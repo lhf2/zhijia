@@ -187,14 +187,15 @@
 <script>
     $(document).ready(function(){
         var knob = $('.report-result').radialIndicator({
-            barColor: '#fff',
-            barBgColor:'rgba(255,255,255,.1)',
-            barWidth: 5,
-            roundCorner : true,
-            displayNumber: false,
+            barColor: '#fff',//圆环色
+            barBgColor:'rgba(255,255,255,.1)',//底部圆环背景色
+            barWidth: 5,//圆环宽度
+            roundCorner : true,//是否是圆角
+            displayNumber: false,//是否显示数字
             frameTime:2,//动画时间
         });
         var radialObj = $('.report-result').data('radialIndicator');
+        //环比
         radialObj.animate(50);
     })
 </script>

@@ -4,57 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>首页</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/body-test.css">
     <script src="../js/rem.js"></script>
 </head>
 <body>
-    <article class="press-page">
-        <section class="press-img">
-            <img src="../img/p1.jpg" alt="">
-            <img src="../img/p2.jpg" alt="">
-            <img src="../img/p3.jpg" alt="">
-            <img src="../img/p4.jpg" alt="">
-            <img src="../img/p5.jpg" alt="">
-            <img src="../img/p6.jpg" alt="">
-            <img src="../img/p7.jpg" alt="">
-        </section>
-        <section class="top-btn">
-            <img src="../img/top1.png" alt="">
-        </section>
-        <section class="press-bottom">
-            <div class="press-btn bottom-btn">
-                <a href="javascript:;">
-                    <img src="../img/zx.png" alt="">
-                    <p>咨询</p>
-                </a>
-            </div>
-            <div class="press-btn1 bottom-btn">
-                <a href="javascript:;">立即参加<span>¥399</span></a>
-            </div>
-        </section>
-    </article>
+<article class="press-page">
+    <section class="press-img">
+        <img src="../img/p1.jpg" alt="">
+        <img src="../img/p2.jpg" alt="">
+        <img src="../img/p3.jpg" alt="">
+        <img src="../img/p4.jpg" alt="">
+        <img src="../img/p5.jpg" alt="">
+        <img src="../img/p6.jpg" alt="">
+        <img src="../img/p7.jpg" alt="">
+    </section>
+    <section class="top-btn">
+        <img src="../img/top1.png" alt="">
+    </section>
+    <section class="press-bottom">
+        <div class="press-btn bottom-btn">
+            <a href="javascript:;">
+                <img src="../img/zx.png" alt="">
+                <p>咨询</p>
+            </a>
+        </div>
+        <div class="press-btn1 bottom-btn">
+            <a href="javascript:;">立即参加<span>¥399</span></a>
+        </div>
+    </section>
+</article>
 </body>
 <script src="../js/jquery-2.1.4.min.js"></script>
 <script>
-    $(document).ready(function(){
-        //显示回到顶部的按钮
-        $(window).scroll(function(){
-            var scrollTop = $(window).scrollTop();
-            if(scrollTop>500){
-                $('.top-btn').show();
-            }else{
-                $('.top-btn').hide();
-            }
-        })
-        //点击回到顶部的按钮
-        $('.top-btn').click(function(){
-            $("body").animate({
-                scrollTop: 0
-            });
-        })
-    })
+  $(document).ready(function () {
+    //显示回到顶部的按钮
+    $(window).scroll(function () {
+      var scrollTop = $(window).scrollTop();
+      if (scrollTop > 500) {
+        $('.top-btn').show();
+      } else {
+        $('.top-btn').hide();
+      }
+    });
+    //点击回到顶部的按钮
+    $('.top-btn').click(function () {
+      $('html,body').animate({scrollTop: '0px'}, 800);
+    });
+  })
 </script>
 </html>
