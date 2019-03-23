@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的等级</title>
+    <script>
+        (function() {
+            document.addEventListener('DOMContentLoaded', function() {
+                var html = document.documentElement;
+                var windowWidth = html.clientWidth;
+                html.style.fontSize = windowWidth / 7.5 + 'px';
+                // 等价于html.style.fontSize = windowWidth / 640 * 100 + 'px';
+            }, false);
+        })();
+    </script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/myLevelMain.css" />
+</head>
+
+<body>
+<!--section1开始-->
+<section class="section1">
+
+    <!-- 进度条开始 -->
+    <div class="loadBox">
+        <div class="load"></div>
+        <div class="loadBall"></div>
+    </div>
+    <!-- 进度条结束 -->
+    <!-- 进度文字开始 -->
+    <div class="text">
+        <span class="num" data-num="" data-min="0" data-max="10" data-level="1"></span> /<span  class='max'></span>
+
+
+    </div>
+    <!-- 进度文字结束 -->
+    <div class="myLevel">
+        V1
+    </div>
+    <div class="minLevel">
+        V1
+    </div>
+
+    <div class="maxLevel">
+        V2
+    </div>
+
+
+
+
+
+    <img src="img/l1.png" alt="">
+    <img src="img/l2.png" alt="">
+    <img src="img/l3.png" alt="">
+    <img src="img/l4.png" alt="">
+    <img src="img/l5.png" alt="">
+</section>
+<!--section2结束-->
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/myLevelMain.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>动作分解</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/lesson-detail.css">
+    <script src="js/rem.js"></script>
+    <link href="http://vjs.zencdn.net/6.4.0/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    <style>
+        *{
+            color: #fff;
+        }
+        .video-js{
+            width: 100%;
+        }
+        .video-js .vjs-big-play-button{
+            width: 2em!important;
+            height: 2em!important;
+            line-height: 2em!important;
+            border-radius: 50%!important;
+            -webkit-border-radius: 50%!important;
+            margin-top: -1em!important;
+            margin-left: -1em!important;
+        }
+        #my-video{
+            display: block;
+        }
+        .video-js .vjs-tech{
+            object-fit: fill;
+        }
+        video::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+        .banner-inner .vjs-big-play-button{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<article class="lesson-page">
+    <section class="lesson-box">
+        <div class="lesson-img">
+            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="100%"
+                   poster="img/lesson.png" data-setup="{}" webkit-playsinline="true" playsinline="true">
+                <source src="http://download.dcloud.net.cn/FastAndroid-mini.mp4" type='video/mp4'>
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+        <header class="lesson-top" id="headerNav">
+            <a class="return-btn" href="javascript:;">
+                <img src="img/return1.png" alt="">
+            </a>
+            <span></span>
+            <a class="share-btn" href="javascript:;">
+                <img src="img/share1.png" alt="">
+            </a>
+        </header>
+        <div class="lesson-inner">
+            <p class="lesson-title">课程标题最多支持两行课程标题最多支持两行课程标题最多支持两行</p>
+            <div class="lesson-play">
+                <a href="video-play.html">
+                    <img src="img/play.png" alt="">
+                    <span>播放课程</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="lesson-people">
+        <div class="people-box">
+            <div class="people-num"><span>10</span>人已报名听课</div>
+            <ul class="people-detail">
+                <div class="people-more">...</div>
+                <li class="people-list">
+                    <img src="img/user.png" alt="">
+                </li>
+                <li class="people-list">
+                    <img src="img/user.png" alt="">
+                </li>
+                <li class="people-list">
+                    <img src="img/user.png" alt="">
+                </li>
+                <li class="people-list">
+                    <img src="img/user.png" alt="">
+                </li>
+                <li class="people-list">
+                    <img src="img/user.png" alt="">
+                </li>
+                <li class="people-list">
+                    <img src="img/user.png" alt="">
+                </li>
+            </ul>
+        </div>
+        <div class="lesson-evaluate">
+            <a href="lesson-evaluate.html">
+                <div class="lesson-score">
+                    <span>课程评价(89)</span>
+                    <div class="score-box">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <span class="score-num">5.0</span>
+                    </div>
+                </div>
+                <div class="more-btn">
+                    <img src="img/more.png" alt="">
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="action-explain">
+        <h1>动作分解</h1>
+        <ul class="explain-box">
+            <li class="a-explain-list">
+                <div class="ex-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <div class="ex-text">
+                    <p class="ex-name">枕骨按摩</p>
+                    <p class="ex-time">20s</p>
+                </div>
+            </li>
+            <li class="a-explain-list">
+                <div class="ex-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <div class="ex-text">
+                    <p class="ex-name">枕骨按摩</p>
+                    <p class="ex-time">20s</p>
+                </div>
+            </li>
+            <li class="a-explain-list">
+                <div class="ex-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <div class="ex-text">
+                    <p class="ex-name">枕骨按摩</p>
+                    <p class="ex-time">20s</p>
+                </div>
+            </li>
+            <li class="a-explain-list">
+                <div class="ex-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <div class="ex-text">
+                    <p class="ex-name">枕骨按摩</p>
+                    <p class="ex-time">20s</p>
+                </div>
+            </li>
+            <li class="a-explain-list">
+                <div class="ex-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <div class="ex-text">
+                    <p class="ex-name">枕骨按摩</p>
+                    <p class="ex-time">20s</p>
+                </div>
+            </li>
+            <li class="a-explain-list">
+                <div class="ex-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <div class="ex-text">
+                    <p class="ex-name">枕骨按摩</p>
+                    <p class="ex-time">20s</p>
+                </div>
+            </li>
+        </ul>
+        <div class="open-btn">
+            <span>展开全部</span>
+            <img src="img/open.png" alt="">
+        </div>
+    </section>
+    <section class="evaluate-box">
+        <div class="evaluate-title">
+            <a href="lesson-evaluate.html">
+                <span>课程评价(89)</span>
+                <span class="more-btn">
+                    <img src="img/more.png" alt="">
+                </span>
+            </a>
+        </div>
+        <div id="wrapper">
+            <ul class="evaluate-detail">
+                <li class="evaluate-list">
+                    <div class="eva-top">
+                        <div class="icon-box">
+                            <div class="icon-inner">
+                                <span class="icon-img">
+                                    <img src="img/user.png" alt="">
+                                </span>
+                                <i class="icon-level">V<sub>3</sub></i>
+                            </div>
+                        </div>
+                        <div class="eva-right">
+                            <div class="name-time">
+                                <span class="icon-name">巴卫</span>
+                                <span class="commmit-time">2017-11-29</span>
+                            </div>
+                            <div class="icon-evaluate">
+                                <div class="score-box">
+                                    <ul>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <span class="score-num">5.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="evaluate-content">
+                        <p>午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而午饭我发问个人而是</p>
+                        <div class="more-content">查看全文</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="more-evaluate"><a href="lesson-evaluate.html">查看全部评价</a></div>
+        <div class="no-comment">别拉了，到底了</div>
+    </section>
+    <!--分享弹窗-->
+    <section class="share-alert">
+        <div class="share-alert-inner">
+            <ul class="share-types">
+                <li class="share-type-list">
+                    <img src="img/share-wx.png" alt="">
+                </li>
+                <li class="share-type-list">
+                    <img src="img/share-pyq.png" alt="">
+                </li>
+                <li class="share-type-list">
+                    <img src="img/share-wb.png" alt="">
+                </li>
+                <li class="share-type-list">
+                    <img src="img/share-qq.png" alt="">
+                </li>
+            </ul>
+            <div class="share-close">
+                <img src="img/close.png" alt="">
+            </div>
+        </div>
+    </section>
+    <!--<section class="play-box">
+        <div class="pj-box">
+            <a href="edit-evaluate.html">
+                <img src="img/sc.png" alt="">
+                <p>评价</p>
+            </a>
+        </div>
+        <div class="play-btn">
+            <a href="javascript:;">
+                <span><img src="img/play.png" alt=""></span>
+                观看课程视频
+            </a>
+        </div>
+    </section>-->
+    <div class="evaluate-btn">
+        <a href="edit-evaluate.html">
+            <img src="img/pj.png" alt="">
+            这就去评价！
+        </a>
+    </div>
+</article>
+<article class="lesson-action">
+    <div class="lesson-action-inner">
+        <section class="action-banner">
+            <div class="action-close">
+                <img src="img/ac-close.png" alt="">
+            </div>
+            <div class="banner-inner">
+                <video id="my-video1" class="video-js vjs-default-skin vjs-big-play-centered" x-webkit-airplay="true" x5-video-player-type="h5" x5-video-player-fullscreen="true"  preload="auto" width="100%" height="264"
+                       data-setup="{}" webkit-playsinline="true" playsinline="true" loop poster="http://file.izhijia.com/absolute_image/201712/9b21fefaeff049e3876a9acf12813334.jpg">
+                    <source src="http://download.dcloud.net.cn/FastAndroid-mini.mp4" type='video/mp4'>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+        </section>
+        <section class="action-detail">
+            <div class="action-title">
+                <span class="action-num"><i id="now">1</i>/<i id="total">5</i></span>
+                <span class="action-name">颈部拉伸</span>
+            </div>
+            <div class="action-box">
+                <div>锻炼部位</div>
+                <p>斜方肌</p>
+            </div>
+            <div class="action-box">
+                <div>动作讲解</div>
+                <ul class="action-explain">
+                    <li class="explain-list">
+                        啦啦啦啦带我飞舒服舒服搞得跟的干活哈哈就
+                    </li>
+                    <li class="explain-list">
+                        啦啦啦啦带我飞舒服舒服搞得跟的干活哈哈就
+                    </li>
+                    <li class="explain-list">
+                        啦啦啦啦带我飞舒服舒服搞得跟的干活哈哈就
+                    </li>
+                </ul>
+            </div>
+            <div class="action-box">
+                <div>动作效果</div>
+                <p>颈部有疼痛的拉伸感</p>
+            </div>
+            <div class="action-box">
+                <div>注意事项</div>
+                <p>颈部有疼痛的拉伸感颈部有疼痛的拉伸感</p>
+            </div>
+            <div class="action-box">
+                <div>动作强度</div>
+                <p>单侧共拉伸2-3次，共3组</p>
+            </div>
+        </section>
+        <section class="bottom-btn">
+            <div class="prev-btn">
+                <img src="img/prev.png" alt="">
+            </div>
+            <span class="action-num"><i id="now">2</i>/<i id="total">7</i></span>
+            <div class="next-btn">
+                <img src="img/next.png" alt="">
+            </div>
+        </section>
+    </div>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="http://api.html5media.info/1.1.8/html5media.min.js"></script>
+<script src="js/demo.js"></script>
+<script src="http://vjs.zencdn.net/6.4.0/video.js"></script>
+<script>
+    $(document).ready(function(){
+        //点击显示、隐藏弹窗
+        var couseVideo = videojs('my-video');
+        var sectionVideoPlayer = videojs('my-video1');
+        couseVideo.ready(function(){
+            $('.lesson-img .vjs-big-play-button').click(function(){
+                console.log(1);
+                $('#my-video_html5_api').attr('webkit-playsinline','true');
+                $('#my-video_html5_api').attr('playsinline','true');
+            })
+            var flag = true;
+            $('.lesson-img .vjs-fullscreen-control').click(function(){
+                if(flag){
+                    console.log(2);
+                    $('#my-video_html5_api').removeAttr('webkit-playsinline');
+                    $('#my-video_html5_api').removeAttr('playsinline');
+                    flag = false;
+                }else{
+                    console.log(3);
+                    $('#my-video_html5_api').attr('webkit-playsinline','true');
+                    $('#my-video_html5_api').attr('playsinline','true');
+                    flag = true;
+                }
+            })
+        })
+        var wH = $(window).height();
+        $('.a-explain-list').click(function(){
+            var index = $(this).index('.a-explain-list');
+            var windowTop= $(window).scrollTop();
+            sessionStorage.setItem('windowT',windowTop);
+            $('.lesson-action').animate({bottom:0}, function () {
+                $('html').css({
+                    'position':'fixed',
+                    "height":"auto",
+                    'top':-windowTop,
+                    "overflow":'hidden'
+                })
+                $('body').css({
+                    'position':'fixed',
+                    "height":"auto",
+                    'top':-windowTop,
+                    "overflow":'hidden',
+                })
+            })
+            $('.banner-inner .vjs-big-play-button').on('click',function(){
+                $(this).hide();
+            })
+//            sectionVideoPlayer.play();
+        })
+        $('.action-close').click(function(){
+            var windowTop= sessionStorage.getItem('windowT');
+            $('.lesson-action').animate({bottom:-3000}, function () {
+                $('html').css({
+                    "position":"static",
+                    "height":'auto',
+                    "overflow":"auto",
+                })
+                $('body').css({
+                    "position":"static",
+                    "height":'auto',
+                    "overflow":'auto',
+                })
+                $(window).scrollTop(windowTop);
+            })
+        })
+        $('.lesson-action').click(function(e){
+            var windowTop= sessionStorage.getItem('windowT');
+            $('.lesson-action').animate({bottom:-3000}, function () {
+                $('html').css({
+                    "position":"static",
+                    "height":'auto',
+                    "overflow":"auto",
+                })
+                $('body').css({
+                    "position":"static",
+                    "height":'auto',
+                    "overflow":'auto',
+                })
+                $(window).scrollTop(windowTop);
+            })
+        })
+        $('.lesson-action-inner').click(function(e){
+            e.stopPropagation();
+        });
+        //点击展开全部
+        if($('.a-explain-list').length>5){
+            $('.open-btn').show();
+        }else{
+            $('.open-btn').hide();
+        }
+        $('.open-btn').click(function(){
+            var state = $(this).children('span').html();
+            if(state == '展开全部'){
+                console.log(1);
+                $(this).children('span').html('收起');
+                $(this).children('img').attr('src','img/open1.png')
+                $('.explain-box').css({'minHeight':'5rem','maxHeight':'100%'});
+            }else{
+                console.log(2);
+                $(this).children('span').html('展开全部');
+                $(this).children('img').attr('src','img/open.png')
+                $('.explain-box').css({maxHeight:'5rem'});
+            }
+        })
+        //兼容安卓跟ios的通栏
+        var barHeight = 40;
+        var dpr = window.devicePixelRatio;
+        $('#headerNav').css('top',barHeight/dpr+'px');
+        //显示查看全文
+        $('.evaluate-content p').each(function(){
+            var lineHeight = parseInt($(this).css('maxHeight'));
+            if($(this).height()>=lineHeight){
+                $(this).siblings('.more-content').show();
+            }
+        })
+        //点击全文
+        $('.more-content').click(function(){
+            if($(this).html() == '查看全文'){
+                $(this).html('收起评论');
+                var height = $(this).siblings('p').height();
+                $(this).siblings('p').css({
+                    "max-height":'100%',
+                    "min-height":height,
+                    'overflow':'auto'
+                });
+            }else{
+                $(this).html('查看全文');
+                $(this).siblings('p').css({
+                    "max-height":'1.78rem',
+                    "min-height":'auto',
+                    'overflow':'hidden'
+                });
+            }
+        })
+        //点击右箭头
+        $('.next-btn').click(function(){
+            console.log('右边');
+            $('.vjs-tech').attr('src','http://www.w3school.com.cn/i/movie.ogg');
+            $('.action-detail').scrollTop(0);
+        })
+        $('.prev-btn').click(function(){
+            console.log('左边');
+            $('.vjs-tech').attr('src','http://download.dcloud.net.cn/FastAndroid-mini.mp4');
+            $('.action-detail').scrollTop(0);
+        })
+        var topH = $('#headerNav').height();
+        $(window).scroll(function(){
+            var scrollTop = $(window).scrollTop();
+            if(scrollTop>0){
+                $('#headerNav').css({'background':'rgba(255,255,255,1)','border-bottom':'1px solid #dcdcdc','height':topH+barHeight/dpr+'px',top:0}).children('span').css('line-height',topH+2*barHeight/dpr+'px').html('课程详情');
+                $('#headerNav').children('.return-btn').css({'background':'none','top':barHeight/dpr+'px'}).children('img').attr('src','img/return.png');
+                $('#headerNav').children('.share-btn').css({'background':'none','top':barHeight/dpr+'px'}).children('img').attr('src','img/share.png');
+            }else{
+                $('#headerNav').css({'background':'none','border-bottom':'0','height':topH+'px',top:barHeight/dpr+'px'}).children('span').html('');
+                $('#headerNav').children('.return-btn').css({'background':'rgba(0,0,0,0.3)','top':0}).children('img').attr('src','img/return1.png');
+                $('#headerNav').children('.share-btn').css({'background':'rgba(0,0,0,0.3)','top':0}).children('img').attr('src','img/share1.png');
+            }
+        })
+        $('#my-video').height(9*$(window).width()/16);
+        setTimeout(function(){
+            $('#my-video1').height(9*$(window).width()/16);
+            $('.action-detail').height($(window).height()-parseInt($('.lesson-action-inner').css('top'))-$('#my-video1').height()-$('.bottom-btn').height());
+        },500)
+//        videojs('#my-video1', { aspectRatio: '16:9' });
+    })
+</script>
+</body>
+</html>

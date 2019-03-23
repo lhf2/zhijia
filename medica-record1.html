@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>用药记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<link rel="stylesheet" href="css/layui.css">
+		<link rel="stylesheet" href="css/mui.poppicker.css">
+		<link rel="stylesheet" href="css/mui.picker.css">
+	</head>
+<body>
+	<article class="medica-page1">
+		<header class="zcjl-title">
+			<div class="date mui-text-center">
+				<span class="left-btn">
+					<img src="img/left.png" alt="">
+				</span>
+				<input type="text" class="chose-date" placeholder="" readonly>
+				<span class="right-btn">
+					<img src="img/right.png" alt="">
+				</span>
+			</div>
+			<div class="save-btn">保存</div>
+		</header>
+		<section class="medica-chosebox">
+			<ul class="chose-box">
+				<li class="chose-list" id="openPopover">
+					<div class="chose-type">药品类型</div>
+					<div class="chose-detail medica-type">
+						<span>请选择</span>
+						<span class="chose-img-xl">
+							<img src="img/chose.png" alt="">
+						</span>
+					</div>
+				</li>
+				<li class="chose-list">
+					<a href="drugs-chose.html">
+						<div class="chose-type">药品名称</div>
+						<div class="chose-detail medica-name">
+							<span class="medica-name-cur">吡格列酮二甲双胍片 15mg：500mg/片</span>
+							<span class="mui-icon mui-icon-arrowright"></span>
+						</div>
+					</a>
+				</li>
+				<li class="chose-list">
+					<div class="chose-type">服药剂量</div>
+					<div class="chose-detail">
+						<span class="chose-num">
+							<span class="chose_num_list chose_num1">-</span> 片/次
+						</span>
+						<span class="chose-num">
+							<span class="chose_num_list chose_num2">-</span> 次/天
+						</span>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<section class="medica-history">
+			<header class="history-title">我的常用药品记录(长按药品可删除)</header>
+			<p class="history-no">暂无常用药品记录</p>
+			<ul class="history-box">
+				<li class="history-list">
+					<span class="name">美迪康</span>
+					<span class="num-01">1片/次</span>
+					<span class="num-02">2次/天</span>
+				</li>
+				<li class="history-list cur">
+					<span class="name">美迪康</span>
+					<span class="num-01">1片/次</span>
+					<span class="num-02">2次/天</span>
+				</li>
+				<li class="history-list">
+					<span class="name">美迪康的</span>
+					<span class="num-01">1片/次</span>
+					<span class="num-02">2次/天</span>
+				</li>
+				<li class="history-list">
+					<span class="name">美迪康的美迪康的</span>
+					<span class="num-01">1片/次</span>
+					<span class="num-02">2次/天</span>
+				</li>
+			</ul>
+		</section>
+	</article>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/rem.js" ></script>
+	<script src='js/mui.min.js'></script>
+	<script src="layui.js"></script>
+	<script src="js/mui.poppicker.js"></script>
+	<script src="js/mui.picker.js"></script>
+	<script>
+	$(document).ready(function(){
+		//长按点击删除事件
+		var timeOutEvent=0;
+		$('.history-list').on({
+			touchstart: function(e){
+				console.log('开始点击');
+				var index=$(this).index();
+				$('.history-list').removeClass('cur');
+				$(this).addClass('cur');
+				timeOutEvent = setTimeout('longPress('+index+')',500);
+				e.preventDefault();
+			},
+			touchmove: function(){
+				clearTimeout(timeOutEvent);
+				timeOutEvent = 0;
+			},
+			touchend: function(){
+				clearTimeout(timeOutEvent);
+				if(timeOutEvent!=0){
+					return
+				}
+				return false;
+			}
+		})
+        //选择药品类型
+        var picker = new mui.PopPicker();
+		picker.setData([{
+			    text: "降压药"
+			}, {
+			    text: "降脂药"
+			}, {
+			    text: "降糖药"
+			}])
+		$('#openPopover').click(function(){
+			picker.show(function(selectItem){
+				$('.medica-type').html(selectItem[0].text);
+			});
+		})
+		//选择药品名称
+		var medica_name=getQueryString('medica_name');
+		if(medica_name){
+			$('.medica-name').html(medica_name);
+		}
+		//服用剂量
+		var picker1 = new mui.PopPicker();
+		picker1.setData([{
+			    text: "0.5"
+			}, {
+			    text: "1"
+			}, {
+			    text: "2"
+			}, {
+			    text: "3"
+			}, {
+			    text: "4"
+			}, {
+			    text: "5"
+			}, {
+			    text: "6"
+			}, {
+			    text: "7"
+			}, {
+			    text: "8"
+			}, {
+			    text: "9"
+			}, {
+			    text: "10"
+			}])
+		$('.chose_num1').click(function(){
+			picker1.show(function(selectItem){
+				$('.chose_num1').html(selectItem[0].text);
+			});
+		})
+		//服用剂量
+		var picker2 = new mui.PopPicker();
+		picker2.setData([{
+			    text: "1"
+			}, {
+			    text: "2"
+			}, {
+			    text: "3"
+			}, {
+			    text: "4"
+			}, {
+			    text: "5"
+			}, {
+			    text: "6"
+			}, {
+			    text: "7"
+			}, {
+			    text: "8"
+			}, {
+			    text: "9"
+			}, {
+			    text: "10"
+			}])
+		$('.chose_num2').click(function(){
+			picker2.show(function(selectItem){
+				$('.chose_num2').html(selectItem[0].text);
+			});
+		})
+	})
+	function longPress(itemIndex){
+		console.log('长按');
+		timeOutEvent = 0;   
+		//执行弹窗
+		mui.confirm('确定要删除该药品吗','',['是','否'],function(e){
+			if(e.index==0){
+				$('.history-list').eq(itemIndex).remove();
+			}else{
+				return
+			}
+		},'div')
+	}   
+	</script>
+</body>
+</html>

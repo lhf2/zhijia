@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>慢病问答</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/qa-index.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+    <article class="qa-page" id="app" v-cloak="">
+        <div class="search-box">
+            <a href="qa-search.html">
+                <span class="icon"></span>
+                请输入乐汁关键字
+            </a>
+        </div>
+        <ul class="qa-detail" v-infinite-scroll="loadMore" infinite-scroll-disabled="dataFlag" infinite-scroll-distance="5">
+            <li class="qa-list" v-for="(item,index) in datas">
+                <a href="qa-detail.html">
+                    <div class="ques-box">
+                        <div class="ques-icon"><span>问</span></div>
+                        <div class="ques-con">{{item.question}}</div>
+                        <div class="ques-time">{{item.time}}</div>
+                    </div>
+                    <ul class="ques-imgs" v-if="item.images">
+                        <li class="ques-img" v-for="item in item.images">
+                            <img :src="item" alt="">
+                        </li>
+                    </ul>
+                    <div class="answer-box">
+                        <div class="ans-icon" v-if="item.num!=0"><span>答</span></div>
+                        <div class="ans-con" v-if="item.num!=0">{{item.answer}}</div>
+                        <div class="ans-con" v-if="item.num==0">还木有人回答，快来抢沙发</div>
+                    </div>
+                    <div class="qa-other">
+                        <span class="qa-num">{{item.num}}个回答</span>
+                        <span class="qa-btn">我来回答</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="qa-bottom">
+            <div class="qa-my"><a href="qa-edit.html">我要提问</a></div>
+            <div class="qa-common"><a href="http://www.lezhilehuo.com/questions">常见问题</a></div>
+        </div>
+    </article>
+</body>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue.min.js?version=1515981677557"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue-infinite-scroll.js?version=1515981677557"></script>
+<script>
+    var vueInitData = {
+        pageCount:2,
+        count:0,
+        busy: false,
+        dataFlag:false,
+        tCount:0,
+        datas:[],
+    };
+    window.app = new Vue({
+        el: '#app',
+        data: vueInitData,
+        methods: {
+            loadMore: function () {
+                if (this.busy) {
+                    return;
+                }
+                this.busy = true;
+                var temp = this;
+                $.ajax({
+                    url: '../api/data.json',
+                    type: "get",
+                    dataType: "json",
+                    success: function (e) {
+                        //temp.datas = [];
+                        for (var i = 0; i < e.data.length; i++) {
+                            temp.datas.push(e.data[i]);
+                        }
+                        if (e.data.length < temp.pageCount) {
+                            temp.dataFlag = true;
+                        }
+                        temp.busy = false;
+                        temp.tCount = temp.tCount + temp.pageCount;
+                    },
+                    error: function () {
+                        temp.dataFlag = true;
+                    }
+                });
+            },
+            resetData: function () {
+                this.pageCount = 10, this.count = 0, this.busy = false;this.dataFlag = false;this.tCount = 0;this.loadMore();
+            },
+        }
+    })
+</script>
+</html>

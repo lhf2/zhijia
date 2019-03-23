@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>饮食记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/layui.css">
+		<link rel="stylesheet" href="css/style1.css" />
+</head>
+<body>
+	<article class="diet-record-page">
+		<header class="diet-date">
+			<div class="date">
+				<span class="left-btn">
+					<img src="img/left.png" alt="">
+				</span>
+				<input type="text" class="chose-date" placeholder="" readonly>
+				<span class="right-btn">
+					<img src="img/right.png" alt="">
+				</span>
+			</div>
+		</header>
+		<section>
+			<ul class="diet-record-cards">
+				<li class="diet-record-card">
+					<a href='breakfast-record.html?type=早餐'>
+						<div class="diet-detail">
+							<span class="diet-img"><img src="img/zc.png" alt=""></span>
+							<span class="diet-name">早餐</span>
+						</div>
+						<div class="diet-chose-state cur">
+							<span class="layui-icon">&#xe605;</span>
+						</div>
+					</a>		
+				</li>
+				<li class="diet-record-card">
+					<a href="breakfast-record.html?type=午餐">
+						<div class="diet-detail">
+							<span class="diet-img"><img src="img/wc.png" alt=""></span>
+							<span class="diet-name">午餐</span>
+						</div>
+						<div class="diet-chose-state">
+                            <span class="layui-icon">&#xe605;</span>
+						</div>
+					</a>
+				</li>
+				<li class="diet-record-card">
+					<a href="breakfast-record.html?type=晚餐">
+						<div class="diet-detail">
+							<span class="diet-img"><img src="img/dc.png" alt=""></span>
+							<span class="diet-name">晚餐</span>
+						</div>
+						<div class="diet-chose-state">
+                            <span class="layui-icon">&#xe605;</span>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<!--晒汁排行榜-->
+			<div class="rank-btn">
+				<a href="ranking-list.html">
+					<img src="img/rank-btn.png" alt="">
+				</a>
+			</div>
+		</section>
+	</article>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/rem.js" ></script>
+	<script src="layui.js"></script>
+</body>
+</html>

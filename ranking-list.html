@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排行榜</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="css/style1.css" />
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="ranking-list" id="app">
+    <section class="rank-top">
+        <img src="img/rank-banner.png" alt="">
+    </section>
+    <section class="rank-box">
+        <div class="list-strategy">上榜攻略</div>
+        <ul class="list-outer">
+            <li class="list-inner first-list">
+                <div class="list-icon-outer">
+                    <div class="list-icon">
+                        <img src="img/user.jpg" alt="">
+                    </div>
+                    <div class="icon-bg"></div>
+                </div>
+               <div class="list-nickname">闲人闲人闲人闲人</div>
+               <div class="list-zan">
+                   <span class="zan-name">4.2万</span>个赞
+               </div>
+            </li>
+            <li class="list-inner second-list">
+                <div class="list-icon-outer">
+                    <div class="list-icon">
+                        <img src="img/user.jpg" alt="">
+                    </div>
+                    <div class="icon-bg"></div>
+                </div>
+                <div class="list-nickname">闲人闲人闲人闲人</div>
+                <div class="list-zan">
+                    <span class="zan-name">6789</span>个赞
+                </div>
+            </li>
+            <li class="list-inner third-list">
+                <div class="list-icon-outer">
+                    <div class="list-icon">
+                        <img src="img/user.jpg" alt="">
+                    </div>
+                    <div class="icon-bg"></div>
+                </div>
+                <div class="list-nickname">闲人闲人闲人闲人</div>
+                <div class="list-zan">
+                    <span class="zan-name">6789</span>个赞
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section class="rank-detail">
+        <div class="rank-detail-top">
+            <div class="detail-num">
+                <span>2968</span>人正在晒
+            </div>
+            <div class="detail-toggle">
+                <span class="new" :class="flag == 'new' ? 'cur':''" @click="changeFlag('new')">最新</span>
+                <span class="hot" :class="flag == 'hot' ? 'cur':'' " @click="changeFlag('hot')">最热</span>
+            </div>
+        </div>
+        <!--最新-->
+        <ul id="waterfall" class="waterfall" v-infinite-scroll="loadMore" v-cloak infinite-scroll-disabled="dataFlag" infinite-scroll-distance="5" keep-alive>
+            <li class="share-detail-list" v-for="(item, index) in datas">
+                <a href="/m/hplus/diningDetail?id=4822">
+                    <img :src="item.image" alt="">
+                    <p class="share-text">{{item.content}}</p>
+                    <div class="icon-box">
+                <span class="icon-img">
+                    <img :src="item.userAvatar" alt="">
+                </span>
+                        <span class="icon-name">{{item.userName}}</span>
+                    </div>
+                </a>
+                <div class="share-detail-zan" :class="flag" data-flag="false" ref='zan' @click.stop="dz($event,$refs.zan)" :key="flag">
+                    <span class="dz-num">6789</span>
+                    <img src="img/dz1.png" alt="">
+                </div>
+            </li>
+        </ul>
+    </section>
+    <!--上榜攻略详情-->
+    <section class="strategy-box">
+        <div class="strategy-inner-box">
+            <div class="strategy-title">
+                <img src="img/str-title.png" alt="">
+            </div>
+            <div class="strategy-detail">
+                <p>
+                    <span>1.操作:</span>
+                    上传您的一日三餐，蔬果汁食、五谷杂粮、创意摆盘等等用餐图片，并在文字框内输入您想说的话，发布即可。
+                </p>
+                <p>
+                    <span>2.规则:</span>
+                    用户发布的每个帖子的点赞数累计并计算排名，实时更新。点赞累计越多排名越靠前。点赞累计数排名前三的用户将被推荐在热门榜的位置。
+                </p>
+                <p>
+                    <span>3.获赞攻略:</span>
+                    让您发布的图片和文字足够抓人眼球。或者，分享榜单页面，邀请您的好友为您的帖子点赞。
+                </p>
+                <p>
+                    <span>4.最热:</span>
+                    按照单帖点赞数排名统计，单帖点赞数越多，排名越靠前。用户可在“最热”区域查看单贴排名。
+                </p>
+                <p>
+                    <span>5.最新:</span>
+                    按照发布时间先后统计，单帖发布时间越早，排名越靠后。用户可在“最新”区域查看最新发布贴。
+                </p>
+            </div>
+            <div class="strategy-btn">
+                <img src="img/str-btn.png" alt="">
+            </div>
+        </div>
+    </section>
+    <!--我要晒-->
+    <div class="edit-btn">
+        <a href="javascript:;">我要晒</a>
+    </div>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.color.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue.min.js?version=1509704576789"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue-infinite-scroll.js?version=1509704576789"></script>
+<!--<script src="js/masonry-docs.min.js"></script>-->
+<script src="js/blocksit.min.js"></script>
+<script>
+    var vueInitData = {
+        pageCount:10,
+        count:0,
+        busy: false,
+        dataFlag:false,
+        tCount:0,
+        flag:'new',
+        datas:[],
+        newDatas:[],
+        hotDatas:[]
+    };
+    window.app = new Vue({
+        el: '#app',
+        data: vueInitData,
+        methods:{
+            loadMore:function(flag){
+                if(this.busy){
+                    return;
+                }
+                this.busy = true;
+                var temp = this;
+                if(!flag){
+                    flag = this.flag
+                }
+                //最新
+                if(flag == 'new'){
+                    console.log(this.busy);
+                    $.ajax({
+                        url : 'api/data.json',
+                        data:{
+                            "first": this.tCount,
+                            "kind": "1",
+                            "dateStr":'2017-11-06'
+                        },
+                        type: "get",
+                        dataType: "json",
+                        success:function(data){
+                            temp.datas = [];
+                            for(var i = 0; i < data.dinings.length; i++) {
+                                temp.newDatas.push(data.dinings[i]);
+                            }
+                            if(data.dinings.length<temp.pageCount){
+                                temp.dataFlag=true;
+                            }
+                            temp.busy = false;
+                            temp.tCount=temp.tCount+temp.pageCount;
+                            temp.datas = temp.newDatas.slice(0);
+                        },
+                        error:function(){
+                            temp.dataFlag=true;
+                        }
+                    });
+                }else if(flag == 'hot'){
+                    //最热
+                    $.ajax({
+                        url : 'api/data1.json',
+                        data:{
+                            "first": this.tCount,
+                            "kind": "1",
+                            "dateStr":'2017-11-06'
+                        },
+                        type: "get",
+                        dataType: "json",
+                        success:function(data){
+                            temp.datas = [];
+                            for(var i = 0; i < data.dinings.length; i++) {
+                                temp.hotDatas.push(data.dinings[i]);
+                            }
+                            if(data.dinings.length<temp.pageCount){
+                                temp.dataFlag=true;
+                            }
+                            temp.busy = false;
+                            temp.tCount=temp.tCount+temp.pageCount;
+                            temp.datas = temp.hotDatas.slice(0);
+                        },
+                        error:function(){
+                            temp.dataFlag=true;
+                        }
+                    });
+                }
+            },
+            resetData:function(){
+                this.pageCount=10,
+                this.count=0,
+                this.busy=false;
+                this.dataFlag=false;
+                this.tCount=0;
+                this.newDatas=[];
+                this.hotDatas=[];
+                this.loadMore();
+            },
+            toggleData: function (flag) {
+                var temp = this;
+                if(flag == 'new'){
+                    $.ajax({
+                        url : 'api/data.json',
+                        data:{
+                            "first": this.tCount,
+                            "kind": "1",
+                            "dateStr":'2017-11-06'
+                        },
+                        type: "get",
+                        dataType: "json",
+                        success:function(data){
+                            temp.datas = data.dinings.slice(0);
+                        },
+                        error:function(){
+
+                        }
+                    });
+                }else if(flag == 'hot'){
+                    $.ajax({
+                        url : 'api/data1.json',
+                        data:{
+                            "first": this.tCount,
+                            "kind": "1",
+                            "dateStr":'2017-11-06'
+                        },
+                        type: "get",
+                        dataType: "json",
+                        success:function(data){
+                            temp.datas = data.dinings.slice(0);
+                        },
+                        error:function(){
+
+                        }
+                    });
+                }
+            },
+            dz:function (event,ele){
+                ele = $(ele);
+                var self = event.currentTarget;
+                console.log(self);
+                ele.each(function(){
+                    if($(self).attr('data-flag')=='true'){
+                        $(self).children('img').attr('src','img/ydz1.png');
+                    }
+                })
+                var flag=$(self).attr('data-flag');
+                var zNum=parseInt($(self).children('.dz-num').html());
+                if(flag=='false'){
+                    console.log('false');
+                    $(self).children('img').attr('src','img/ydz1.png');
+                    $(self).attr('data-flag','true');
+                    zNum++;
+                }else{
+                    console.log('true');
+                    $(self).children('img').attr('src','img/dz1.png');
+                    $(self).attr('data-flag','false');
+                    zNum--
+                }
+                $(self).children('.dz-num').html(zNum)
+            },
+            //切换最新、最热
+            changeFlag: function (flag) {
+                this.flag = flag;
+                this.toggleData(flag);
+            }
+        },
+        //watch到datas数据更改的时候 执行重新排版
+        watch:{
+            datas:function(){
+                console.log('数据改变了');
+                setTimeout(function(){
+                    $('.waterfall').BlocksIt({
+                        numOfCol:3,
+                        blockElement: '.share-detail-list',
+                        offsetY: 5
+                    });
+                },50);
+            }
+        }
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        var height = $(window).height();
+        var scrollTop = $('.strategy-inner-box').height();
+        if(scrollTop>height){
+            $('.strategy-box').css('top',-scrollTop+'px');
+        }else{
+            $('.strategy-box').css('top',-height+'px');
+        }
+        //上榜攻略
+        $('.list-strategy').click(function(){
+            $('.strategy-box').animate({backgroundColor:'rgba(0,0,0,0.85)'},10,function(){
+                $(this).css("top",0);
+                $('body').css({
+                    "height": "100%",
+                    "position":"fixed",
+                    "overflow":'hidden'
+                })
+                $('html').css({
+                    "position":"fixed",
+                    "overflow":'hidden'
+                })
+            })
+        })
+        //点击我知道了
+        var sH;
+        if(scrollTop>height){
+            sH = -scrollTop+'px';
+        }else{
+            sH = -height+'px';
+        }
+        $('.strategy-btn').click(function(){
+            $('.strategy-box').animate({top:sH},0,function(){
+                $('body').css({
+                    "height": "auto",
+                    "position":"static",
+                    "overflow":"auto"
+                })
+                $('html').css({
+                    "position":"static",
+                    "overflow":"auto"
+                })
+            })
+        })
+    })
+</script>
+</body>
+</html>

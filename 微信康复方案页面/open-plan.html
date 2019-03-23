@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>日期</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <script src="js/rem.js"></script>
+    <style>
+        .layui-laydate-content td.laydate-selected{}
+    </style>
+</head>
+<body>
+<article class="plan-page">
+    <header class="health-top" id="headerNav">
+        <span class="return-btn">
+            <img src="img/return.png" alt="">
+        </span>
+        日期
+        <span class="commit-btn">保存</span>
+    </header>
+    <section class="date-box">
+        <div class="open-date">
+            <p>开始日期</p>
+            <p class="open-text"></p>
+        </div>
+        <div class="close-date">
+            <p>结束日期</p>
+            <p class="close-text"></p>
+        </div>
+    </section>
+    <section class="chose-date-outer">
+        <div id="chose-date">
+            <input type="hidden" id="datetext">
+        </div>
+        <div class="date-tip">
+            推荐理由：1、周末；2、预留准备工具的时间
+        </div>
+    </section>
+</article>
+</body>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="layui.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        function GetDateStr(date,AddDayCount) {
+            var dd = new Date(date);
+            dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+            var y = dd.getFullYear();
+            var m = dd.getMonth()+1;//获取当前月份的日期
+            var d = dd.getDate();
+            return y+"-"+m+"-"+d;
+        }
+        function Lately(){
+            //获取当前日期的周六日
+            var now = new Date();
+            var nowTime = now.getTime() ;
+            var day = now.getDay();
+            var oneDayLong = 24*60*60*1000 ;
+            //周六
+            var SatTime = nowTime + (6-day)*oneDayLong  ;
+            //周日
+            var SundayTime =  nowTime + (7-day)*oneDayLong ;
+            var satday = new Date(SatTime);
+            var sunday = new Date(SundayTime);
+            if(day!=0&day<6){
+                return satday.getFullYear()+'-'+(satday.getMonth()+1)+'-'+satday.getDate();
+            }else{
+                return sunday.getFullYear()+'-'+(sunday.getMonth()+1)+'-'+sunday.getDate()
+            }
+        }
+        var dateConfig = {
+            elem: '#chose-date',
+            format: 'yyyy-MM-dd',
+            show:true,
+            showBottom: false,
+            isToday:true,
+            position: 'static',
+            done: function (value, date, endDate) {
+                $('#datetext').val(value);
+                //如果点击的是当前日期之前的日期
+                if(new Date(value)<new Date()){
+                    layer.msg('开始日期不可以小于今天');
+                    return false;
+                }else{
+                    var date1 = GetDateStr(value,27);
+                    $('td').each(function(item){
+                        //看每个td的日期在不在点击的日期跟28天后的日期范围内
+                        if(new Date($(this).attr('lay-ymd'))>=new Date(value) && new Date($(this).attr('lay-ymd'))<=new Date(date1)){
+                            $(this).addClass('laydate-selected');
+                        }
+                    })
+                    $('.open-text').html(value.substring(5));
+                    $('.close-text').html(date1.substring(5));
+                }
+            },
+            change:function(value, date, endDate){
+                var djdate = $('#datetext').val();
+                var date2 = GetDateStr(djdate,27);
+                $('td').each(function(item){
+                    if(new Date($(this).attr('lay-ymd'))>=new Date(djdate) && new Date($(this).attr('lay-ymd'))<=new Date(date2)){
+                        $(this).addClass('laydate-selected');
+                    }
+                })
+            }
+        };
+
+
+        var markDate = Lately();
+
+        setMark(markDate);
+
+
+        // _date 需要标记的日期
+        function setMark(_date){
+            layui.use(['laydate','layer'], function() {
+                var $ = layui.$, laydate = layui.laydate, layer = layui.layer, myDate = new Date();
+
+                $("#chose-date").html("");
+
+                if(_date){
+                    dateConfig.mark = {};
+                    dateConfig.mark[_date] = '推荐'
+                }
+
+                laydate.render(dateConfig);
+
+                return laydate;
+
+            });
+        }
+
+
+
+
+
+
+    })
+</script>
+</html>

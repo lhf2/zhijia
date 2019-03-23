@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>搜索</title>
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/qa-index.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+    <article class="qa-search" id="app" v-cloak="">
+        <section class="search-box">
+            <div class="search-input">
+                <span class="search-icon"></span>
+                <input type="text" placeholder="请输入乐汁关键字" v-model="keyword">
+                <span class="close-icon" @click="closeInput"></span>
+            </div>
+            <div class="search-btn" v-if="keyword" @click="search">搜索</div>
+            <div class="search-btn" v-else @click="cancle">取消</div>
+        </section>
+        <ul class="search-result" v-show="showFlag" v-infinite-scroll="loadMore" infinit e-scroll-disabled="dataFlag" infinite-scroll-distance="5">
+            <li class="result-list" v-for="item in datas">
+                <a href="qa-detail.html">
+                    <p class="result-title">{{item.title}}</p>
+                    <p class="result-num">{{item.num}}个回复</p>
+                </a>
+            </li>
+        </ul>
+    </article>
+</body>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue.min.js?version=1515981677557"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue-infinite-scroll.js?version=1515981677557"></script>
+<script>
+    var vueInitData = {
+        pageCount:2,
+        count:0,
+        busy: false,
+        dataFlag:false,
+        tCount:0,
+        datas:[],
+        keyword:'',
+        showFlag:false
+    };
+    window.app = new Vue({
+        el:'#app',
+        data:vueInitData,
+        methods:{
+            search: function () {
+                this.showFlag = true;
+                this.datas = [];
+                this.loadMore();
+            },
+            loadMore:function(){
+                if (this.busy) {
+                    return;
+                }
+                var temp = this;
+                if(this.showFlag){
+                    $.ajax({
+                        url: '../api/data1.json',
+                        type: "get",
+                        dataType: "json",
+                        success: function (e) {
+                            //temp.datas = [];
+                            for (var i = 0; i < e.data.length; i++) {
+                                temp.datas.push(e.data[i]);
+                            }
+                            if (e.data.length < temp.pageCount) {
+                                temp.dataFlag = true;
+                            }
+                            temp.busy = false;
+                            temp.tCount = temp.tCount + temp.pageCount;
+                        },
+                        error: function () {
+                            temp.dataFlag = true;
+                        }
+                    });
+                }
+            },
+            resetData: function () {
+                this.pageCount = 2, this.count = 0, this.busy = false;this.dataFlag = false;this.tCount = 0;this.loadMore();
+            },
+            cancle:function(){
+                location.href = 'qa-page.html'
+            },
+            closeInput:function(){
+                this.keyword = ''
+            }
+        }
+    })
+</script>
+</html>

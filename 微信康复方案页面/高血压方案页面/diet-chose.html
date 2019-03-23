@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>饮食习惯分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="sugar-edit">
+    <section class="chose-detail-box">
+        <h1>饮食习惯分析</h1>
+        <div class="chose-detail">
+            <p>日常饮食习惯，是慢性疾病的主要诱因之一</p>
+        </div>
+        <ul class="edit-box">
+            <li class="edit-list">
+                <div class="edit-name">您平时最喜欢的饭菜口味是？</div>
+                <div class="edit-text" id="diet-chose">
+                    <input type="text" id="diet-text" placeholder="请选择" readonly>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //点击出现弹窗并且在存储中赋值
+        $('#diet-chose').click(function(){
+            var dietJson = [{"label":"一般","value":"1"},{"label":"偏酸","value":"2"},{"label":"偏辣","value":"3"},{"label":"偏咸","value":"4"},{"label":"偏甜","value":"5"}];
+            weui.picker(dietJson, {
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    $('#diet-text').val(result[0].label);
+                    $('.next-btn').addClass('cur').children('a').attr('href','diet-chose1.html')
+                }
+            });
+        })
+        //点击下一步
+        $('.next-btn').click(function(){
+            sessionStorage.setItem('diet',$('#diet-text').val())
+        })
+        //刚进入页面的时候
+        if(sessionStorage.getItem('diet')){
+            $('.next-btn').addClass('cur').children('a').attr('href','diet-chose1.html')
+        }
+    })
+</script>
+</body>
+</html>

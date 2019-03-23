@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>生活方式分析</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="life-chose">
+    <header id="headerNav" class="test-top">
+        <a href="javascript:;" class="return-btn">
+            <img src="img/return.png" alt="">
+        </a>
+    </header>
+    <section class="chose-detail-box">
+        <h1>生活方式分析</h1>
+        <div class="chose-detail">
+            <p>请准确填写饮酒情况</p>
+        </div>
+        <ul class="edit-box">
+            <li class="edit-list" id="drink-chose">
+                <span class="edit-name">是否饮酒</span>
+                <span class="edit-text">
+                    <input type="text" placeholder="请选择" id="drink-text" readonly>
+                </span>
+            </li>
+            <li class="edit-list" id="drink-age">
+                <span class="edit-name">酒龄</span>
+                <span class="edit-text edit-text1">
+                    <input type="text" id="drink-year">
+                    <i>年</i>
+                </span>
+            </li>
+        </ul>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#drink-chose').click(function(){
+            var drinkJson = [{"label":"不喝酒","value":"1"},{"label":"已戒酒","value":"2"},{"label":"一直喝酒","value":"3"}];
+            weui.picker(drinkJson, {
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    $('#drink-text').val(result[0].label);
+                    if(result[0].value == 1){
+                        $('#drink-age').hide();
+                        $('.next-btn').addClass('cur').children('a').attr('href','exercise-chose.html');
+                    }else{
+                        $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+                        $('#drink-age').show();
+                        $('#drink-year').keyup(function(){
+                            if($('#drink-year').val()){
+                                $('.next-btn').addClass('cur').children('a').attr('href','exercise-chose.html');
+                            }else{
+                                $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+                            }
+                        })
+                    }
+
+                }
+            });
+        })
+        $('.next-btn').click(function(){
+            sessionStorage.setItem('drink',$('#drink-text').val());
+            sessionStorage.setItem('year1',$('#drink-year').val());
+        })
+        var drink = sessionStorage.getItem('drink');
+        var year1 = sessionStorage.getItem('year1');
+        if(drink&&drink == '不喝酒'){
+            $('#drink-age').hide();
+            $('.next-btn').addClass('cur').children('a').attr('href','exercise-chose.html');
+        }else if(!drink){
+            $('#drink-age').hide();
+        }else{
+            $('#drink-age').show();
+            $('.next-btn').addClass('cur').children('a').attr('href','exercise-chose.html');
+        }
+    })
+</script>
+</body>
+</html>

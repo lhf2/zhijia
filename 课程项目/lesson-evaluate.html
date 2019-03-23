@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>评论详情</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/lesson-detail.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="lesson-evaluate" id="app" v-cloak="">
+    <header class="lesson-top" id="headerNav">
+        <a class="return-btn" href="javascript:;">
+            <img src="img/return.png" alt="">
+        </a>
+        小伙伴们说
+    </header>
+    <section class="evaluate-box">
+        <ul class="evaluate-detail" id="waterfall" class="waterfall" v-infinite-scroll="loadMore" v-cloak infinite-scroll-disabled="dataFlag" infinite-scroll-distance="5" keep-alive>
+            <li class="evaluate-list" v-for="(item, index) in datas">
+                <div class="eva-top">
+                    <div class="icon-box">
+                        <div class="icon-inner">
+                            <span class="icon-img">
+                                <img src="img/user.png" alt="">
+                            </span>
+                            <i class="icon-level">V<sub>3</sub></i>
+                        </div>
+                    </div>
+                    <div class="eva-right">
+                        <div class="name-time">
+                            <span class="icon-name">{{item.userName}}</span>
+                            <span class="commmit-time">{{item.time}}</span>
+                        </div>
+                        <div class="icon-evaluate">
+                            <div class="score-box">
+                                <ul>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                                <span class="score-num">{{item.star}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evaluate-content">
+                    <p>{{item.content}}</p>
+                    <div class="more-content">查看全文</div>
+                </div>
+            </li>
+        </ul>
+        <div class="no-comment">别拉了，到底了</div>
+    </section>
+    <div class="evaluate-btn">
+        <a href="edit-evaluate.html">
+            <img src="img/pj.png" alt="">
+            这就去评价！
+        </a>
+    </div>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue.min.js?version=1511930172746"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue-infinite-scroll.js?version=1511930172746"></script>
+<script src="js/demo.js"></script>
+<script>
+    $(document).ready(function(){
+        //兼容安卓跟ios的通栏
+        var barHeight = 0;
+        var dpr = window.devicePixelRatio;
+        var topH = parseInt($('#headerNav').height());
+        $('#headerNav').before('<div style="background:#fff;height:'+barHeight/dpr+'px;width:100%;position: fixed;top:0;z-index:1000"></div>').css('top',barHeight/dpr+'px');
+        $('.evaluate-box').css('margin-top',44+(barHeight/dpr)+'px');
+        //返回键
+        $('#headerNav .return-btn').click(function(){
+            window.history.back();
+        })
+    })
+    var vueInitData = {
+        pageCount:3,
+        count:0,
+        busy: false,
+        dataFlag:false,
+        tCount:0,
+        datas:[],
+    };
+    window.app = new Vue({
+        el: '#app',
+        data: vueInitData,
+        methods:{
+            loadMore:function(flag){
+                var temp = this;
+                $.ajax({
+                    url : 'api/data.json',
+                    type: "get",
+                    dataType: "json",
+                    success:function(data){
+                        if(temp.datas.length >20){
+                            //模拟无数据的时候
+                            $('.no-comment').show();
+                        }else{
+                            for(var i = 0; i < data.datas.length; i++) {
+                                temp.datas.push(data.datas[i]);
+                            }
+                            if(data.datas.length<temp.pageCount){
+                                temp.dataFlag=true;
+                            }
+                            temp.busy = false;
+                            temp.tCount=temp.tCount+temp.pageCount;
+                        }
+                    },
+                    error:function(){
+                        temp.dataFlag=true;
+                    }
+                });
+            },
+            resetData:function(){
+                this.pageCount=10, this.count=0, this.busy=false;
+                this.dataFlag=false;
+                this.tCount=0;
+                this.loadMore();
+            }
+        },
+        updated:function(){
+            //显示查看全文
+            $('.evaluate-content p').each(function(){
+                var lineHeight = parseInt($(this).css('maxHeight'));
+                if($(this).height()>=lineHeight){
+                    $(this).siblings('.more-content').show();
+                }
+            })
+            //点击全文
+            $('.more-content').click(function(){
+                if($(this).html() == '查看全文'){
+                    $(this).html('收起评论');
+                    var height = $(this).siblings('p').height();
+                    $(this).siblings('p').css({
+                        "max-height":'100%',
+                        "min-height":height,
+                        'overflow':'auto'
+                    });
+                }else{
+                    $(this).html('查看全文');
+                    $(this).siblings('p').css({
+                        "max-height":'1.78rem',
+                        "min-height":'auto',
+                        'overflow':'hidden'
+                    });
+                }
+            })
+            //应该显示多少星
+            $('.score-box').each(function(){
+                var len = 5;
+                var num = parseInt($(this).children('.score-num').html());
+                for(var i=0;i<num;i++){
+                    $(this).children('ul').children('li').eq(i).html('<img src="img/star.png" alt="">');
+                }
+                for(var j=0;j<len-num;j++){
+                    $(this).children('ul').children('li').eq(num+j).html('<img src="img/star1.png" alt="">');
+                }
+            })
+        }
+    })
+</script>
+
+</body>
+</html>

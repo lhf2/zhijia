@@ -1,0 +1,254 @@
+
+
+
+/* base */
+
+body {
+    background-color: #ffffff;
+    font-size: 14px;
+}
+
+
+/* module */
+
+.hidden {
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+
+/*页面样式开始*/
+
+section {
+    background: #ffffff;
+}
+
+
+/*第一部分开始*/
+
+.section1 {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 4.2rem;
+    padding: .3rem;
+    padding-bottom: 0.4rem;
+}
+
+.topBox {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #dcdcdc;
+    border-radius: 0.25rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: .4rem;
+}
+.topBox span{
+    color: #999;
+}
+
+/*图片与文字切换显示开始*/
+
+.picBox {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+
+    padding: 0.25rem 0.15rem;
+}
+
+.textBox {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2.3rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+
+    color: rgb( 153, 153, 153);
+
+}
+
+
+/*图片与文字切换显示结束*/
+
+.topBox>p {
+    text-align: center;
+    font-size: 0.32rem;
+    font-family: "PingFangSC";
+    color: rgb( 51, 51, 51);
+}
+
+.topBox>p+hr {
+    margin-top: .3rem;
+    border: 0;
+    border-top: 1px solid #dcdcdc;
+}
+
+.picBox>div {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+}
+
+.picBox img {
+    width: 1.54rem;
+    height: 1.63rem;
+}
+
+
+/*第一部分结束*/
+
+
+/*第2部分开始*/
+
+.text {
+    text-align: center;
+    font-size: 0.32rem;
+    font-family: "PingFangSC";
+    color: rgb( 51, 51, 51);
+    border-top: 0.2rem solid #f3f3f3;
+    padding: 0.2rem 0;
+}
+
+.text+hr {
+    border: 0;
+    border-top: 1px solid #dcdcdc;
+}
+
+.section2 {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: .35rem 0.3rem;
+}
+
+.task {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+}
+
+.task>li {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 0.25rem;
+    margin-bottom: 0.2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row;
+    flex-flow: row;
+    /*伸缩项目单行排列*/
+}
+
+.part1 {
+    width: 1.93rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+}
+
+.part1>img {
+    width: 1.54rem;
+    height: 1.63rem;
+}
+
+.rol {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    width: 1px;
+    height: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.rol>span {
+    display: inline-block;
+    width: 100%;
+    height: 1.3rem;
+    background-color: #dcdcdc;
+}
+
+.part2 {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    /*这里设置为占比1，填充满剩余空间*/
+    -webkit-flex: 1;
+    padding: .2rem;
+    font-size: 0.32rem;
+    font-family: "PingFangSC";
+    color: rgb( 51, 51, 51);
+}
+
+.part2>p {
+    line-height: 0.45rem;
+}
+
+.part2>p:first-of-type {
+    line-height: 0.6rem;
+}
+
+.part2>p span {
+    color: #21cfc0;
+}
+
+
+/*第2部分结束*/
+
+
+/*页面样式结束*/

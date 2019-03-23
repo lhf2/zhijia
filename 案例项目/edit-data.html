@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>编辑资料</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/mui.poppicker.css">
+	<link rel="stylesheet" href="css/mui.picker.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/healthy-story.css" />
+	<script type="text/javascript" src="js/rem.js" ></script>
+</head>
+<body>
+	<article class="edit-data-page">
+		<header class="edit-top">
+			<img src="img/return.png" alt="">
+			编辑基本资料
+			<span class="save-btn">保存</span>
+		</header>
+		<section class="data-chosebox">
+			<ul class="chose-box">
+				<li class="chose-list mui-row" id="openPopover">
+					<div class="chose-type mui-col-xs-4">性别</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose sex-text">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+				<li class="chose-list mui-row" id="openPopover1">
+					<div class="chose-type mui-col-xs-4">身高</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose height-text">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+				<li class="chose-list mui-row" id="openPopover2">
+					<div class="chose-type mui-col-xs-4">生日</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose birth-day">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+				<li class="chose-list mui-row" id="openPopover3">
+					<div class="chose-type mui-col-xs-4">慢病家族史</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose family-history">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+				<li class="chose-list mui-row" id="openPopover4">
+					<div class="chose-type mui-col-xs-4">吸烟状况</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose smoke-status">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+				<li class="chose-list mui-row" id="openPopover5">
+					<div class="chose-type mui-col-xs-4">饮酒状况</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose drink-status">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+				<li class="chose-list mui-row" id="openPopover6">
+					<div class="chose-type mui-col-xs-4">所在地</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose loc-text">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+				<li class="chose-list mui-row" id="openPopover7">
+					<div class="chose-type mui-col-xs-4">加入乐汁</div>
+					<div class="chose-detail mui-col-xs-8">
+						<span class="please-chose join-text">请选择</span>
+						<span class="mui-icon mui-icon-arrowright"></span>
+					</div>
+				</li>
+			</ul>
+		</section>
+	</article>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src='js/mui.min.js'></script>
+	<script src="js/mui.poppicker.js"></script>
+	<script src="js/mui.picker.js"></script>
+	<script src="js/mui.dtpicker.js"></script>
+	<script src="js/city.data.js"></script>
+	<script>
+	$(document).ready(function(){
+        // 性别
+        var picker = new mui.PopPicker();
+		picker.setData([{
+			    text: "男"
+			}, {
+			    text: "女"
+		}])
+		$('#openPopover').click(function(){
+			picker.show(function(selectItem){
+				console.log(selectItem)
+				$('.sex-text').html(selectItem[0].text);
+			});
+		})
+		// 身高
+		var height = [];
+		for(var i = 100;i <= 250;i++){
+			height.push({
+				text:i
+			})
+		}
+        var picker1 = new mui.PopPicker();
+		picker1.setData(height);
+		picker1.pickers[0].setSelectedIndex(55)
+		$('#openPopover1').click(function(){
+			picker1.show(function(selectItem){
+				$('.height-text').html(selectItem[0].text);
+			});
+		})
+		// 慢病家族史
+        var picker3 = new mui.PopPicker();
+		picker3.setData([{
+			    text: "无遗传病史"
+			},{
+			    text: "有家族糖尿病史"
+			},{
+			    text: "有家族高血压史"
+			},{
+			    text: "有家族高血脂史"
+			}])
+		$('#openPopover3').click(function(){
+			picker3.show(function(selectItem){
+				$('.family-history').html(selectItem[0].text);
+			});
+		})
+		// 吸烟状况
+		var somkeChilds = [];
+		somkeChilds.push({
+			text:'不吸烟'
+		},{
+			text:'5根/天'
+		},{
+			text:'半包/天'
+		},{
+			text:'一包/天'
+		},{
+			text:'一包半/天'
+		},{
+			text:'两包/天'
+		},{
+			text:'两包以上/天'
+		})
+		var picker4 = new mui.PopPicker({
+			layer: 2
+		});
+		picker4.setData([{
+			    text: "不吸烟",
+			    children:somkeChilds
+			},{
+			    text: "1-5年",
+			    children:somkeChilds
+			},{
+			    text: "6-10年",
+			    children:somkeChilds
+			},{
+			    text: "11-15年",
+			    children:somkeChilds
+			},{
+			    text: "16-20年",
+			    children:somkeChilds
+			},{
+			    text: "20年以上",
+			    children:somkeChilds
+			}])
+		$('#openPopover4').click(function(){
+			picker4.show(function(selectItem){
+				$('.smoke-status').html(selectItem[0].text +'    '+ selectItem[1].text);
+			});
+		})
+		//饮酒状况
+		var drinkChilds = [];
+		drinkChilds.push({
+			text:'不饮酒'
+		},{
+			text:'1两/天均'
+		},{
+			text:'2两/天均'
+		},{
+			text:'3两/天均'
+		},{
+			text:'4两/天均'
+		},{
+			text:'半斤/天均'
+		},{
+			text:'一斤/天均'
+		},{
+			text:'一斤以上/天均'
+		})
+		var picker5 = new mui.PopPicker({
+			layer: 2
+		});
+		picker5.setData([{
+			    text: "不饮酒",
+			    children:drinkChilds
+			},{
+			    text: "1-5年",
+			    children:drinkChilds
+			},{
+			    text: "6-10年",
+			    children:drinkChilds
+			},{
+			    text: "11-15年",
+			    children:drinkChilds
+			},{
+			    text: "16-20年",
+			    children:drinkChilds
+			},{
+			    text: "20年以上",
+			    children:drinkChilds
+			}])
+		$('#openPopover5').click(function(){
+			picker5.show(function(selectItem){
+				$('.drink-status').html(selectItem[0].text +'    '+ selectItem[1].text);
+			});
+		})
+		//日期
+		var today = new Date();
+		var endYear = today.getFullYear();
+		var endMonth = today.getMonth()+1;
+		var endDay = today.getDate();
+		console.log(endYear,endMonth,endDay);
+		var beginYear = endYear-100;
+		var dtPicker = new mui.DtPicker({
+			type:'date',
+			beginYear:beginYear,
+			endDate: new Date()
+		}); 
+		dtPicker.setSelectedValue("1980-01-01") 
+		$('#openPopover2').click(function(){
+			dtPicker.show(function(selectItem){
+				console.log(selectItem);
+				$('.birth-day').html(selectItem.text)
+			});
+		})
+		$('#openPopover7').click(function(){
+			dtPicker.show(function(selectItem){
+				console.log(selectItem);
+				$('.join-text').html(selectItem.text)
+			});
+		})
+		//所在地的选择
+		var cityPicker = new mui.PopPicker({
+			layer: 2
+		});
+		cityPicker.setData(cityData);
+		$('#openPopover6').click(function(){
+			cityPicker.show(function(items) {
+				$('.loc-text').html(items[0].text+ " " + items[1].text)
+			});
+		})
+	})
+	</script>
+</body>
+</html>

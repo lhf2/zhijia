@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>评估结果</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body style="background: #f4f5f9">
+<article class="bmi-report">
+    <section class="report-result">
+        <div class="report-text">
+            <p>您的体重指数<br>评估结果为</p>
+            <p class="result-text">超重</p>
+        </div>
+    </section>
+    <section class="manger-program">
+        <div class="program-bmi">
+            <p class="bmi-result"><b>您的BMI测试结果为：</b><i>24</i></p>
+            <p>根据您的年龄和身高测算，您已经属于体重<i class="result-text1">超重</i>范围</p>
+        </div>
+        <div class="program-detail">
+            <b>超重体重</b>,将对人体的骨骼、关节、各重要器官带来健康影响。请尽快从饮食、运动、睡眠、情绪四个维度，全面进行生活方式调整，将体重降到合理区间。
+        </div>
+    </section>
+    <div class="open-plan"></div>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/radialIndicator.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //圆环
+        var knob = $('.report-result').radialIndicator({
+            barColor: '#fff',
+            barBgColor:'rgba(255,255,255,.1)',
+            barWidth: 5,
+            roundCorner : true,
+            displayNumber: false,
+            frameTime:2,//动画时间
+        });
+        var radialObj = $('.report-result').data('radialIndicator');
+        //计算bmi指数
+        function bmi(w,h){
+            return (w/(h/100*h/100)).toFixed(1);
+        }
+        function bmiState(w,h){
+            var bmiIndex = bmi(w,h);
+            if(bmiIndex>18.5&&bmiIndex<23){
+                return '正常'
+            }else if(bmiIndex>=23&&bmiIndex<24){
+                return '偏胖'
+            }else if(bmiIndex>=24&&bmiIndex<28){
+                return '超重'
+            }else if(bmiIndex>=28){
+                return '肥胖'
+            }else{
+                return '偏瘦'
+            }
+        }
+        function bmiCon(state){
+            var con = '';
+            if(state == '偏瘦'){
+                con = '将对人体的骨骼、关节、各重要器官也十分不利。请尽快从饮食、运动、睡眠、情绪四个维度，全面进行生活方式调整，尽量使体重回归合理区间内。';
+                radialObj.animate(20);
+            }else if(state == '正常'){
+                con = '将对人体的骨骼、关节、各重要器官没有危害。请尽快从饮食、运动、睡眠、情绪四个维度，全面进行生活方式调整，尽量保持体重在合理区间内。';
+                radialObj.animate(40);
+            }else if(state == '偏胖'){
+                con = '将对人体的骨骼、关节、各重要器官带来健康隐忧。请尽快从饮食、运动、睡眠、情绪四个维度，全面进行生活方式调整，将体重降到合理区间。';
+                radialObj.animate(60);
+            }else if(state == '超重'){
+                con = '将对人体的骨骼、关节、各重要器官带来健康影响。请尽快从饮食、运动、睡眠、情绪四个维度，全面进行生活方式调整，将体重降到合理区间。';
+                radialObj.animate(80);
+            }else if(state == '肥胖'){
+                con = '将对人体的骨骼、关节、各重要器官带来健康隐患。请尽快从饮食、运动、睡眠、情绪四个维度，全面进行生活方式调整，将体重降到合理区间。';
+                radialObj.animate(100);
+            }
+            return con;
+        }
+        //刚进入页面
+        var height = sessionStorage.getItem('height');
+        var weight = sessionStorage.getItem('weight');
+        if(weight&&height){
+            var state = bmiState(weight,height);
+            var bmiIndex = bmi(weight,height);
+            $('.result-text').html(state);
+            $('.result-text1').html(state);
+            $('.program-detail b').html(state+'体重');
+            $('.program-detail').html('<b>'+state+'体重</b>,'+bmiCon(state));
+            $('.bmi-result i').html(bmiIndex);
+            if(state == '偏瘦'){
+                $('.open-plan').hide()
+            }
+        }
+        //点击进入计划
+        $('.open-plan').click(function(){
+            location.href = 'open-plan.html'
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>高血压第一阶段方案报告</title>
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/css/reset.css">
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/css/program-page.css">
+    <script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/js/rem.js"></script>
+</head>
+<body>
+<article class="health-report">
+    <section class="health-top">
+        <header class="health-title">
+            <img src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/img/return.png" alt="">
+            高血压第一阶段方案报告
+        </header>
+        <section class="health-tip">
+            <p>亲爱的<span class="icon-name">三晋时代</span></p>
+            <p>恭喜您与<span class="people-num">18</span>人一起完成了高血压第一阶段。</p>
+        </section>
+    </section>
+    <!--血压结果-->
+    <section class="press-result">
+        <div class="result-title">
+            <span>血压结果</span>
+        </div>
+        <section class="result-box1">
+            <div class="result-final">(最近一次血压)</div>
+            <ul class="press-box">
+                <li class="press-list">
+                    舒张压
+                    <span>51.1</span>
+                    <sup>mmHg</sup>
+                </li>
+                <li class="press-list">
+                    收缩压
+                    <span>95.61</span>
+                    <sup>mmHg</sup>
+                </li>
+            </ul>
+            <div class="result-box">
+                <div class="result-box-inner">
+                    血压控制的结果：<i class="result-text">
+                    正常血压
+                </i>
+                    <em></em>
+                </div>
+            </div>
+        </section>
+        <section class="result-box2">
+            <div class="slider-result slider-result-gky">
+                <div class="slider-top">
+                    <div class="slider-type">
+                        <span class="line"></span>
+                        <span>高血压</span>
+                    </div>
+                    <div class="slider-num">0次</div>
+                    <em></em>
+                </div>
+                <div class="slider-box" id="slider-gxy"></div>
+            </div>
+            <div class="slider-result slider-result-zcy">
+                <div class="slider-top">
+                    <div class="slider-type">
+                        <span class="line"></span>
+                        <span>正常血压</span>
+                    </div>
+                    <div class="slider-num">0次</div>
+                    <em></em>
+                </div>
+                <div class="slider-box" id="slider-zc"></div>
+            </div>
+            <div class="slider-result slider-result-zcg">
+                <div class="slider-top">
+                    <div class="slider-type">
+                        <span class="line"></span>
+                        <span>正常高值</span>
+                    </div>
+                    <div class="slider-num">0次</div>
+                    <em></em>
+                </div>
+                <div class="slider-box" id="slider-gz"></div>
+            </div>
+            <div class="result-box">
+                脉压差值<span>44.51</span><sup>mmHg</sup>
+                <em></em>
+            </div>
+            <div class="result-tip">
+            </div>
+        </section>
+    </section>
+    <!--血压曲线-->
+    <section class="press-curve">
+        <div class="result-title"><span>血压曲线</span></div>
+        <section class="curve-box">
+            <header class="press-curve-title">
+                单位:mmHg
+            </header>
+            <div id="press-chart"></div>
+            <div id="noDataTip" class="nodata">暂无数据记录</div>
+        </section>
+    </section>
+    <!--原因分析-->
+    <section class="cause-analysis">
+        <div class="result-title"><span>原因分析</span></div>
+        <div class="cause-box cause-box-ysjl">
+            <div class="cause-top">
+                <div class="cause-type">
+                    <span class="line"></span>
+                    <span>饮食记录</span>
+                </div>
+                <div class="cause-chose">
+                    <span class="a">A</span>
+                    <span class="b">B</span>
+                    <span class="c">C</span>
+                </div>
+                <div class="yes-num">符合要求：<i>0</i>次</div>
+            </div>
+            <div class="cause-slider" id="slider-ysjl"></div>
+            <div class="cause-tip">
+                <span class="tip-img">
+                    <img src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/img/re-icon1.png" alt="">
+                </span>
+                <span class="tip-text">
+                喝汁的前几天，身体会有排毒反应，应该坚持下去！
+                </span>
+            </div>
+        </div>
+        <div class="cause-box cause-box-smjl">
+            <div class="cause-top">
+                <div class="cause-type">
+                    <span class="line"></span>
+                    <span>睡眠记录</span>
+                </div>
+                <div class="cause-chose">
+                    <span class="a">A</span>
+                    <span class="b">B</span>
+                    <span class="c">C</span>
+                </div>
+                <div class="yes-num">精致睡眠：<i>0</i>次</div>
+            </div>
+            <div class="cause-slider" id="slider-smjl"></div>
+            <div class="cause-tip">
+                <span class="tip-img">
+                    <img src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/img/re-icon1.png" alt="">
+                </span>
+                <span class="tip-text">
+                您如果感觉睡眠太差，建议去医院就诊。
+                </span>
+            </div>
+        </div>
+        <div class="cause-box cause-box-ydjl">
+            <div class="cause-top">
+                <div class="cause-type">
+                    <span class="line"></span>
+                    <span>运动记录</span>
+                </div>
+                <div class="cause-chose">
+                    <span class="a">A</span>
+                    <span class="b">B</span>
+                    <span class="c">C</span>
+                </div>
+                <div class="yes-num">运动达标：<i>0</i>次</div>
+            </div>
+            <div class="cause-slider" id="slider-ydjl"></div>
+            <div class="cause-tip">
+                <span class="tip-img">
+                    <img src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/img/re-icon1.png" alt="">
+                </span>
+                <span class="tip-text">
+                生命在于运动，您的身体一定是棒棒的！
+               	</span>
+            </div>
+        </div>
+        <div class="cause-box cause-box-qxjl">
+            <div class="cause-top">
+                <div class="cause-type">
+                    <span class="line"></span>
+                    <span>情绪记录</span>
+                </div>
+                <div class="cause-chose">
+                    <span class="a">A</span>
+                    <span class="b">B</span>
+                    <span class="c">C</span>
+                </div>
+                <div class="yes-num">合理情绪：<i>0</i>次</div>
+            </div>
+            <div class="cause-slider" id="slider-qxjl"></div>
+            <div class="cause-tip">
+                <span class="tip-img">
+                    <img src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/img/re-icon1.png" alt="">
+                </span>
+                <span class="tip-text">馨臻健康法七原则之一，好心情比吃药的效果更直接。</span>
+            </div>
+        </div>
+    </section>
+    <section class="score-Explain">
+        <div class="score-inner">
+            <p>评分说明：通过您在方案执行阶段的表现确定得分。</p>
+            <p>A为表现优秀，B为表现一般，c为表现不佳。</p>
+        </div>
+    </section>
+    <!--弹窗-->
+    <section class="alert-box press-alert">
+        <div class="alert-inner-box">
+            <div class="alert-text">
+                正常血压:收缩压<120和舒张压<80</br>
+                正常高值:收缩压120～139和舒张压80～89</br>
+                单纯收缩期高血压: 收缩压≥140和舒张压<90</br>
+                轻度高血压：收缩压140～159或舒张压90～99</br>
+                中度高血压：收缩压160～179或舒张压100～109</br>
+                重度高血压：收缩压≥180或舒张压≥110</br>
+            </div>
+            <div class="alert-btn">我知道了</div>
+        </div>
+    </section>
+    <section class="alert-box press-zcy-alert">
+        <div class="alert-inner-box">
+            <div class="alert-text">
+                正常血压:收缩压<120 和舒张压<80
+            </div>
+            <div class="alert-btn">我知道了</div>
+        </div>
+    </section>
+    <section class="alert-box press-zcg-alert">
+        <div class="alert-inner-box">
+            <div class="alert-text">
+                正常高值:收缩压120～139 和舒张压80～89
+            </div>
+            <div class="alert-btn">我知道了</div>
+        </div>
+    </section>
+    <section class="alert-box press-gxy-alert">
+        <div class="alert-inner-box">
+            <div class="alert-text">
+                高血压: 收缩压≥140 或舒张压≥90
+            </div>
+            <div class="alert-btn">我知道了</div>
+        </div>
+    </section>
+    <section class="alert-box press-myc-box">
+        <div class="alert-inner-box">
+            <div class="alert-text">
+                脉压差是指收缩压与舒张压之间的差值，正常范围是20-60mmHg，脉压差偏大或偏小都是身体健康失衡的一种表现，应该及时去医院查明原因，治疗原发病。
+            </div>
+            <div class="alert-btn">我知道了</div>
+        </div>
+    </section>
+</article>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/js/echarts.common.min.js"></script>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com//app/js/slider.js"></script>
+<script>
+    $(document).ready(function(){
+        var pressChart=echarts.init(document.getElementById('press-chart'));
+        var timeData = [];
+        option={
+            textStyle:{
+                color:'#666'
+            },
+            tooltip : {
+
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: {
+                data:['收缩压','舒张压'],
+                right:0,
+                top:0
+            },
+            toolbox: {
+                show:false,
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '5%',
+                right: '12%',
+                top: '15%',
+                bottom:'10%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : timeData,
+                    /*axisLabel :{
+                     interval:0
+                     }*/
+                    /*splitLine: {
+                     show: true
+                     }//显示网格线*/
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    min:60,
+                    max:140,
+                    splitNumber:10
+                }
+            ],
+            dataZoom: [
+                {
+                    show: true,
+                    start: 0,
+//            		end:30,
+                    realtime: true,
+                    type: 'inside'//移动曲线图的时候也能拖动曲线图
+                }
+            ],
+            series : [
+                {
+                    name:'收缩压',
+                    type:'line',
+                    smooth:0.3,
+                    markLine: {
+                        symbol: ['none', 'none'],//控制标示线前后的圆点跟箭头
+                        label:{
+                            normal:{show:false}//是否显示标线上面的文本
+                        },
+                        itemStyle:{
+                            normal:{lineStyle:{type:'dotted',color:'#FB8E61'}}//控制线的颜色跟类型
+                        },
+                        data: [{
+                            yAxis: 90,
+                            name: 'y轴刻度值为90的线'
+                        }]
+                    },
+                    itemStyle : {
+                        normal : {
+                            color:'#FB8E61',
+                            lineStyle:{
+                                color:'#FB8E61',
+                                borderColor:'#FB8E61'
+                            },
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    areaStyle: {
+                        /*normal: {
+                         color:['#FB8E61'],
+                         opacity:.2
+                         }*/
+                    },
+                    data:[]
+                },
+                {
+                    name:'舒张压',
+                    type:'line',
+                    smooth:0.3,
+                    itemStyle : {
+                        normal : {
+                            color:'#7EC1F4',
+                            lineStyle:{
+                                color:'#7EC1F4',
+                                borderColor:'#7EC1F4'
+                            },
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    areaStyle: {
+                        /*normal: {
+                         color:['#7EC1F4'],
+                         opacity:.2
+                         }*/
+                    },
+
+                    data:[]
+                }
+            ]
+        }
+        if(timeData.length<=4){
+            option.dataZoom[0].end = 100
+        }else{
+            option.dataZoom[0].end = 30
+        }
+        pressChart.setOption(option);
+        //进度条
+        //高血压
+        var slider = new SliderBox({
+            id:'slider-gxy',
+            val:0,
+            bgColor:'253,64,122',
+        })
+        //正常血压
+        var slider1 = new SliderBox({
+            id:'slider-zc',
+            val:0,
+            bgColor:'108,195,116',
+
+        })
+        //正常高值
+        var slider2 = new SliderBox({
+            id:'slider-gz',
+            val:0,
+            bgColor:'255,157,58'
+        })
+        //饮食记录
+        var slider3 = new SliderBox({
+            id:'slider-ysjl',
+            val:0,
+            bgColor:'250,141,98',
+            max:84,
+            type:2,
+            onChange:function(){
+                var curClass = this.getRegion(this);
+                $('#'+this.id).siblings('.cause-top').find('.'+curClass).addClass('cur')
+            }
+        })
+        //睡眠记录
+        var slider4 = new SliderBox({
+            id:'slider-smjl',
+            val:0,
+            bgColor:'127,193,243',
+            type:2,
+            firstPoint:8,
+            secondPoint:20,
+            onChange:function(){
+                var curClass = this.getRegion(this);
+                $('#'+this.id).siblings('.cause-top').find('.'+curClass).addClass('cur')
+            }
+        })
+        //运动记录
+        var slider5 = new SliderBox({
+            id:'slider-ydjl',
+            val:0,
+            bgColor:'114,116,190',
+            max:84,
+            type:2,
+            onChange:function(){
+                var curClass = this.getRegion(this);
+                $('#'+this.id).siblings('.cause-top').find('.'+curClass).addClass('cur')
+            }
+        })
+        //情绪记录
+        var slider6 = new SliderBox({
+            id:'slider-qxjl',
+            val:0,
+            bgColor:'255,129,158',
+            max:84,
+            type:2,
+            onChange:function(){
+                var curClass = this.getRegion(this);
+                $('#'+this.id).siblings('.cause-top').find('.'+curClass).addClass('cur')
+            }
+        })
+        //弹窗的显示/隐藏
+        $('.result-box-inner em').click(function(){
+            $('.press-alert').show();
+        })
+        $('.slider-result-gky').find('em').click(function(){
+            $('.press-gxy-alert').show();
+        })
+        $('.slider-result-zcy').find('em').click(function(){
+            $('.press-zcy-alert').show();
+        })
+        $('.slider-result-zcg').find('em').click(function(){
+            $('.press-zcg-alert').show();
+        })
+        $('.result-box2 .result-box').find('em').click(function(){
+            $('.press-myc-box').show();
+        })
+        $('.alert-btn').click(function(){
+            $('.alert-box').hide()
+        })
+        $('.alert-box').click(function(){
+            $(this).hide()
+        })
+        $('.alert-box .alert-text').click(function(e){
+            e.stopPropagation()
+        })
+    })
+</script>
+</body>
+</html>

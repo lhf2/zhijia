@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>乐汁历</title>
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/qa-index.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+    <article class="calendar-index article-page">
+        <header class="calendar-box">
+            <section class="calendar-title">
+                <a href="javascipt:;">
+                    <div class="title-left">
+                        <img src="../images/logo.png" alt="">
+                        <span>乐汁历馨臻每日推荐</span>
+                    </div>
+                    <div class="title-right">
+                        <span>查看往期</span>
+                        <img src="../images/next.png" alt="">
+                    </div>
+                </a>
+            </section>
+            <section class="calendar-img">
+                <img src="../images/calendar.jpg" alt="">
+            </section>
+        </header>
+        <!--最新评论-->
+        <section class="comment-box">
+            <header class="comment-title">
+                <span class="comment-line"></span>
+                最新评论
+            </header>
+            <div class="comment-detail">
+                <p class="comment-no">还没人评论，快来抢沙发....</p>
+                <ul class="comment-lists">
+                    <li class="comment-list">
+                        <div class="comment-list-left">
+                            <div class="comment-icon">
+								<span class="icon-img">
+									<img src="../images/icon.png" alt="">
+								</span>
+                                <i class="icon-level">V<sub>12</sub></i>
+                            </div>
+                        </div>
+                        <div class="comment-list-right">
+                            <div class="comment-content">
+                                <p class="comment-name-dz">
+                                    <span class="comment-name">评论人的昵称</span>
+                                    <span class="icon-type">志愿者</span>
+									<span class="comment-dz-box dz-box" data-flag="true">
+										<img src="../images/ydz.png" alt="">
+										<span class="action-text dz-num">1234</span>
+									</span>
+                                </p>
+                                <p class="comment-time">1小时前</p>
+                                <p class="hf-box">
+                                    <span class="hf-name">被评论人昵称</span>
+                                    <span class="hf-content">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
+                                </p>
+                                <p class="comment-text">
+                                    糖尿病人每天喝的果汁里面，什么水果都可以放吗？还是有什么需要注意的？
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="comment-list">
+                        <div class="comment-list-left">
+                            <div class="comment-icon">
+								<span class="icon-img">
+									<img src="../images/icon.png" alt="">
+								</span>
+                                <i class="icon-level">V<sub>12</sub></i>
+                            </div>
+                        </div>
+                        <div class="comment-list-right">
+                            <div class="comment-content">
+                                <p class="comment-name-dz">
+                                    <span class="comment-name">评论人的昵称</span>
+									<span class="comment-dz-box dz-box" data-flag="true">
+										<img src="../images/ydz.png" alt="">
+										<span class="action-text dz-num">1234</span>
+									</span>
+                                </p>
+                                <p class="comment-time">1小时前</p>
+                                <p class="comment-text">
+                                    糖尿病人每天喝的果汁里面，什么水果都可以放吗？还是有什么需要注意的？
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--底部固定-->
+        <section class="edit-comment">
+            <div class="edit-input">
+                <img src="../images/edit-comment.png" alt="">
+                <input type="text" placeholder="写评论">
+            </div>
+            <div class="edit-img">
+                <img src="../images/ypl.png" alt="">
+                <span class="comment-num">0</span>
+            </div>
+            <div class="comment-dz-box dz-box" data-flag="true">
+                <img src="../images/ydz.png" alt="">
+                <span class="action-text dz-num">1234</span>
+            </div>
+        </section>
+    </article>
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // 点赞
+            function dz(ele){
+                //判断是否为点赞 对应的图标的转换
+                ele.each(function(){
+                    if($(this).attr('data-flag')=='true'){
+                        $(this).children('img').attr('src','../images/ydz.png');
+                    }
+                })
+                ele.click(function(e){
+                    e.stopPropagation();
+                    if(!$(this).attr('data-flag')){
+                        $(this).attr('data-flag','false');
+                    }
+                    var flag=$(this).attr('data-flag');
+                    var zNum=parseInt($(this).children('.dz-num').html());
+                    if(flag=='false'){
+                        $(this).children('img').attr('src','../images/ydz.png');
+                        $(this).attr('data-flag','true');
+
+                        zNum++;
+                        mui.toast('点赞成功,+1积分');
+                    }else{
+                        $(this).children('img').attr('src','../images/dz.png');
+                        $(this).attr('data-flag','false');
+                        zNum--;
+                        mui.toast('已取消点赞');
+                    }
+                    $(this).children('.dz-num').html(zNum)
+                })
+            }
+            dz($('.dz-box'));
+            //本人刪除評論
+            $('.comment-list').click(function(e){
+                var btnArray = ['是', '否'];
+                mui.confirm('是否刪除评论？', '提示', btnArray, function(e) {
+                    console.log(e.index);
+                    if (e.index == 0) {
+                        //刪除的代碼
+                    } else {
+                        //取消
+                    }
+                })
+            })
+            //评论 滑动到顶部位置
+            $(this).keydown(function (e) {
+                if (e.which == "13") {
+                    var scrollTop = $('.comment-detail').offset().top;
+                    var cont = $("#commentInput").val();
+                    if (cont == null || cont == '') {
+                        weui.alert('评论内容不能为空');
+                        return false;
+                    }
+                    $.ajax({
+                        url: '/wx/comment?none=none',
+                        data: {'itemId': $("#topicId").val(), 'type': $("#topicType").val(), 'content': cont},
+                        type: "post",
+                        dataType: "json",
+                        success: function (res) {
+                            if (res.meta.success) {
+                                $("#commentInput").val('');
+                                location.reload();
+                                $(window).scrollTop(scrollTop);
+                            } else {
+
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("XMLHttpRequest：" + XMLHttpRequest);
+                            alert("textStatus：" + textStatus);
+                            alert("errorThrown：" + errorThrown);
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+</body>
+</html>

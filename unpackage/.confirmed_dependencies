@@ -1,0 +1,206 @@
+{
+  "my-health.html": {
+    "resources": [
+      "js/radialIndicator.min.js",
+      "css/style1.css",
+      "img/diet-icon2.png",
+      "img/weight-tj.png",
+      "img/diet-icon3.png",
+      "img/diet-icon6.png",
+      "js/rem.js",
+      "js/jquery-2.1.4.min.js",
+      "img/wdjk-main-bg.png",
+      "img/diet-icon4.png",
+      "img/xtbj.png",
+      "img/diet-icon7.png",
+      "css/mui.min.css",
+      "img/diet-icon5.png",
+      "img/diet-icon1.png",
+      "fonts/mui.ttf",
+      "sugar-record.html",
+      "healthy-report.html",
+      "diet-record.html",
+      "press-record.html",
+      "weight-record.html",
+      "medica-record.html",
+      "sleep-record.html",
+      "recovery-record.html"
+    ],
+    "refer": []
+  },
+  "sugar-record.html": {
+    "resources": [
+      "css/style1.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "blood-sugar-record.html",
+      "my-health.html"
+    ],
+    "refer": []
+  },
+  "blood-sugar-record.html": {
+    "resources": [
+      "lay/modules/laydate.js",
+      "css/modules/laydate/default/laydate.css",
+      "css/style1.css",
+      "font/iconfont.woff",
+      "img/left.png",
+      "layui.js",
+      "css/mui.min.css",
+      "img/blood-bg.png",
+      "img/blood-state.png",
+      "img/right.png",
+      "css/layui.css",
+      "sugar-record.html",
+      "lay/modules/layer.js",
+      "css/modules/layer/default/layer.css"
+    ],
+    "refer": []
+  },
+  "healthy-report.html": {
+    "resources": [
+      "img/user.jpg",
+      "css/style1.css",
+      "img/icon7.png",
+      "img/icon2.png",
+      "js/echarts.js",
+      "img/icon4.png",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "img/icon6.png",
+      "img/icon5.png",
+      "img/icon3.png",
+      "img/icon1.png",
+      "my-health.html"
+    ],
+    "refer": []
+  },
+  "diet-record.html": {
+    "resources": [
+      "js/bootstrap-datetimepicker.min.js",
+      "img/glyphicons-halflings.png",
+      "img/wc.png",
+      "js/bootstrap-datetimepicker.zh-CN.js",
+      "img/left.png",
+      "css/bootstrap-datetimepicker.css",
+      "img/zc.png",
+      "js/bootstrap.min.js",
+      "img/right.png",
+      "img/dc.png",
+      "breakfast-record.html",
+      "lay/modules/laydate.js",
+      "css/modules/laydate/default/laydate.css",
+      "css/style1.css",
+      "font/iconfont.woff",
+      "layui.js",
+      "css/layui.css",
+      "lay/modules/layer.js",
+      "css/modules/layer/default/layer.css"
+    ],
+    "refer": []
+  },
+  "breakfast-record.html": {
+    "resources": [
+      "js/getquerystring.js",
+      "font/iconfont.woff",
+      "lay/modules/flow.js",
+      "css/bootstrap-datetimepicker.css",
+      "layui.js",
+      "css/mui.min.css",
+      "api/data.json",
+      "img/carmera-tip1.png",
+      "img/carmera-tip2.png",
+      "img/camera.png",
+      "css/layui.css",
+      "lay/modules/laydate.js",
+      "css/modules/laydate/default/laydate.css",
+      "css/style1.css",
+      "img/share1.png",
+      "lay/modules/layer.js",
+      "css/modules/layer/default/layer.css"
+    ],
+    "refer": []
+  },
+  "press-record.html": {
+    "resources": [
+      "lay/modules/laydate.js",
+      "js/Ruler.js",
+      "css/style1.css",
+      "js/echarts.js",
+      "js/touch.min.js",
+      "css/Ruler.css",
+      "css/layui.css",
+      "css/modules/laydate/default/laydate.css",
+      "lay/modules/layer.js",
+      "css/modules/layer/default/layer.css"
+    ],
+    "refer": []
+  },
+  "weight-record.html": {
+    "resources": [
+      "js/Ruler.js",
+      "js/echarts.js",
+      "js/touch.min.js",
+      "css/Ruler.css",
+      "css/layui.css",
+      "lay/modules/laydate.js",
+      "css/modules/laydate/default/laydate.css",
+      "lay/modules/layer.js",
+      "css/modules/layer/default/layer.css"
+    ],
+    "refer": []
+  },
+  "medica-record.html": {
+    "resources": [
+      "medica-record1.html"
+    ],
+    "refer": [
+      "medica-record1.html"
+    ]
+  },
+  "medica-record1.html": {
+    "resources": [
+      "lay/modules/laydate.js",
+      "img/chose.png",
+      "css/modules/laydate/default/laydate.css",
+      "js/mui.picker.js",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "css/layui.css",
+      "medica-record.html"
+    ],
+    "refer": []
+  },
+  "sleep-record.html": {
+    "resources": [
+      "img/chose.png",
+      "js/mui.picker.js",
+      "lay/modules/layer.js",
+      "css/modules/layer/default/layer.css",
+      "layui.js",
+      "my-health.html",
+      "css/mui.picker.css",
+      "lay/modules/laydate.js",
+      "css/modules/laydate/default/laydate.css",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "img/left.png",
+      "css/mui.min.css",
+      "css/mui.poppicker.css",
+      "img/right.png",
+      "css/layui.css"
+    ],
+    "refer": [
+      "my-health.html"
+    ]
+  },
+  "recovery-record.html": {
+    "resources": [
+      "lay/modules/layer.js",
+      "font/iconfont.woff",
+      "css/modules/layer/default/layer.css"
+    ]
+  }
+}

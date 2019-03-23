@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>我的课程</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/lesson-detail.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="my-lesson" id="app" v-cloak="">
+    <header class="lesson-top" id="headerNav">
+        <a class="return-btn" href="javascript:;">
+            <img src="img/return.png" alt="">
+        </a>
+        我的课程
+    </header>
+    <section class="my-lesson-box">
+        <ul class="lesson-types">
+            <li class="type-list" :class="type == 'like'?'cur':''" @click="toggle('like')">收藏的课程</li>
+            <li class="type-list" :class="type == 'buy'?'cur':''" @click="toggle('buy')">购买的课程</li>
+        </ul>
+        <ul class="like-lessons my-lesson-detail" v-show="type == 'like'">
+            <li class="like-list" v-for="(item,index) in likeDatas">
+                <div class="like-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <h1>{{item.title}}</h1>
+                <div class="lesson-price">
+                    <span class="price">¥ {{item.price}}</span>
+                    <span class="price1">¥ {{item.price1}}</span>
+                    <span class="people-num"><i>{{item.num}}</i>人报名</span>
+                </div>
+            </li>
+        </ul>
+        <ul class="buy-lessons my-lesson-detail" v-show="type == 'buy'">
+            <li class="buy-list" v-for="(item,index) in buyDatas">
+                <div class="like-img">
+                    <img src="img/lesson.png" alt="">
+                </div>
+                <h1>{{item.title}}</h1>
+                <div class="buy-detail">
+                    <div class="buy-user">
+                        <span class="userimg">
+                            <img src="img/user.png" alt="">
+                        </span>
+                        <span class="username">{{item.userName}}</span>
+                    </div>
+                    <div class="score-box">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <span class="score-num">{{item.star}}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</article>
+<script src="js/vue.js"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //兼容安卓跟ios的通栏
+        var barHeight = 0;
+        var dpr = window.devicePixelRatio;
+        var topH = parseInt($('#headerNav').height());
+        $('#headerNav').before('<div style="background:#fff;height:'+barHeight/dpr+'px;width:100%;position: fixed;top:0;z-index:1000"></div>').css('top',barHeight/dpr+'px');
+        $('.my-lesson-box').css('margin-top',topH+(barHeight/dpr)+'px');
+    })
+</script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            type:'like',
+            likeDatas:[],
+            buyDatas:[]
+        },
+        methods:{
+            toggle:function(type){
+                this.type = type
+            },
+            load:function(){
+                var self = this;
+                $.ajax({
+                    url : 'api/data1.json',
+                    type: "get",
+                    dataType: "json",
+                    success:function(data){
+                        self.likeDatas = data.likeDatas;
+                        self.buyDatas = data.buyDatas;
+                    },
+                    error:function(){
+                        console.log('出错了')
+                    }
+                });
+            }
+        },
+        mounted:function(){
+            this.load();
+        },
+        updated:function(){
+            //应该显示多少星星
+            $('.score-box').each(function(){
+                var len = 5;
+                var num = parseInt($(this).children('.score-num').html());
+                console.log(num);
+                for(var i=0;i<num;i++){
+                    $(this).children('ul').children('li').eq(i).html('<img src="img/star.png" alt="">');
+                }
+                for(var j=0;j<len-num;j++){
+                    $(this).children('ul').children('li').eq(num+j).html('<img src="img/star1.png" alt="">');
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>

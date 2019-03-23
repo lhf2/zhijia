@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>身体指标分析</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="sugar-edit">
+    <header id="headerNav" class="test-top">
+        <a href="javascript:;" class="return-btn">
+            <img src="img/return.png" alt="">
+        </a>
+    </header>
+    <section class="chose-detail-box">
+        <h1>身体指标分析</h1>
+        <div class="chose-detail">
+            <p>请填写最近一次血糖监控数据</p>
+        </div>
+        <ul class="edit-box">
+            <li class="edit-list">
+                <div class="edit-name">空腹血糖浓度</div>
+                <div class="edit-text">
+                    <input type="text" id="sugar" placeholder="请输入">
+                    <i>mmol/L</i>
+                </div>
+            </li>
+            <li class="edit-list">
+                <div class="edit-name">餐后两小时血糖浓度</div>
+                <div class="edit-text">
+                    <input type="text" id="sugar1" placeholder="请输入">
+                    <i>mmol/L</i>
+                </div>
+            </li>
+        </ul>
+        <p class="result-text">您本次血糖记录为<span>重度糖尿病</span></p>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //刚进入页面
+        function load(){
+            var sugar = sessionStorage.getItem('xt');
+            var sugar1 = sessionStorage.getItem('xt1');
+            if(sugar&&sugar1){
+                $('.next-btn').addClass('cur').children('a').attr('href','bmi-chose.html')
+            }
+        }
+        load();
+        //设置血糖
+        $('#sugar').keyup(function(){
+            sessionStorage.setItem('xt',$('#sugar').val());
+            load();
+        })
+        $('#sugar1').keyup(function(){
+            sessionStorage.setItem('xt1',$('#sugar1').val());
+            load();
+        })
+    })
+</script>
+</body>
+</html>

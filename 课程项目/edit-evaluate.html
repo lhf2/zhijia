@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>评价</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/lesson-detail.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="edit-evaluate">
+    <header class="health-top" id="headerNav">
+        <span class="close-btn">
+            <img src="img/close.png" alt="">
+        </span>
+        评价
+        <span class="commit-btn">发表</span>
+    </header>
+    <section class="edit-box">
+        <div class="edit-text">
+            <textarea name="" id="" cols="30" rows="10" placeholder="亲，您对本次课程还满意吗？请写下您的评价吧！"></textarea>
+            <div class="edit-tip">至少输入8个字</div>
+        </div>
+        <div class="edit-score">
+            <span class="text">打分</span>
+            <div class="score-box" id="score-box">
+                <div class="star_score"></div>
+                <span class="fenshu"></span>
+            </div>
+            <span class="num">0.0</span>
+        </div>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/starScore.js"></script>
+<script>
+    $(document).ready(function(){
+        scoreFun($("#score-box"),{
+            fen_d:35,//每一个a的宽度
+            ScoreGrade:5//a的个数5
+        });
+        //显示分数
+        $('.star_score').click(function(){
+            var score_num = parseInt($('.fenshu').html());
+            $('.num').html(score_num.toFixed(1));
+        })
+        //兼容安卓跟ios的通栏
+        var barHeight = 0;
+        var dpr = window.devicePixelRatio;
+        $('#headerNav').before('<div style="background:#f4f5f9;height:'+barHeight/dpr+'px;width:100%"></div>');
+        //返回键
+        $('#headerNav .close-btn').click(function(){
+            window.history.back();
+        })
+    })
+</script>
+</body>
+</html>

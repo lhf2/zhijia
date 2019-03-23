@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>饮食习惯分析</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="sugar-edit diet-chose">
+    <header id="headerNav" class="test-top">
+        <a href="javascript:;" class="return-btn">
+            <img src="img/return.png" alt="">
+        </a>
+    </header>
+    <section class="chose-detail-box">
+        <h1>饮食习惯分析</h1>
+        <div class="chose-detail">
+            <p>日常饮食习惯，是慢性疾病的主要诱因之一</p>
+        </div>
+        <ul class="edit-box">
+            <li class="edit-list">
+                <div class="edit-name">您经常吃肥肉吗？</div>
+                <div class="edit-text" id="diet-chose">
+                    <input type="text" id="diet-text" placeholder="请选择" readonly>
+                </div>
+            </li>
+            <li class="edit-list">
+                <div class="edit-name">您的饮食爱好是？</div>
+                <div class="edit-text" id="like-chose">
+                    <input type="text" id="like-text" placeholder="请选择" readonly>
+                </div>
+            </li>
+            <li class="edit-list">
+                <div class="edit-name">您经常吃油炸食品吗？</div>
+                <div class="edit-text" id="food-chose">
+                    <input type="text" id="food-text" placeholder="请选择" readonly>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        var dietVal;
+        var likeVal;
+        var foodVal;
+        //共用的方法
+        function binkChose(obj,json,text){
+            weui.picker(json, {
+                onConfirm: function (result) {
+                    $(text).val(result[0].label);
+                    if($('#diet-text').val()&&$('#like-text').val()&&$('#food-text').val()){
+                        $('.next-btn').addClass('cur').children('a').attr('href','inherit-chose.html')
+                    }
+                }
+            });
+        }
+        //点击出现弹窗
+        $('#diet-chose').click(function(){
+            var dietJson = [{"label":"不吃","value":"1"},{"label":"偶尔（1-2次/周）","value":"2"},{"label":"经常（3-4次/周）","value":"3"},{"label":"每天","value":"4"}];
+            binkChose($(this),dietJson,'#diet-text');
+        })
+        $('#like-chose').click(function(){
+            var likeJson = [{"label":"没有偏好","value":"1"},{"label":"喜欢肉食","value":"2"},{"label":"喜欢素食","value":"3"}];
+            binkChose($(this),likeJson,'#like-text');
+        })
+        $('#food-chose').click(function(){
+            var foodJson = [{"label":"不吃","value":"1"},{"label":"偶尔（1-2次/周）","value":"2"},{"label":"经常（3-4次/周）","value":"3"},{"label":"每天","value":"4"}];
+            binkChose($(this),foodJson,'#food-text');
+        })
+        //点击下一步
+        var dietArr = [];
+        $('.next-btn').click(function(){
+            dietVal = $('#diet-text').val();
+            likeVal = $('#like-text').val();
+            foodVal = $('#food-text').val();
+            dietArr.push(dietVal);
+            dietArr.push(likeVal);
+            dietArr.push(foodVal);
+            sessionStorage.setItem('diet',dietArr);
+        })
+        //刚进入页面
+        var curArr = sessionStorage.getItem('diet').split(',');
+        if(curArr.length == 3){
+            $('.next-btn').addClass('cur').children('a').attr('href','inherit-chose.html')
+        }
+    })
+</script>
+</body>
+</html>

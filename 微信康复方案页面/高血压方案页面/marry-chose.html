@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>婚姻状况分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="sugar-edit">
+    <section class="chose-detail-box">
+        <h1>婚姻状况分析</h1>
+        <div class="chose-detail">
+            <p>婚姻状况对身体健康的影响不容忽视</p>
+        </div>
+        <ul class="chose-box">
+            <li class="select-list" value="1">未婚</li>
+            <li class="select-list" value="2">在婚</li>
+            <li class="select-list" value="3">分居</li>
+            <li class="select-list" value="4">离异</li>
+            <li class="select-list" value="5">丧偶</li>
+        </ul>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //共用的判断是否有没有数据进而显示高亮和链接
+        function load(){
+            var curArr = sessionStorage.getItem('marry'),curIndex;
+            if(curArr) {
+                $('.select-list').each(function(index){
+                    if($('.select-list').eq(index).attr('value') == curArr){
+                        curIndex = index
+                    }
+                })
+                $('.select-list').eq(curIndex).addClass('cur');
+            }
+        }
+        //点击列表的时候往存储里添加
+        $('.select-list').click(function(){
+            $('.select-list').removeClass('cur');
+            $(this).addClass('cur');
+            sessionStorage.setItem('marry',$(this).attr('value'));
+            location.href = 'smoke-chose.html'
+        })
+        //刚进入页面的时候判断
+        load();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>编辑内容</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.1/weui.min.css" />
+    <link rel="stylesheet" href="css/healthy-story.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="edit-content-page">
+    <header class="edit-top">
+        <img src="img/return.png" alt="">
+        <span class="edit-title">编辑喝汁效果</span>
+        <span class="edit-save">保存</span>
+    </header>
+    <section class="edit-content">
+        <textarea name="" id="" placeholder="不超过50字" maxlength="50"></textarea>
+    </section>
+    <section class="edit-pic">
+        <div class="edit-pic-inner">
+            <div class="pic-before pic-list">
+                <div class="upload-list">
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                        <div class="weui-uploader__input-box weui_uploader_input_wrp input_wrp">
+                            <img src="img/before.jpg" alt="">
+                            <div class="uploader-inner">
+                                <input id="uploaderCustomInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                <div class="add-btn">
+                                    +
+                                </div>
+                                添加图片
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                喝汁前
+            </div>
+            <div class="pic-after pic-list">
+                <div class="upload-list">
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles1"></ul>
+                        <div class="weui-uploader__input-box weui_uploader_input_wrp input_wrp">
+                            <img src="img/before.jpg" alt="">
+                            <div class="uploader-inner">
+                                <input id="uploaderCustomInput1" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                <div class="add-btn">
+                                    +
+                                </div>
+                                添加图片
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                喝汁后
+            </div>
+        </div>
+        <p class="pic-tip">请在此添加您喝汁前后的对比照片</p>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js?version=1511177619235"></script>
+<script>
+    $(document).ready(function(){
+        var title = getQueryString('title');
+        var size = getQueryString('size');
+        var content = getQueryString('content');
+        var placeholder = getQueryString('placeholder');
+        var type = getQueryString('type');
+        $('.edit-title').html(title);
+        if(!placeholder || placeholder == 'undefined'){
+            $('.edit-content textarea').attr("placeholder",'不超过'+size+'字');
+        }else{
+            $('.edit-content textarea').attr("placeholder",placeholder);
+        }
+        $('.edit-content textarea').attr("maxlength",size);
+        $('.edit-content textarea').html(content);
+        //通过type判断类型是否需要显示上传图片的功能
+        if(type == 1){
+            $('.edit-pic').show();
+        }else if(type == 2){
+            $('.edit-pic1').show();
+        }
+        if($('.input_wrp').children('img').length){
+            console.log(1);
+            $('.input_wrp .uploader-inner').css('opacity',0);
+        }
+        if($('.input_wrp1').children('img').length){
+            $('.input_wrp1 .uploader-inner').css('opacity',0);
+        }
+        var uploadCount = 0,
+        uploadList = [];
+        var uploadCountDom = document.getElementById("uploadCount");
+        weui.uploader('#uploader', {
+            url: '',
+            auto: true,
+            type: 'file',
+            fileVal: 'fileVal',
+            compress: {
+                width: 1600,
+                height: 1600,
+                quality: .8
+            },
+            onBeforeQueued: function onBeforeQueued(files) {
+                if (["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
+                    _weui2.default.alert('请上传图片');
+                    return false;
+                }
+                if (this.size > 10 * 1024 * 1024) {
+                    _weui2.default.alert('请上传不超过10M的图片');
+                    return false;
+                }
+                if (files.length > 5) {
+                    // 防止一下子选中过多文件
+                    _weui2.default.alert('最多只能上传5张图片，请重新选择');
+                    return false;
+                }
+                if (uploadCount + 1 > 5) {
+                    _weui2.default.alert('最多只能上传5张图片');
+                    return false;
+                }
+
+                ++uploadCount;
+                uploadCountDom.innerHTML = uploadCount;
+            },
+            onQueued: function onQueued() {
+                uploadList.push(this);
+                console.log(this);
+            },
+            onBeforeSend: function onBeforeSend(data, headers) {
+                console.log(this, data, headers);
+                // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
+                // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
+
+                // return false; // 阻止文件上传
+            },
+            onProgress: function onProgress(procent) {
+                console.log(this, procent);
+            },
+            onSuccess: function onSuccess(ret) {
+                if (ret.meta.success) {
+                    var imgUrl = ret.data[0];
+                    var hiddenStr = '<input type="hidden" id="img'+uploadCount+'" imgKey="'+uploadCount+'" name="fileName" value="'+imgUrl+'">';
+                    var str = '<li class="weui-uploader__file" imgKey="'+uploadCount+'" id="himg' + uploadCount + '" style="background-image: url('+imgUrl+');">  </li>';
+                    $('#uploaderFiles').find('.weui-uploader__file_status').remove();
+                    $('#uploaderFiles').find('input[name="fileName"]').remove();
+                    $('#uploaderFiles').html(str);
+                    $('#uploaderFiles').append(hiddenStr);
+                }
+                return true;
+            },
+            onError: function onError(err) {
+                console.log(this, err);
+            }
+        });
+        // 缩略图预览
+        /*document.querySelector('#uploaderFiles').addEventListener('click', function (e) {
+            var target = e.target;
+
+            while (!target.classList.contains('weui-uploader__file') && target) {
+                target = target.parentNode;
+            }
+            if (!target) return;
+
+            var url = target.getAttribute('style') || '';
+            var id = target.getAttribute('data-id');
+
+            if (url) {
+                url = url.match(/url\((.*?)\)/)[1].replace(/"/g, '');
+            }
+            var gallery = _weui2.default.gallery(url, {
+                className: 'custom-name',
+                onDelete: function onDelete() {
+                    _weui2.default.confirm('确定删除该图片？', function () {
+                        --uploadCount;
+                        uploadCountDom.innerHTML = uploadCount;
+
+                        for (var i = 0, len = uploadList.length; i < len; ++i) {
+                            var file = uploadList[i];
+                            if (file.id == id) {
+                                file.stop();
+                                break;
+                            }
+                        }
+                        target.remove();
+                        gallery.hide();
+                    });
+                }
+            });
+        });*/
+    })
+</script>
+</body>
+</html>

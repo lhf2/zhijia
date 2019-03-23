@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>登录</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="login-page">
+    <section class="login-link">
+        <div class="link-img">
+            <span class="wx">
+                <img src="img/wx.png" alt="">
+            </span>
+            <span class="link">
+                <img src="img/link.png" alt="">
+            </span>
+            <span class="zj">
+                <img src="img/zj.png" alt="">
+            </span>
+        </div>
+        <p>请绑定微信号，便于下次快速登录</p>
+    </section>
+    <section class="login-box">
+        <div class="form-group">
+            <span class="tel-name">+86</span>
+            <input type="text" id="tel" placeholder="请输入手机号">
+        </div>
+        <div class="form-group">
+            <input type="text" id="yzm" placeholder="请输入验证码">
+            <span class="yzm-btn">获取验证码</span>
+        </div>
+        <div class="check-group">
+            <input type="checkbox" id="agree" class="check-1">
+            <span class="agree"></span>
+            <label for="agree">点击完成，表示您已阅读并同意<a href="javascript:;">《汁家用户协议》</a></label>
+        </div>
+        <div class="login-btn">
+            完成绑定
+        </div>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //检验手机号//Test cell phone number
+        function check_number() {
+            var input = document.getElementById('tel').value;
+            //判断手机号的位数及是否能匹配正则表达式//Determine the number of phone numbers and whether it can match the regular expression
+            if (input.length == 11 && /^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$/i.test(input)) {
+                return 1; //手机号正确//Phone number correct
+            } else {
+                return 0; //手机号错误//phone number error
+            }
+        }
+        //检验验证码
+        function check_ma(){
+            var check = /^[0-9]*$/;
+            var check_num = $("#yzm").val().length;
+            if( (check_num > 0) && check.test($("#yzm").val())){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+        //点击验证码
+        $('.yzm-btn').click(function() {
+            var a = check_number();
+            if (a == 0) {
+                alert("请输入正确手机号");
+                return false;
+            }
+            if ($(this).html() == '获取验证码') {
+                var startTime = 60;
+                $(this).html(startTime + 's');
+                var that = this;
+                var t = setInterval(function () {
+                    startTime = startTime - 1;
+                    $(that).html(startTime + 's');
+                    if (startTime == 0) {
+                        $(that).html('获取验证码');
+                        clearInterval(t);
+                    }
+                }, 1000);
+            }
+        })
+        //点击复选框
+        var flag = true;
+        $('.check-group').click(function(){
+            if(flag){
+                $('#agree').prop('checked','checked');
+                flag = false;
+            }else{
+                $('#agree').prop('checked',false);
+                flag = true;
+            }
+
+        })
+        $('#tel').keyup(function(){
+            var a = check_number();
+            var b = check_ma();
+            if(a == 1&& b == 1){
+                $('.login-btn').addClass('cur')
+            }
+        })
+        $('#yzm').keyup(function(){
+            var a = check_number();
+            var b = check_ma();
+            if(a == 1&& b == 1){
+                $('.login-btn').addClass('cur')
+            }
+        })
+    })
+</script>
+</body>
+</html>

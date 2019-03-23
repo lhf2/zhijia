@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>生活方式分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="life-chose drink-page">
+    <section class="chose-detail-box">
+        <h1>生活方式分析</h1>
+        <div class="chose-detail">
+            <p>请准确填写饮酒情况</p>
+        </div>
+        <div class="edit-box">
+            <div class="edit-list" id="drink-chose">
+                <span class="edit-name">是否饮酒</span>
+                <span class="edit-text">
+                    <input type="text" placeholder="请选择" id="drink-text" readonly>
+                </span>
+            </div>
+            <div class="form-group drink-box">
+                <div class="chose-box" id="drink-type">
+                    <input type="text" id="type-text" readonly="">
+                    <span>酒</span>
+                </div>
+                <div class="chose-box" id="drink-con">
+                    <input type="text" id="con-text">
+                    <span>ml/次</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //选择
+        $('#drink-chose').click(function(){
+            var drinkJson = [{"label":"是","value":"1"},{"label":"否","value":"2"}];
+            weui.picker(drinkJson, {
+                onConfirm: function (result) {
+                    if(result[0].value=='1'){
+                        $('.drink-box').show();
+                    }else{
+                        $('.drink-box').hide();
+                        $('.next-btn').addClass('cur').children('a').attr('href','diet-chose.html');
+                    }
+                    $('#drink-text').val(result[0].label);
+                    sessionStorage.setItem('isdrink',result[0].label);
+                }
+            });
+        })
+        $('#type-text').click(function(){
+            var typeJson = [{"label":"红","value":"1"},{"label":"黄","value":"2"},{"label":"啤","value":"3"},{"label":"50°以上高度白","value":"4"},{"label":"40°~50°中度白","value":"5"},{"label":"40°以下低度白","value":"6"}];
+            weui.picker(typeJson, {
+                onConfirm: function (result) {
+                    if(result[0].value == 1||result[0].value == 3){
+                        $('#drink-con span').html('ml/次')
+                    }else{
+                        $('#drink-con span').html('两/次')
+                    }
+                    $('#type-text').val(result[0].label);
+                    sessionStorage.setItem('drtype',result[0].label);
+                }
+            });
+        })
+        $('#con-text').keyup(function(){
+            if($('#con-text').val()){
+                sessionStorage.setItem('drnum',$('#con-text').val());
+                $('.next-btn').addClass('cur').children('a').attr('href','diet-chose.html');
+            }else{
+                $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+            }
+        })
+        //刚进入页面
+        var isdrink = sessionStorage.getItem('isdrink');
+        if(isdrink&&isdrink == '否'){
+            $('.drink-box').hide();
+            $('.next-btn').addClass('cur').children('a').attr('href','diet-chose.html');
+        }else if(!isdrink){
+            $('.drink-box').hide();
+        }else{
+            $('.drink-box').show();
+            $('.next-btn').addClass('cur').children('a').attr('href','diet-chose.html');
+        }
+    })
+</script>
+</body>
+</html>

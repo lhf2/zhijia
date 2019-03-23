@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>课程列表</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/lesson-detail.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="lesson-list" id="app" v-cloak="">
+    <header class="lesson-top" id="headerNav">
+        <a class="return-btn" href="javascript:;" id="backBtn">
+            <img src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/course/img/return.png" alt="">
+        </a>
+        课程
+    </header>
+    <section class="list-boxs">
+        <ul class="list-types">
+            <li class="type-list" :class="type == 'top'?'cur':''" @click="toggle('top')">推荐课程</li>
+            <li class="type-list" :class="type == 'other'?'cur':''" @click="toggle('other')">慢性病房</li>
+        </ul>
+        <ul class="list-detail" v-infinite-scroll="loadMore" v-cloak infinite-scroll-disabled="dataFlag" infinite-scroll-distance="5" keep-alive>
+            <li class="top-list" v-for="(item,index) in datas">
+                <div class="list-img">
+                    <img :src="item.img" alt="">
+                </div>
+                <h1>{{item.title}}</h1>
+                <div class="name-num">
+                    <span class="user-name">{{item.name}}</span>
+                    <span class="user-num">{{item.num}}人报名</span>
+                </div>
+            </li>
+        </ul>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/vue/vue-infinite-scroll.js?version=1511930172746"></script>
+<script>
+    var vueInitData = {
+        pageCount:3,
+        count:0,
+        busy: false,
+        dataFlag:false,
+        tCount:0,
+        datas:[],
+        type:'top'
+    };
+    var app = new Vue({
+        el:"#app",
+        data: vueInitData,
+        methods:{
+            toggle:function(type){
+                this.type = type;
+                this.resetData();
+            },
+            loadMore:function(){
+                var temp = this;
+                $.ajax({
+                    url : 'api/data2.json',
+                    type: "get",
+                    dataType: "json",
+                    success:function(data){
+                        if(temp.type == 'top'){
+                            for(var i = 0; i < data.datas.length; i++) {
+                                temp.datas.push(data.datas[i]);
+                            }
+                        }else{
+                            for(var j = 0; j < data.data1s.length; j++) {
+                                temp.datas.push(data.data1s[j]);
+                            }
+                        }
+                        if(data.datas.length<temp.pageCount){
+                            temp.dataFlag=true;
+                        }
+                        temp.busy = false;
+                        temp.tCount=temp.tCount+temp.pageCount;
+                    },
+                    error:function(){
+                        temp.dataFlag=true;
+                    }
+                });
+            },
+            resetData:function(){
+                this.pageCount=3, this.count=0, this.busy=false;
+                this.dataFlag=false;
+                this.tCount=0;this.datas=[];this.loadMore();
+            }
+        }
+    })
+</script>
+</body>
+</html>

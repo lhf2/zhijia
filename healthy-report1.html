@@ -1,0 +1,775 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>健康报告</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+		<script type="text/javascript" src="js/echarts.js" ></script>
+	</head>
+	<body>
+		<article class="mui-content" id="report_c">
+			<section class="report_c1 mui-text-center">
+				<div class="report_c1_a">
+					健康报告
+					<em class="mui-icon mui-icon-back"></em>
+				</div>
+				<div class="report_c1_b mui-text-center">
+					<div class="icon-img">
+						<img src="img/user.jpg"/>
+					</div>
+					<h6>冷傲寒梅</h6>
+				</div>
+			</section>
+			<section class="report_c2">
+				<div class="report_c2_a">
+					<div class="report_c2_a1">
+						<span>基本信息</span>
+						<i></i>
+					</div>
+					<div class="report_c2_a2">
+						<div class="mui-row">
+							<div class="mui-col-xs-4">性别</div>
+							<div class="mui-col-xs-8">女</div>
+						</div>
+						<div class="mui-row">
+							<div class="mui-col-xs-4">身高</div>
+							<div class="mui-col-xs-8">----</div>
+						</div>
+						<div class="mui-row">
+							<div class="mui-col-xs-4">生日</div>
+							<div class="mui-col-xs-8">----</div>
+						</div>
+						<div class="mui-row">
+							<div class="mui-col-xs-4">慢病家族史</div>
+							<div class="mui-col-xs-8">----</div>
+						</div>
+						<div class="mui-row">
+							<div class="mui-col-xs-4">吸烟状况</div>
+							<div class="mui-col-xs-8">---- , ----</div>
+						</div>
+						<div class="mui-row">
+							<div class="mui-col-xs-4">饮酒状况</div>
+							<div class="mui-col-xs-8">---- , ----</div>
+						</div>
+						<a href="edit-data.html">补充资料</a>
+					</div>
+				</div>
+				<div class="report_c2_b">
+					<div class="report_c2_a1">
+						<span>健康数据</span>
+						<i></i>
+					</div>
+					<div class="report_c2_b5">
+						<div class="report_c2_b1">
+							体重总体变化
+							<em>体重</em>
+						</div>
+						<div class="report_c2_b2 mui-text-center">
+							您的体重比第一次记录<em>轻</em><span>--</span><sup>KG</sup>
+						</div>
+						<div class="report_c2_b3 mui-row mui-text-center">
+							<div class="weight-box average-weight">
+								<div class="weight-outer">
+									<div class="weight-inner">
+										<div class="weight-num">
+											<span>--</span>KG
+										</div>
+									</div>
+								</div>
+								<h6>平均体重</h6>
+							</div>
+							<div class="weight-box high-weight">
+								<div class="weight-outer">
+									<div class="weight-inner">
+										<div class="weight-num">
+											<span>--</span>KG
+										</div>
+									</div>
+								</div>
+								<h6>最高体重</h6>
+							</div>
+							<div class="weight-box low-weight">
+								<div class="weight-outer">
+									<div class="weight-inner">
+										<div class="weight-num">
+											<span>--</span>KG
+										</div>
+									</div>
+								</div>
+								<h6>最低体重</h6>
+							</div>
+						</div>
+						<div class="report_c2_b4 mui-text-center">
+							您还没有记录信息呢，<a href="javascript:;">赶紧去记录吧。</a>
+						</div>
+					</div>
+				</div>
+				<div class="report_c2_c">
+					<div class="report_c2_c1">
+						最近一次血压
+						<em>血压</em>
+					</div>
+					<div class="report_c2_c2 mui-row">
+						<div class="report_c2_c2_a mui-col-xs-6">
+							舒张压<span>--</span><sup>mmHg</sup>
+						</div>
+						<div class="report_c2_c2_a mui-col-xs-6">
+							收缩压<span>--</span><sup>mmHg</sup>
+						</div>
+					</div>
+					<div class="report_c2_c3 mui-row">
+						<div class="mui-col-xs-6 report_c2_c3_a">
+							<div id="chart"></div>
+							<div class="chartdata">
+								<div>
+									<p>--</p>
+								    <p>测试次数</p>
+								</div>
+							</div>
+						</div>
+						<div class="mui-col-xs-6 report_c2_c3_b">
+							<div>
+								<em>血压正常</em>
+								<span>-</span>次
+							</div>
+							<div>
+								<em>血压偏高</em>
+								<span>-</span>次
+							</div>
+							<div>
+								<em>血压偏低</em>
+								<span>-</span>次
+							</div>
+						</div>
+					</div>
+					<div class="report_c2_c4 mui-text-center">
+						脉压差平均值<span>--</span><sup>mmHg</sup>
+						<em></em>
+					</div>
+					<div class="report_c2_c5 mui-text-center">
+						您还没有记录信息呢，<a href="javascript:;">赶紧去记录吧。</a>
+					</div>
+				</div>
+				<div class="report_c2_d">
+					<div class="report_c2_d1">
+						最近一周血糖
+						<em>血糖</em>
+					</div>
+					<div class="report_c2_d2 mui-row">
+						<div class="mui-col-xs-6 fasting-box">
+							<em><i class="diet-type">空腹</i><br/>平均值</em>
+							<span>--</span>mmol/L
+						</div>
+						<div class="mui-col-xs-6 after-meal">
+							<em><i class="diet-type">餐后</i><br />平均值</em>
+							<span>--</span>mmol/L
+						</div>
+					</div>
+					<div class="report_c2_c3 mui-row">
+						<div class="mui-col-xs-6 report_c2_c3_a">
+							<div id="chart2"></div>
+							<div class="chartdata">
+								<div>
+									<p>--</p>
+								    <p>测试次数</p>
+								</div>
+							</div>
+						</div>
+						<div class="mui-col-xs-6 report_c2_c3_b">
+							<div>
+								<em>正常</em>
+								<span>-</span>次
+							</div>
+							<div>
+								<em>偏高</em>
+								<span>-</span>次
+							</div>
+							<div>
+								<em>偏低</em>
+								<span>-</span>次
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="report_c2_e">
+					<div class="report_c2_e1">
+						血糖值(mmol/L)
+					</div>
+					<div class="report_c2_e2">
+						<div id="chart3"></div>
+					</div>
+				</div>
+				<div class="report_c2_e bottom">
+					<div class="report_c2_e1">
+						平均值(mmol/L)
+					</div>
+					<div class="report_c2_e2">
+						<div id="chart4"></div>
+					</div>
+					<div class="report_c2_e3 mui-text-center">
+						您还没有记录信息呢，<a href="javascript:;">赶紧去记录吧。</a>
+					</div>
+				</div>
+				<div class="report_c2_f">
+					<div class="report_c2_f1">
+						睡眠指数得分
+						<em>睡眠</em>
+					</div>
+					<div class="report_c2_f2">
+						<div id="chart5"></div>
+						<div class="nodata">暂无数据记录</div>
+					</div>
+					<div class="report_c2_f3 mui-text-center">
+						您还没有记录信息呢，<a href="javascript:;">赶紧去记录吧。</a>
+					</div>
+				</div>
+				<div class="report_c2_g">
+					<div class="report_c2_g1">
+						心情记录次数
+						<em>情绪</em>
+					</div>
+					<div class="report_c2_g2">
+						<div id="chart6"></div>
+						<div class="nodata">暂无数据记录</div>
+					</div>
+					<div class="report_c2_g3 mui-text-center">
+						您还没有记录信息呢，<a href="javascript:;">赶紧去记录吧。</a>
+					</div>
+				</div>
+			</section>
+		</article>
+		<article class="hide">
+			<section class="hide_a"></section>
+			<section class="hide_b">
+				<div class="hide_b1">
+					脉压差是指收缩压与舒张压之间的差值，正常范围是20-60mmHg，脉压差偏大或偏小都是身体健康失衡的一种表现，应该及时去医院查明原因，治疗原发病。
+				</div>
+				<div class="hide_b2">我知道了</div>
+			</section>
+		</article>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
+		<script type="text/javascript" src="js/rem.js" ></script>
+		<script>
+			$('#chart').height($('#chart').width()*.8);
+			$('#chart2').height($('#chart2').width()*.8);
+			$('#chart3').height($('#chart3').width()*.4);
+			$('#chart4').height($('#chart4').width()*.5);
+			$('#chart5').height($('#chart5').width()*.6);
+			$('#chart6').height($('#chart6').width()*.6);
+			$('.report_c2_c4 em').click(function(){
+				$('.hide').show();
+			})
+			$('.hide_b2').click(function(){
+				$('.hide').hide();
+			})
+		</script>
+		
+		<script>
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        myChart.title = '测试次数';
+		option = {
+			color:["#6CC374","#FD407A","#FF9D3A"],
+		    tooltip: {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b}: {c} ({d}%)"
+		    },
+		    legend: {
+		    	show:false,
+		    },
+		    series: [
+		        {
+		            name:'测试次数',
+		            type:'pie',
+		            radius: ['70%', '80%'],
+		            avoidLabelOverlap: false,
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'center'
+		                },
+		                emphasis: {
+		                    show: true,
+		                    textStyle: {
+		                        fontSize: '30',
+		                        fontWeight: 'bold'
+		                    }
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    show: false
+		                }
+		            },
+		            data:[
+		                {value:80, name:'血压正常'},
+		                {value:8, name:'血压偏高'},
+		                {value:8, name:'血压偏低'}
+		            ]
+		        }
+		    ]
+		};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		</script>
+		<script>
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+
+        myChart2.title = '测试次数';
+		option = {
+			color:["#6CC374","#FD407A","#FF9D3A"],
+		    tooltip: {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b}: {c} ({d}%)"
+		    },
+		    legend: {
+		    	show:false,
+		    },
+		    series: [
+		        {
+		            name:'测试次数',
+		            type:'pie',
+		            radius: ['70%', '80%'],
+		            avoidLabelOverlap: false,
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'center'
+		                },
+		                emphasis: {
+		                    show: true,
+		                    textStyle: {
+		                        fontSize: '30',
+		                        fontWeight: 'bold'
+		                    }
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    show: false
+		                }
+		            },
+		            data:[
+		                {value:6, name:'正常'},
+		                {value:5, name:'偏高'},
+		                {value:1, name:'偏低'}
+		            ]
+		        }
+		    ]
+		};
+
+        myChart2.setOption(option);
+		</script>
+		<script>
+			var myChart3 = echarts.init(document.getElementById('chart3'));
+			myChart3.title = '血糖值';
+			option = {
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        
+			        }
+			    },
+			    grid: {
+			        top: '15%',
+			        left: '27%',
+			        right: '27%',
+			        bottom: '10%',
+			        width:'40%',
+			        containLabel: true
+			    },
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : ['最高值', '最低值'],
+						axisLabel: {
+							textStyle: {
+								//fontSize:14,
+								color: '#333'
+							}
+						},
+			            axisTick: {
+							show:false,
+			                alignWithLabel: true
+			            },
+						axisLine:{
+							lineStyle:{
+								color:'#DCDCDC'
+							}
+						}
+					}
+			    ],
+			    yAxis : [
+					{
+						show: false,
+						max: 17,
+						axisLabel: {
+							textStyle: {
+								fontSize:15
+							}
+						},
+					}
+			    ],
+			    series : [
+			        {
+			            name:'血糖值',
+			            type:'bar',
+			            barWidth: '40%',
+			            label:{
+							normal:{
+								show: true,
+								position: 'top',
+								fontSize:15,
+							}
+						},
+						itemStyle: {   
+			                normal:{  
+			                    color: function (params){
+			                        var colorList = ['#FD407A','#FF9D3A'];
+			                        return colorList[params.dataIndex];
+			                    }
+			                },
+			            },
+			        }
+			    ]
+			};
+			
+        myChart3.setOption(option);
+		</script>
+		<script>
+			var myChart4 = echarts.init(document.getElementById('chart4'));
+			myChart4.title = '平均值';
+			option = {
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        
+			        }
+			    },
+			    grid: {
+			        top: '15%',
+			        left: '14%',
+			        right: '14%',
+			        bottom:'10%',
+			        width:'65%',
+			        containLabel: true
+			    },
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : ['空腹', '餐前','餐后','睡前'],
+			            axisTick: {
+							show:false
+			            },
+						axisLabel: {
+							textStyle: {
+								//fontSize:14,
+								color: '#333'
+							}
+						},
+						axisLine:{
+							lineStyle:{
+								color:'#DCDCDC'
+							}
+						}
+			        }
+			    ],
+			    yAxis : [
+			        {
+			        	show:false,
+						max:17
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'平均值',
+			            type:'bar',
+			            barWidth: '40%',
+			            label:{
+							normal:{
+								show: true,
+								position: 'top',
+								fontSize:15,
+							}
+						},
+						itemStyle: {   
+			                normal:{  
+			                    color: function (params){
+			                        var colorList = ['#6CC374','#6CC374','#FD407A','#FF9D3A'];
+			                        return colorList[params.dataIndex];
+			                    }
+			                },
+			            },
+			        }
+			    ]
+			};
+			
+            myChart4.setOption(option);
+		</script>
+		<script>
+			var myChart5 = echarts.init(document.getElementById('chart5'));
+			var timeData = [
+				'08/05','08/06','08/07','08/08','08/09','08/10'
+			];
+			//给时间文字添加年份
+			for(var i =0;i<timeData.length;i++){
+				timeData[i]+='2017'
+			}
+			option={
+				textStyle:{
+					color:'#666'
+				},
+				tooltip : {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'cross',
+						label: {
+							backgroundColor: '#6a7985'
+						}
+					}
+				},
+				legend: {
+					show:false,
+				},
+				toolbox: {
+					show:false,
+					feature: {
+						saveAsImage: {}
+					}
+				},
+				grid: {
+					left: '6%',
+					right: '6%',
+					top: '15%',
+					bottom:'10%',
+					containLabel: true
+				},
+				xAxis : [
+					{
+						type : 'category',
+						boundaryGap : false,
+						data : timeData,
+						axisTick: {
+							show:false
+						},
+						axisLabel: {
+							textStyle: {
+								//fontSize:14,
+								color: '#333',
+							},
+							//x轴文字显示不全 换行显示
+							formatter:function(params){
+								var newParamsName = "";// 最终拼接成的字符串
+								var paramsNameNumber = params.length;// 实际标签的个数
+								var provideNumber = 5;// 每行能显示的字的个数
+								var rowNumber = 2;// 换行的话，需要显示几行，向上取整
+
+								// 条件等同于rowNumber>1
+								if (paramsNameNumber > provideNumber) {
+
+									for (var p = 0; p < rowNumber; p++) {
+										var tempStr = "";// 表示每一次截取的字符串
+										var start = p * provideNumber;// 开始截取的位置
+										var end = start + provideNumber;// 结束截取的位置
+										// 此处特殊处理最后一行的索引值
+										if (p == rowNumber - 1) {
+											// 最后一次不换行
+											tempStr = params.substring(start, paramsNameNumber);
+										} else {
+											// 每一次拼接字符串并换行
+											tempStr = params.substring(start, end) + "\n";
+										}
+										newParamsName += tempStr;// 最终拼成的字符串
+									}
+//									newParamsName = newParamsName+'2017'
+
+								} else {
+									// 将旧标签的值赋给新标签
+									newParamsName = params;
+								}
+								//将最终的字符串返回
+								return newParamsName
+							}
+						},
+						axisLine:{
+							lineStyle:{
+								color:'#DCDCDC'
+							}
+						},
+					}
+				],
+				yAxis : [
+					{
+						type : 'value',
+						axisTick: {
+							show:false
+						},
+						axisLabel: {
+							textStyle: {
+								fontSize:14,
+								color: '#333'
+							}
+						},
+						axisLine:{
+							show:false
+						},
+						min:0,
+						max:10,
+						//splitNumber:1
+					}
+				],
+				dataZoom: [
+					{
+						show: true,
+						start: 0,
+						//end: 70,
+						realtime: true,
+						type: 'inside'//移动曲线图的时候也能拖动曲线图
+					}
+				],
+				series : [
+					{
+						name:'睡眠指数',
+						type:'line',
+						smooth:0.3,
+						markLine: {
+							symbol: ['none', 'none'],//控制标示线前后的圆点跟箭头
+							label:{
+								normal:{show:false}//是否显示标线上面的文本
+							},
+							itemStyle:{
+								normal:{lineStyle:{type:'dotted',color:'#FB8E61'}}//控制线的颜色跟类型
+							},
+							data: [{
+								yAxis: 90,
+								name: 'y轴刻度值为90的线'
+							}]
+						},
+						itemStyle : {
+							normal : {
+								color:'#5366E0',
+								lineStyle:{
+									color:'#5366E0',
+									borderColor:'#5366E0'
+								},
+							}
+						},
+						label: {
+							normal: {
+								show: true,
+								position: 'top'
+							}
+						},
+						areaStyle: {
+							normal: {
+								color:['#5366e0'],
+								opacity:.2
+							}
+						},
+						//data:[5, 6, 4, 5, 4, 5, 6]
+					}
+				]
+			}
+			if(timeData.length<=6){
+				console.log('小于4');
+				option.dataZoom[0].end = 100
+			}else{
+				console.log('大于4')
+				option.dataZoom[0].end = 30
+			}
+			myChart5.setOption(option);
+		</script>
+		<script>
+			var myChart6 = echarts.init(document.getElementById('chart6'));
+			myChart6.title = '心情记录';
+			option = {
+			    //color: ['#64B8F8'],
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '3%',
+			        top: '10%',
+			        bottom:'10%',
+			        containLabel: true
+			    },
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : ['羞愧', '冷淡', '悲伤', '恐惧', '愤怒', '淡定', '喜悦','平和'],
+			            axisTick: {
+			                show: false
+			            },
+						axisLabel: {
+							textStyle: {
+								//fontSize:14,
+								color: '#666'
+							}
+						},
+						axisLine:{
+							lineStyle:{
+								color:'#DCDCDC'
+							}
+						}
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value',
+						min:0,
+						max:10,
+						axisLine:{
+							show:false
+						},
+						axisTick: {
+							show: false
+						},
+						axisLabel: {
+							textStyle: {
+								fontSize:14,
+								color: '#666'
+							}
+						},
+
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'心情记录',
+			            type:'bar',
+			            barWidth: '30%',
+			            label:{
+							normal:{
+								show: true,
+								position: 'top',
+								fontSize:14,
+							}
+						},
+			            //data:[4, 7, 9, 6, 4,4,4,4],
+						itemStyle: {
+							normal: {
+								//添加渐变色
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+									offset: 0,
+									color: '#37BBF8'
+								}, {
+									offset: 1,
+									color: '#2294E4'
+								}]),
+							}
+						}
+			        }
+			    ]
+			};
+			myChart6.setOption(option);
+		</script>
+	</body>
+
+</html>

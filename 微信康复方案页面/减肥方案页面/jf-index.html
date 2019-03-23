@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>首页</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="press-page">
+    <section class="press-img">
+        <img src="../img/jf1.jpg" alt="">
+        <img src="../img/jf2.jpg" alt="">
+        <img src="../img/jf3.jpg" alt="">
+        <img src="../img/jf4.jpg" alt="">
+        <img src="../img/jf5.jpg" alt="">
+        <img src="../img/jf6.jpg" alt="">
+        <img src="../img/jf7.jpg" alt="">
+        <img src="../img/jf8.jpg" alt="">
+        <img src="../img/jf9.jpg" alt="">
+        <img src="../img/jf10.jpg" alt="">
+    </section>
+    <section class="top-btn">
+        <img src="../img/top.png" alt="">
+    </section>
+    <section class="jf-bottom">
+        <div class="jf-btn bottom-btn">
+            <a href="javascript:;">
+                <img src="../img/zx.png" alt="">
+                <p>咨询</p>
+            </a>
+        </div>
+        <div class="jf-btn1 bottom-btn">
+            <a href="javascript:;">立即参与<span>¥198</span></a>
+        </div>
+    </section>
+</article>
+</body>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //显示回到顶部的按钮
+        $(window).scroll(function(){
+            var scrollTop = $(window).scrollTop();
+            if(scrollTop>500){
+                $('.top-btn').show();
+            }else{
+                $('.top-btn').hide();
+            }
+        })
+        //点击回到顶部的按钮
+        $('.top-btn').click(function(){
+            $("body").animate({
+                scrollTop: 0
+            });
+        })
+    })
+</script>
+</html>

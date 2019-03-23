@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>编辑身体数据资料</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/healthy-story.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="edit-body-page">
+    <header class="edit-top">
+        <img src="img/return.png" alt="">
+        健康故事
+        <span class="save-btn">保存</span>
+    </header>
+    <section class="edit-content">
+        <div class="edit-tip">
+            <img src="img/tip.png" alt="">请补充您的既往身体数据
+        </div>
+        <div class="edit-list press-edit">
+            <div class="list-top">
+                <img src="img/icon1.png" alt="">
+                血压
+            </div>
+            <div class="edit-content-box">
+                <span class="edit-name">舒张压</span>：
+                <input type="text" value="---" class="nodata">
+                <i>mmHg</i>
+            </div>
+            <div class="edit-content-box">
+                <span class="edit-name">收缩压</span>：
+                <input type="text" value="1">
+                <i>mmHg</i>
+            </div>
+        </div>
+        <div class="edit-list sugar-edit">
+            <div class="list-top">
+                <img src="img/icon2.png" alt="">
+                血糖
+            </div>
+            <div class="edit-content-box">
+                <span class="edit-name">空腹</span>：
+                <input type="text" value="---" class="nodata">
+                <i>mmol/L</i>
+            </div>
+            <div class="edit-content-box">
+                <span class="edit-name">餐后</span>：
+                <input type="text" value="1">
+                <i>mmol/L</i>
+            </div>
+        </div>
+        <div class="edit-list weight-edit">
+            <div class="list-top">
+                <img src="img/icon3.png" alt="">
+                体重
+            </div>
+            <div class="edit-content-box">
+                <span class="edit-name">净重</span>：
+                <input type="text" value="---" class="nodata">
+                <i>kG</i>
+            </div>
+        </div>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //输入数据的时候去掉---
+        $('.edit-content-box input').focus(function(){
+            if($(this).val() == '---'){
+                $(this).val('')
+            }
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>身体指标分析</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <link rel="stylesheet" href="css/rule.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="bmi-chose">
+    <header id="headerNav" class="test-top">
+        <a href="javascript:;" class="return-btn">
+            <img src="img/return.png" alt="">
+        </a>
+    </header>
+    <section class="chose-detail-box">
+        <h1>身体指标分析</h1>
+        <div class="chose-detail">
+            <p>BMI指数，用来判断你的胖瘦程度</p>
+        </div>
+        <section class="rule-box">
+            <span class="rule-title">身高</span>
+            <div class="rule" id="heightRuler"></div>
+            <span class="rule-unit">厘米</span>
+        </section>
+        <section class="rule-box">
+            <span class="rule-title">体重</span>
+            <div class="rule" id="weightRuler"></div>
+            <span class="rule-unit">公斤</span>
+        </section>
+        <div class="result-box">
+            <span class="result-name">BMI</span>
+            <span class="result-text">根据你的身高体重，自动算出BMI</span>
+        </div>
+        <p class="bmi-text">您属于<span></span>人群</p>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/wx/js/Ruler.js?version=1513336130491"></script>
+<script src="js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        var heightVal,weightVal;
+        //滑动的标尺的时候
+        var heightRuler = new Ruler({
+            id: "#heightRuler",
+            rate:10,
+            markColor:'#21cfc0',
+            min:0,
+            max:250,
+            num:160,
+            onChange:function(){
+                changeVal();
+            }
+        });
+        var weightRuler = new Ruler({
+            id: "#weightRuler",
+            rate:1,
+            toFixed:1,
+            markColor:'#21cfc0',
+            min:0,
+            max:200,
+            num:50,
+            onChange:function(){
+                changeVal();
+            }
+        });
+        //刚进入页面的时候
+        var height = sessionStorage.getItem('height');
+        var weight = sessionStorage.getItem('weight');
+        if(height&&weight){
+            heightRuler.val(height);
+            weightRuler.val(weight);
+            $('.result-text').html(bmi(weight,height));
+            $('.bmi-text').show().children('span').html(bmiState(weight,height));
+            $('.next-btn').addClass('cur').children('a').attr('href','whr-chose.html')
+        }
+        //点击下一步的时候
+        $('.next-btn').click(function(){
+            sessionStorage.setItem('height',heightRuler.val());
+            sessionStorage.setItem('weight',weightRuler.val());
+        })
+        //计算bmi指数
+        function bmi(w,h){
+            return (w/(h/100*h/100)).toFixed(1);
+        }
+        function bmiState(w,h){
+            var bmiIndex = bmi(w,h);
+            if(bmiIndex>19&&bmiIndex<24){
+                return '正常'
+            }else if(bmiIndex>=24&&bmiIndex<=27){
+                return '超重'
+            }else if(bmiIndex>=27){
+                return '肥胖'
+            }
+        }
+        //修改刻度尺的值的时候
+        function changeVal(){
+            heightVal = heightRuler.val();
+            weightVal = weightRuler.val();
+            if(heightVal&&weightVal){
+                $('.result-text').html(bmi(weightVal,heightVal));
+                $('.bmi-text').show().children('span').html(bmiState(weightVal,heightVal));
+                $('.next-btn').addClass('cur').children('a').attr('href','whr-chose.html')
+            }
+        }
+    })
+</script>
+</body>
+</html>

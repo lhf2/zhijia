@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>高血压疾病风险等级评估</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="body-test">
+    <section class="chose-detail-box">
+        <h1>高血压疾病风险等级评估</h1>
+        <div class="chose-detail">
+            <p>Hi，汁家用户+（用户昵称）</p>
+            <p>欢迎参加高血压疾病风险等级评估</p>
+            <p>请花三分钟认真填写以下评估测评表</p>
+        </div>
+        <ul class="chose-box">
+            <li class="chose-list" sex="woman">
+                <div class="chose-img">
+                    <img src="../img/woman.png" alt="">
+                </div>
+                <div class="chose-text">女性</div>
+            </li>
+            <li class="chose-list" sex="man">
+                <div class="chose-img">
+                    <img src="../img/man.png" alt="">
+                </div>
+                <div class="chose-text">男性</div>
+            </li>
+        </ul>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //点击列表的时候给存储中添加性别
+        $('.chose-list').click(function(){
+            $('.chose-list').removeClass('cur');
+            $(this).addClass('cur');
+            var sex = $(this).attr('sex');
+            sessionStorage.setItem('sex',sex);
+            location.href = 'age-chose.html';
+        })
+        //刚进入页面时候
+        $('.chose-list').each(function () {
+            if(sessionStorage.getItem('sex') == $(this).attr('sex')){
+                $(this).addClass('cur')
+            }
+        })
+    })
+</script>
+</body>
+</html>

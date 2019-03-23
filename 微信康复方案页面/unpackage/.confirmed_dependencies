@@ -1,0 +1,94 @@
+{
+  "index.html": {
+    "resources": [
+      "img/woman.png",
+      "img/return.png",
+      "img/man.png",
+      "js/jquery-2.1.4.min.js",
+      "js/rem.js",
+      "css/body-test.css",
+      "css/reset.css",
+      "age-chose.html"
+    ],
+    "refer": []
+  },
+  "age-chose.html": {
+    "resources": [
+      "js/index.js",
+      "sugar-edit.html",
+      "css/body-test.css",
+      "css/reset.css"
+    ],
+    "refer": []
+  },
+  "sugar-edit.html": {
+    "resources": [
+      "bmi-chose.html"
+    ],
+    "refer": [
+      "bmi-chose.html"
+    ]
+  },
+  "bmi-chose.html": {
+    "resources": [
+      "css/rule.css",
+      "whr-chose.html"
+    ],
+    "refer": []
+  },
+  "whr-chose.html": {
+    "resources": [
+      "css/rule.css",
+      "disease-chose.html"
+    ],
+    "refer": []
+  },
+  "disease-chose.html": {
+    "resources": [
+      "smoke-chose.html"
+    ],
+    "refer": [
+      "smoke-chose.html"
+    ]
+  },
+  "diet-chose.html": {
+    "resources": [
+      "diet-chose1.html"
+    ],
+    "refer": [
+      "diet-chose1.html"
+    ]
+  },
+  "smoke-chose.html": {
+    "resources": [
+      "drink-chose.html"
+    ],
+    "refer": [
+      "drink-chose.html"
+    ]
+  },
+  "drink-chose.html": {
+    "resources": [
+      "exercise-chose.html"
+    ],
+    "refer": [
+      "exercise-chose.html"
+    ]
+  },
+  "exercise-chose.html": {
+    "resources": [
+      "diet-chose.html"
+    ],
+    "refer": [
+      "diet-chose.html"
+    ]
+  },
+  "diet-chose1.html": {
+    "resources": [
+      "inherit-chose.html"
+    ],
+    "refer": [
+      "inherit-chose.html"
+    ]
+  }
+}

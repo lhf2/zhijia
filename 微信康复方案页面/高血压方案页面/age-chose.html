@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>基本信息分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="age-chose">
+    <section class="chose-detail-box">
+        <h1>基本信息分析</h1>
+        <div class="chose-detail">
+            <p>你的实际年龄，将用于匹配更合适的计划</p>
+        </div>
+        <div class="sex-img">
+            <img src="../img/woman.png" alt="">
+        </div>
+        <div class="age-text" id="age-chose">
+            <input type="text" id="age-text" placeholder="请选择出生日期" readonly>
+        </div>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //刚进入页面
+        var sex = sessionStorage.getItem('sex');
+        var birth = sessionStorage.getItem('birth');
+        //设置头像是男的还是女的
+        if(sex){
+            $('.sex-img').children('img').attr('src','../img/'+sex+'.png');
+        }
+        //按钮是否高亮
+        if(birth){
+            $('.next-btn').addClass('cur').children('a').attr('href','press-chose.html');
+        }
+        //选择日期
+        $('#age-chose').click(function(){
+            weui.datePicker({
+                start: 1917,
+                end:new Date(),
+                defaultValue:[1980,1,1],
+                onConfirm: function(result){
+                    var resultLabel = result[0].label+result[1].label+result[2].label;
+                    $('#age-text').val(resultLabel);
+                    if(resultLabel){
+                        sessionStorage.setItem('birth',resultLabel);
+                        $('.next-btn').addClass('cur').children('a').attr('href','press-chose.html');
+                    }
+                },
+                id: 'age-chose'
+            });
+        })
+    })
+</script>
+</body>
+</html>

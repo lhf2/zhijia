@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>订单详情</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/lesson-detail.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="order-detail order-detail1">
+    <header class="lesson-top" id="headerNav">
+        <a class="return-btn" href="javascript:;">
+            <img src="img/return.png" alt="">
+        </a>
+        支付失败
+    </header>
+    <section class="order-fail">
+        <div class="fail-img">
+            <img src="img/fail.png" alt="">
+        </div>
+        <div class="fail-text">
+            亲，错过学习机会太可惜了哦，再不付款就来不及了！
+        </div>
+    </section>
+    <section class="pay-type">
+        <h1>支付方式</h1>
+        <ul class="pay-type-box">
+            <li class="pay-list pay-click cur">
+                <img src="img/weixin.png" alt="">
+                <span class="type-text">微信支付</span>
+                <span class="check-box"></span>
+            </li>
+            <li class="pay-list pay-click">
+                <img src="img/zfb.png" alt="">
+                <span class="type-text">支付宝</span>
+                <span class="check-box"></span>
+            </li>
+            <li class="pay-list jifen-list">
+                <img src="img/jifen.png" alt="">
+                <span class="type-text">积分支付  需1000积分（暂不可用）</span>
+                <span class="check-box"></span>
+            </li>
+        </ul>
+        <div class="pay-btn">
+            <a href="javascript:;">
+                重新支付
+            </a>
+        </div>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //点击支付方式
+        $('.pay-click').click(function(){
+            $('.pay-click').removeClass('cur');
+            $(this).addClass('cur');
+        })
+        //兼容安卓跟ios的通栏
+        var barHeight = 0;
+        var dpr = window.devicePixelRatio;
+        $('#headerNav').before('<div style="background:#fff;height:'+barHeight/dpr+'px;width:100%;position: fixed;top:0;z-index:1000"></div>').css('top',barHeight/dpr+'px');
+        $('.order-fail').css('margin-top',(barHeight/dpr)+'px');
+        //返回键
+        $('#headerNav .return-btn').click(function(){
+            window.history.back();
+        })
+    })
+</script>
+</body>
+</html>

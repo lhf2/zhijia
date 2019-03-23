@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>遗传因素分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="sugar-edit inherit-chose">
+    <section class="chose-detail-box">
+        <h1>遗传因素分析</h1>
+        <div class="chose-detail">
+            <p>一级亲属中是否有高血压病患者<span>（可多选）</span></p>
+        </div>
+        <ul class="chose-box">
+            <li class="select-list" value="1">无</li>
+            <li class="select-list" value="2">父亲</li>
+            <li class="select-list" value="3">母亲</li>
+            <li class="select-list" value="4">兄长</li>
+            <li class="select-list" value="5">弟弟</li>
+            <li class="select-list" value="6">姐姐</li>
+            <li class="select-list" value="7">妹妹</li>
+        </ul>
+    </section>
+    <section class="next-btn look-btn">
+        <a href="javascript:;">查看评估结果</a>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        var inherArr = [];
+        //共用的判断是否有没有数据进而显示高亮和链接
+        function load(){
+            var curArr = sessionStorage.getItem('inherit');
+            if(curArr){
+                var curArr1 = curArr.split(',');
+                inherArr = curArr1.slice();
+                $('.select-list').each(function(index){
+                    for(var i =0;i<curArr1.length;i++){
+                        if($(this).attr('value') == curArr1[i]){
+                            $(this).addClass('cur');
+                        }
+                    }
+                })
+                $('.next-btn').addClass('cur').children('a').attr('href','look-result.html');
+            }else{
+                $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+            }
+        }
+        //点击列表的时候往存储里添加
+        $('.select-list').click(function(){
+            var value = $(this).attr('value');
+            if(value == 1){
+                inherArr= [];
+                location.href = 'look-result.html';
+            }else{
+                $('.select-list').eq(0).removeClass('cur');
+                inherArr.remove(1);
+            }
+            if($(this).hasClass('cur')){
+                $(this).removeClass('cur');
+                inherArr.remove(value);
+            }else{
+                $(this).addClass('cur');
+                inherArr.push(value);
+            }
+            sessionStorage.setItem('inherit',inherArr);
+            load();
+        })
+        //刚进入页面的时候判断
+        load();
+    })
+</script>
+</body>
+</html>

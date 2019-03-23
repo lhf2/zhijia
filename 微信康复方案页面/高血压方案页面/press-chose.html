@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>血压指数分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <link rel="stylesheet" href="../css/rule.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="press-chose">
+    <section class="chose-detail-box">
+        <h1>血压指数分析</h1>
+        <div class="chose-detail">
+            <p>请选择您<b>服用降压药前</b>的血压值</p>
+        </div>
+        <section class="rule-box">
+            <span class="rule-title">高压（收缩压）</span>
+            <div class="rule" id="heightRuler"></div>
+            <span class="rule-unit">mmHg</span>
+        </section>
+        <section class="rule-box">
+            <span class="rule-title">低压（舒张压）</span>
+            <div class="rule" id="lowRuler"></div>
+            <span class="rule-unit">mmHg</span>
+        </section>
+        <p class="press-text">您本次血压记录数据为<span></span></p>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/wx/js/Ruler.js?version=1513336130491"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        var heightPress,lowPress;
+        //滑动的标尺的时候
+        var heightRuler = new Ruler({
+            id: "#heightRuler",
+            rate:10,
+            markColor:'#21cfc0',
+            max:250,
+            num:90,
+            onChange:function(){
+                changePress();
+            }
+        });
+        var lowRuler= new Ruler({
+            id: "#lowRuler",
+            rate:10,
+            markColor:'#21cfc0',
+            max:250,
+            num:145,
+            onChange:function(){
+                changePress();
+            }
+        });
+        //刚进入页面的时候
+        var heightpress = sessionStorage.getItem('heightpress');
+        var lowpress = sessionStorage.getItem('lowpress');
+        if(heightpress&&lowpress){
+            $('.press-text').show();
+            heightRuler.val(heightpress);
+            lowRuler.val(lowpress);
+            $('.press-text span').html(comparePress(heightpress,lowpress));
+            $('.next-btn').addClass('cur').children('a').attr('href','medica-index1.html')
+        }else{
+            $('.press-text span').html('血压正常');
+        }
+        //点击下一步的时候
+        $('.next-btn').click(function(){
+            sessionStorage.setItem('heightpress',heightRuler.val());
+            sessionStorage.setItem('lowpress',lowRuler.val());
+        })
+        //判断所在范围
+        function comparePress(val,val1){
+            if(val<130||val1<80){
+                return '血压正常'
+            }else if((val>=130&&val<=139)||(val1>=80&&val1<=89)){
+                return '0级高血压'
+            }else if((val>=140&&val<=159)||(val1>=90&&val1<=99)){
+                return '1级高血压'
+            }else if((val>=160&&val<=179)||(val1>=100&&val1<=109)){
+                return '2级高血压'
+            }else if(val>=180||val1>=110){
+                return '3级高血压'
+            }
+        }
+        //滑动刻度尺改变数值的时候
+        function changePress(){
+            $('.press-text').show();
+            heightPress = heightRuler.val();
+            lowPress = lowRuler.val();
+            if(heightPress&&lowPress){
+                $('.press-text span').html(comparePress(heightPress,lowPress));
+                $('.next-btn').addClass('cur').children('a').attr('href','medica-index1.html')
+            }
+        }
+    })
+</script>
+</body>
+</html>

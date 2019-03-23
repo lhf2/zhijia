@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/style1.css" />
+</head>
+<body>
+<article class="login-page">
+	<section class="login-box">
+		<form action="">
+			<div class="input-box">
+				<div class="form-group have-border-input">
+					<input type="text" placeholder="输入手机号">
+				</div>
+				<div class="form-group">
+					<input type="text" placeholder="输入短信验证码" class="input-6">
+					<span class="yzm-btn">发送验证码</span>
+				</div>
+			</div>	
+			<p class="pro-text">您已阅读并同意<a href="javascript:;">汁家用户协议</a></span></p>
+			<div class="login-btn">
+				<a href="javascript:;">完成</a>
+			</div>
+		</form>
+	</section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/rem.js" ></script>
+<script>
+	$(document).ready(function(){
+		// 点击发送验证码时的倒计时
+		$('.yzm-btn').click(function(){
+			if($(this).html()=='发送验证码'){
+				var startTime=60;
+				$(this).css('background','#DDDDDD').html(startTime+'s');
+				var that=this;
+				var t=setInterval(function(){
+					startTime=startTime-1;
+					$(that).html(startTime+'s');
+					if(startTime == 0){
+						$(that).css('background','#1FCFC0').html('发送验证码');
+						clearInterval(t);
+					}
+				},1000)
+			}else{
+				return 
+			}		
+		})
+	})
+</script>	
+</body>
+</html>

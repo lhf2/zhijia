@@ -1,0 +1,30 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+    color: #fff;
+    font-family: PingFangSC-Regular, sans-serif;
+}
+ul,li,ol,h1,h2,h3,dl,dt,dd,form,p,span,b,u,s,i{
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-decoration: none;
+}
+input[type="button"], input[type="submit"], input[type="reset"] {
+    -webkit-appearance: none;
+}
+textarea {  -webkit-appearance: none;}
+button{ border-radius: 0; }
+input[type='text']:focus{
+    outline: none;
+}
+html,body{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+ div {
+   /*关键代码*/
+   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

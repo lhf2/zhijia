@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>乐汁历</title>
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/qa-index.css">
+    <!--<link rel="stylesheet" href="../css/look.css">-->
+    <!--<link rel="stylesheet" href="../css/look.wechat.css">-->
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="daily-top">
+    <div class="date-text"></div>
+    <ul class="daily-lists">
+        <li class="daily-list">
+            <!--<img src="" alt="">-->
+        </li>
+    </ul>
+    <div class="touch-mask-box">
+        <div class="touch-inner">
+            <img src="../images/touch.png" alt="">
+            <p>左右滑动屏幕，查看往期乐汁历</p>
+        </div>
+    </div>
+</article>
+</body>
+</html>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/touch.min.js"></script>
+<script src="../js/look-wechat.js"></script>
+<script>
+    $(document).ready(function(){
+
+        var swiperImg = {
+            index:0, // 起始页 尽量从0开始  否则会有异常
+            preLoadingNum:10, //提前加载5张图片
+            errerImg:"../images/logo.png", // 默认error图片
+            data:null, // 请求来的数据
+            init:function(){
+                var that = this;
+                console.log('init...');
+                this.request.img(function(){
+                    that.event.swiper();
+                    that.preLoad.init();
+                    console.log('init-over..');
+                });
+
+            },
+            event:{
+                swiper(){
+                    var that = swiperImg;
+                    //左右滑动切换图片
+                    touch.on('.daily-lists', 'swipeleft swiperight', function (e) {
+                        if (e.direction == 'left') {
+                            that.next();
+                        } else {
+                            that.prev();
+                        }
+                    });
+                }
+            },
+
+            prev(){
+                this.index--;
+                this.addImg();
+                console.log('prev',this.index);
+            },
+            next(){
+                this.index++;
+                this.addImg();
+                console.log('next',this.index);
+            },
+            // 图片处理
+            addImg(){
+                var index = this.index;
+                var lastIndex = this.data.length-1;
+                if(index < 0){
+                    index =  0;
+                };
+                if(index > lastIndex){
+                    index = lastIndex;
+                    look.msg("已经是最后一页了");
+                }
+                this.index = index;
+                this.changeImg();
+            },
+            // 展示图片
+            changeImg(){
+                var data = this.data;
+                var index = this.index;
+                var images = this.preLoad.images;
+                if(!images[index] && index <= images.length-1){
+                    // 图片没加载完 就开始滑动 会报错
+                    console.log('loading...')
+                    return
+                }
+
+                if(index > images.length-1){
+                    // 如果滑动到最后一页，则继续缓存下一批
+                    this.preLoad.init();
+                }
+
+
+                if(images[index]){
+                    var image = images[index].image;
+                    $('.date-text').html(data[index].time);
+                    $('.daily-list').html(image);
+                }
+
+
+            },
+
+            //预加载
+            preLoad:{
+                loadState:false, // 第几批是否加载完毕
+                image:null,
+                images:[],
+                index:0,
+                init(){
+                    var that = swiperImg;
+                    this.index = that.index;
+                    this.cacheImg();
+                },
+                cacheImg(){
+                    var that = this;
+                    this.loadState = false;
+                    var preLoadingNum = swiperImg.preLoadingNum;
+                    if(!swiperImg.data[this.index]){
+                        console.log('所有图片缓存完成');
+                        this.loadState = true;
+                        return;
+                    }
+                    var src = swiperImg.data[this.index].image;
+                    this.image = new Image();
+                    this.image.src = src;
+
+                    // 是不是每一批的第一张图片
+                    var firstGroup = (preLoadingNum+swiperImg.index) - that.index == preLoadingNum;
+
+                    if(firstGroup){
+//                        this.loading = look.loading("加载中...");
+                    };
+
+                    var onload = this.image.onload = function(){
+                        that.images.push({
+                            index:that.index,
+                            image:that.image
+                        });
+                        if(that.index-swiperImg.index < preLoadingNum){
+                            console.log('正在缓存第'+(that.index+1)+"张图片");
+                            that.index++;
+                            if(this.index > swiperImg.index){
+                                this.index = swiperImg.index
+                            };
+                            if(firstGroup){
+                                swiperImg.changeImg();
+//                                that.loading && that.loading.close();
+                            }
+                            that.cacheImg();
+                        }else{
+                            console.log('缓存完成');
+//                            that.loading && that.loading.close();
+                            this.loadState = true;
+                        }
+
+                    };
+                    this.image.onerror = function(){
+//                      图片异常时代替的默认图片
+                        that.image.src = swiperImg.errerImg;
+                        that.image.onerror = null;
+                        that.image.onload = onload;
+                        console.log('第'+(that.index+1)+"张图片异常");
+                    }
+
+
+                },
+            },
+
+
+            // 请求
+            request:{
+                state:true,  // 防止多次请求
+                img:function(_callback){
+                    var that = swiperImg;
+                    if(!this.state){
+                        return
+                    };
+                    console.log('request...');
+                    this.state = false;
+                    $.get("../api/test.json",function(data){
+                        console.log('request-over');
+                        data = typeof data == "object" ? data : {};
+                        that.data = data.datas;
+                        _callback && _callback(data);
+                    });
+                }
+            }
+        };
+
+        swiperImg.init();
+
+        //关于手势图
+        //第一次进乐汁历的时候有 第二次进来就没了
+        var hasTouch = localStorage.getItem('hasTouch');
+        if(!hasTouch){
+            $('.touch-mask-box').show();
+            localStorage.setItem('hasTouch',true);
+        }else{
+            $('.touch-mask-box').hide();
+        }
+        $('.touch-mask-box').click(function(){
+            $(this).hide()
+        })
+    })
+</script>

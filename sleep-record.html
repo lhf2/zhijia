@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>睡眠记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/mui.poppicker.css">
+		<link rel="stylesheet" href="css/mui.picker.css">
+		<link rel="stylesheet" href="css/layui.css">
+		<link rel="stylesheet" href="css/style1.css" />
+	</head>
+<body>
+	<article class="sleep-page">
+		<header class="zcjl-title">
+			<div class="date mui-text-center">
+				<span class="left-btn">
+					<img src="img/left.png" alt="">
+				</span>
+				<input type="text" class="chose-date" placeholder="" readonly>
+				<span class="right-btn">
+					<img src="img/right.png" alt="">
+				</span>
+			</div>
+			<div class="save-btn">保存</div>
+		</header>
+		<section class="sleep-chosebox">
+			<header class="sleep-title">睡眠情况记录</header>
+			<ul class="chose-box">
+				<li class="chose-list" id="openPopover">
+					<div class="chose-type">入睡时间</div>
+					<div class="chose-detail sleep-time">
+						<span>请选择</span>
+						<span class="chose-img-xl">
+							<img src="img/chose.png" alt="">
+						</span>
+					</div>
+				</li>
+				<li class="chose-list" id="openPopover1">
+					<div class="chose-type">睡眠时长</div>
+					<div class="chose-detail sleep-duration">
+						<span>请选择</span>
+						<span class="chose-img-xl">
+							<img src="img/chose.png" alt="">
+						</span>
+					</div>
+				</li>
+				<li class="chose-list" id="openPopover2">
+					<div class="chose-type">睡眠质量</div>
+					<div class="chose-detail sleep-quiaity">
+						<span>请选择</span>
+						<span class="chose-img-xl">
+							<img src="img/chose.png" alt="">
+						</span>
+					</div>
+				</li>
+				<li class="chose-list" id="openPopover3">
+					<div class="chose-type">睡眠障碍</div>
+					<div class="chose-detail sleep-hinder">
+						<span>请选择</span>
+						<span class="chose-img-xl">
+							<img src="img/chose.png" alt="">
+						</span>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<section class="sport-chosebox sleep-chosebox">
+			<header class="sport-title sleep-title">运动情况记录</header>
+			<ul class="chose-box">
+				<li class="chose-list" id="openPopover4">
+					<div class="chose-type">运动时长</div>
+					<div class="chose-detail sport-type">
+						<input type="text" value="0" id="sport-val">
+						<span class="sport-time">分钟</span>
+					</div>
+				</li>
+			</ul>
+		</section>
+	</article>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/rem.js" ></script>
+	<script src='js/mui.min.js'></script>
+	<script src="layui.js"></script>
+	<script src="js/mui.poppicker.js"></script>
+	<script src="js/mui.picker.js"></script>
+	<script>
+	$(document).ready(function(){
+        // 入睡时间
+        var picker = new mui.PopPicker();
+		picker.setData([{
+			    text: "21:30以前"
+			}, {
+			    text: "21:30-22:30"
+			}, {
+			    text: "22:30-23：00"
+			}, {
+			    text: "23：00以后"
+			}])
+		$('#openPopover').click(function(){
+			picker.show(function(selectItem){
+				$('.sleep-time').html(selectItem[0].text);
+			});
+		})
+		// 睡眠时长
+        var picker1 = new mui.PopPicker();
+		picker1.setData([{
+			    text: "大于7h"
+			},{
+			    text: "6h-7h"
+			},{
+			    text: "5h-6h"
+			},{
+			    text: "小于5h"
+			}])
+		$('#openPopover1').click(function(){
+			picker1.show(function(selectItem){
+				$('.sleep-duration').html(selectItem[0].text);
+			});
+		})
+		// 睡眠质量
+        var picker2 = new mui.PopPicker();
+		picker2.setData([{
+			    text: "很好"
+			},{
+			    text: "较好"
+			},{
+			    text: "不好"
+			},{
+			    text: "基本无眠"
+			}])
+		$('#openPopover2').click(function(){
+			picker2.show(function(selectItem){
+				$('.sleep-quiaity').html(selectItem[0].text);
+			});
+		})
+		// 睡眠障碍
+        var picker3 = new mui.PopPicker();
+		picker3.setData([{
+			    text: "无障碍"
+			},{
+			    text: "入睡困难"
+			},{
+			    text: "夜间易醒/早醒"
+			},{
+			    text: "多梦"
+			},{
+			    text: "呼吸不畅"
+			},{
+			    text: "用安眠药"
+			}])
+		$('#openPopover3').click(function(){
+			picker3.show(function(selectItem){
+				$('.sleep-hinder').html(selectItem[0].text);
+			});
+		})
+		// 运动类型
+
+
+	})
+	</script>
+</body>
+</html>

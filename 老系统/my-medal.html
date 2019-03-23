@@ -1,0 +1,131 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的勋章</title>
+    <script>
+        (function() {
+            document.addEventListener('DOMContentLoaded', function() {
+                var html = document.documentElement;
+                var windowWidth = html.clientWidth;
+                html.style.fontSize = windowWidth / 7.5 + 'px';
+                // 等价于html.style.fontSize = windowWidth / 640 * 100 + 'px';
+            }, false);
+        })();
+    </script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/myMedalMain.css" />
+</head>
+
+<body>
+<!--section1开始-->
+<section class="section1">
+    <div class="topBox">
+        <p>
+            我拥有的勋章
+        </p>
+        <hr/>
+
+        <!--切换显示————————图片块开始-->
+        <div class="picBox">
+            <div class="img-list">
+                <img src="img/4.png" alt="">
+            </div>
+            <div class="img-list">
+                <img src="img/5.png" alt="">
+            </div>
+            <div class="img-list">
+                <img src="img/6.png" alt="">
+            </div>
+        </div>
+        <!--切换显示————————文字块开始-->
+        <div class="textBox">
+        <span>
+                  勋章还未拥有,同志还需努力呀!
+            </span>
+        </div>
+        <!--切换显示————————文字块结束-->
+
+    </div>
+</section>
+<!--section1结束-->
+<!--section2开始-->
+<article class="text">每得到1个勋章，您将获得奖励的50积分</article>
+<hr/>
+
+<section class="section2">
+    <ul class="task">
+
+        <!--模板第一条开始-->
+        <li>
+            <div class="part1">
+                <img src="img/4.png" alt="" />
+            </div>
+            <div class="rol">
+                <span></span>
+            </div>
+            <div class="part2">
+                <p>你好,我是赞赏果!</p>
+
+                <p>
+                    想要得到我,很简单哦!
+                </p>
+
+                <p>
+                    只需要<span>计点赞达到100次</span>
+                </p>
+            </div>
+        </li>
+        <!--模板第一条结束-->
+
+
+        <li>
+            <div class="part1">
+                <img src="img/5.png" alt="" />
+            </div>
+            <div class="rol">
+                <span></span>
+            </div>
+            <div class="part2">
+                <p>你好,我是疑问果!</p>
+
+                <p>
+                    想要得到我,很简单哦!
+                </p>
+
+                <p>
+                    只需要<span>只需要累计发帖50次</span>
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="part1">
+                <img src="img/6.png" alt="" />
+            </div>
+            <div class="rol">
+                <span></span>
+            </div>
+            <div class="part2">
+                <p>你好,我是排忧果!</p>
+
+                <p>
+                    想要得到我,很简单哦!
+                </p>
+
+                <p>
+                    只需要<span>只需要累计回帖50次</span>
+                </p>
+            </div>
+        </li>
+    </ul>
+</section>
+<!--section2结束-->
+</body>
+
+</html>

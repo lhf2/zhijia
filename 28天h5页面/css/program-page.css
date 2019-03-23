@@ -1,0 +1,773 @@
+/*html,body{
+    font-size: 16px;
+}*/
+body{
+    line-height: normal;
+}
+.program-page{
+    background: #33ba99;
+}
+.program-page .program-title{
+    width: 100%;
+}
+.program-page .program-title .program-img img{
+    width: 100%;
+}
+.program-page .program-detail{
+    /*padding-top: 9rem;*/
+    /*background: url("../img/program-img.png") no-repeat center top;*/
+    /*background-size: 100%;*/
+    text-align: center;
+}
+.program-page .program-detail img{
+    width: 100%;
+    object-fit: cover;
+}
+.program-detail .program-name{
+    font-size: 1.8125rem;
+    margin-bottom: 1.4375rem;
+    font-weight:bold;
+    margin-top: -8rem;
+}
+.program-detail .program-des{
+    font-size: 1rem;
+}
+.program-detail .program-time{
+    font-size: 1.125rem;
+    font-weight:600;
+}
+.program-page .program-num{
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 1.3125rem;
+    padding-bottom: 1.0625rem;
+    margin-top: 1rem;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    overflow: hidden;
+}
+.program-page .program-num .num-list{
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+.program-page .program-num .num-list:nth-child(1){
+    border-right: 1px solid #fff;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.num-list p.day,.num-list p.people{
+    font-size: 2.5rem;
+}
+.num-list p:nth-last-child(1){
+    font-size: 1rem;
+    margin-top: .5rem;
+}
+.program-page .program-content{
+    font-size: .875rem;
+    text-align: center;
+    margin-top: 1.47rem;
+    line-height: 1.5;
+}
+/*共用*/
+.program-page .program-box,.program-page .program-detail-box{
+    margin-top: 1.7rem;
+}
+.program-page .program-rule{
+    margin-top: 2.215rem;
+    padding-bottom: 3.4375rem;
+}
+.program-page .program-box .health-name,.program-detail-box .detail-name,.program-rule .rule-name{
+    position: relative;
+    text-align: center;
+}
+.program-page .program-box .health-name h1,.program-detail-box .detail-name h1,.program-rule .rule-name h1{
+    font-style: normal;
+    font-size: 2.5rem;
+    color: #fff;
+    opacity: 0.1;
+}
+.health-name .health-name-box,.detail-name .detail-name-box,.rule-name .rule-name-box{
+    position: absolute;
+    top:1.4rem;
+    left: 50%;
+    right: 0;
+    margin: auto;
+    margin-left: -22%;
+}
+.health-name .health-name-box .line,.detail-name .detail-name-box .line,.rule-name .rule-name-box .line{
+    /*display: inline-block;*/
+    float: left;
+    width: 1.25rem;
+    height: 2px;
+    background: #fff;
+    vertical-align:middle;
+    margin-top: .8rem;
+}
+.health-name .health-name-box .name,.detail-name .detail-name-box .name,.rule-name .rule-name-box .name{
+    font-size: 1.25rem;
+    margin: 0 .9375rem;
+    float: left;
+}
+/**************共用结束********************/
+.program-box .health-introduce{
+    position: relative;
+    min-height: 25rem;
+    background: url("../img/bg.png") no-repeat;
+    margin-right:1.25rem;
+    background-size:100% 100%;
+    border: 1px solid rgba(0,0,0,0);
+    text-align: center;
+    margin-top:2rem;
+    padding-bottom: 2rem;
+}
+.health-introduce .health-icon{
+    width: 4.6875rem;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: -1rem;
+}
+.health-introduce .health-icon img{
+    width: 75px;
+    vertical-align: top;
+}
+.health-introduce .icon-name{
+    font-size: 1.25rem;
+    color: #333;
+    margin-top: .8rem;
+    margin-bottom: .5rem;
+}
+.health-introduce .icon-detail{
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+.health-introduce .health-detail{
+    margin-left: 2rem;
+    margin-right: 1rem;
+    padding-bottom: 1rem;
+}
+.health-introduce .health-detail p{
+    font-size: .9375rem;
+    color: #4a4a4a;
+    text-align: left;
+    line-height: 1.5;
+}
+.program-detail-box .detail-introduce{
+    margin-top: 3.1875rem;
+    text-align: left;
+}
+.detail-introduce .detail-name{
+    text-align: left;
+    font-size: 1.125rem;
+    margin-left: 1.4375rem;
+    margin-bottom: 1.25rem;
+}
+.detail-introduce .detail-points .detail-list,.rule-points .rule-list,.detail-points li,.rule-points li{
+    position: relative;
+    font-size: .9375rem;
+    color: #fff;
+    line-height: 1.5;
+    margin:0 1.4375rem;
+    margin-left: 2.5rem;
+    margin-bottom: 1.25rem;
+}
+.program-page .circle{
+    /*display: inline-block;*/
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    left: -1rem;
+    top:.5rem;
+}
+.detail-introduce:nth-last-child(1){
+    margin-top: 2rem;
+}
+.program-rule .rule-points{
+    margin-top: 2.375rem;
+}
+.program-page .program-open{
+    width: 100%;
+    height: 3.125rem;
+    /*margin-top: 3.4375rem;*/
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+}
+.program-open{
+    overflow: hidden;
+}
+.program-open .price-box{
+    display: inline-block;
+    width: 30%;
+    height: 100%;
+    float: left;
+    background: #19896e;
+    position: relative;
+}
+.price-box .free-type{
+    display: inline-block;
+    width: 2rem;
+    height: 1rem;
+    background: #fff;
+    font-size: .75rem;
+    color: #19896e;
+    position: absolute;
+    top:0;
+    text-align: center;
+    line-height: 1rem;
+}
+.price-box .price{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 3.125rem;
+    text-decoration: line-through;
+}
+.program-open .open-btn{
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.program-open .open-btn a{
+    font-size: 1.25rem;
+    line-height: 3.125rem;
+    color: #333;
+    text-decoration: none;
+}
+/*报告*/
+.health-report{
+    background: #F4F5F9;
+}
+.health-report .health-top-outer{
+    background: #fff;
+}
+.health-report .health-top{
+    background: url("../img/report-bg.png") no-repeat center top;
+    background-size: 100% 100%;
+    min-height:15rem;
+}
+.health-top .health-title{
+    text-align: center;
+    font-size: 1.25rem;
+    height:2.75rem;
+    line-height: 2.75rem;
+    vertical-align: middle;
+    padding: 0 1rem;
+}
+.health-top .health-title img{
+    height: 1.25rem;
+    float: left;
+    /*margin-left: 1rem;*/
+    vertical-align: middle;
+    margin-top: .875rem;
+    cursor: pointer;
+}
+.health-top .health-tip{
+    width: 83%;
+    padding:.9385rem;
+    height: 4.875rem;
+    background: rgba(255,255,255,.3);
+    margin: 0 auto;
+    font-size: .9385rem;
+    margin-top: 2rem;
+    overflow: hidden;
+}
+.health-top .health-tip p .icon-name{
+    font-size: 1.125rem;
+}
+.health-top .health-tip p:nth-last-child(1){
+    margin-top: .625rem;
+}
+.health-report .press-result{
+    padding-top:1.875rem;
+    padding-bottom: 1.5625rem;
+    border-bottom: 1px solid #DEDEDE;
+    background: #fff;
+}
+.press-result .result-title,.press-curve .result-title,.cause-analysis .result-title{
+    padding-bottom: .6rem;
+    text-align: center;
+    border-bottom: 1px solid #DDDDDD;
+}
+.press-result .result-title span,.press-curve .result-title span,.cause-analysis .result-title span{
+    font-size: 1.125rem;
+    color: #666;
+    padding: 0 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid #17C0A3;
+}
+.press-result .result-box1 .result-final{
+    margin-top:.3125rem;
+    font-size: .875rem;
+    text-align: center;
+    color: #999;
+}
+.press-result .press-box{
+    margin-top: 1.75rem;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+.press-result .press-box .press-list{
+    width: 50%;
+    float: left;
+}
+.press-result .press-list{
+    font-size: 1.125rem;
+    color: #333;
+    text-align: center;
+}
+.press-list span{
+    font-size: 1.125rem;
+    color: #17C0A3;
+    margin-left: .9375rem;
+    vertical-align: top;
+}
+.press-list sup{
+    font-size: .75rem;
+    color: #666;
+    margin-left: .3125rem;
+}
+@media screen and (max-width:360px) {
+    .press-list span{
+        font-size: 1rem;
+        margin-left: .5rem;
+    }
+    .press-list sup{
+        font-size: .75rem;
+        margin-left: .3rem;
+    }
+}
+.press-result .result-box1 .result-box{
+    width: 92%;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #E5E5E5;
+    margin: 0 auto;
+}
+.press-result .result-box1 .result-box .result-box-inner{
+    height: 3.125rem;
+    width: 96%;
+    padding-left: 4%;
+    margin: 0 auto;
+    box-shadow: 0 0 5px #cdcdcd;
+    -webkit-box-shadow: 0 0 5px #cdcdcd;
+    border-radius:1px;
+    -webkit-border-radius:1px;
+}
+.press-result .result-box .result-box-inner{
+    font-size: 1.125rem;
+    line-height: 3.125rem;
+    color: #333333;
+    position: relative;
+}
+.press-result .result-box i{
+    color: #fd407a;
+    font-style: normal;
+}
+em{
+    display: block;
+    background: url(../img/re-icon2.png) no-repeat;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-size:100% 100%;
+}
+.press-result .result-box em{
+    position: absolute;
+    right: .625rem;
+    top: 1rem;
+}
+.press-result .result-box2{
+    margin-top: 1.5625rem;
+}
+.result-box2 .slider-result .slider-top{
+    position: relative;
+    overflow: hidden;
+    line-height: 1.3rem;
+}
+.result-box2 .slider-result .slider-top .slider-type,.cause-analysis .cause-box .cause-top .cause-type{
+    float: left;
+    font-size: 1rem;
+    color: #333;
+}
+.result-box2 .slider-result .slider-top .slider-type span,.cause-analysis .cause-box .cause-top .cause-type span{
+    font-size: 1rem;
+    color: #333;
+    float: left;
+}
+.result-box2 .slider-result .slider-top .slider-type .line,.cause-analysis .cause-box .cause-top .cause-type .line{
+    display: inline-block;
+    margin-left: .9375rem;
+    width: .25rem;
+    height: 1rem;
+    margin-right: .5625rem;
+    float: left;
+    margin-top: .13rem;
+}
+.cause-analysis .cause-box .cause-top .cause-type .line{
+    margin-top: .34375rem;
+}
+.slider-result-gky .slider-top .slider-type .line{
+    background: #FD407A;
+}
+.slider-result-zcy .slider-top .slider-type .line{
+    background: #6CC374;
+}
+.slider-result-zcg .slider-top .slider-type .line{
+    background: #ff9d3a;
+}
+.slider-result-zcg .slider-box .slider-inner{
+    margin-bottom: 3.9375rem!important;
+}
+.slider-top .slider-num{
+    float: left;
+    text-align: center;
+    font-size: 1.25rem;
+    color: #333;
+    /*margin-left: 6rem;*/
+    position: absolute;
+    left:50%;
+    margin-left: -.5rem;
+}
+.slider-top em{
+    float: right;
+    margin-right: .9375rem;
+}
+.press-result .result-box2 .result-box{
+    position: relative;
+    width: 83%;
+    height: 3.125rem;
+    margin: 0 auto;
+    box-shadow: 0 0 5px #cdcdcd;
+    -webkit-box-shadow: 0 0 5px #cdcdcd;
+    border-radius:1px;
+    -webkit-border-radius:1px;
+    font-size: 1.125rem;
+    color: #333;
+    line-height: 3;
+    text-align: center;
+}
+.result-box2 .result-box span{
+    color: #6CC374;
+    margin-left: 1.0625rem;
+}
+.result-box2 .result-box sup{
+    font-size: .75rem;
+    color: #666;
+    margin-left: .2rem;
+}
+.result-box2 .result-tip{
+    width: 80%;
+    font-size: .9375rem;
+    color: #333;
+    text-align: center;
+    margin-top: 1.18rem;
+}
+.health-report .press-curve,.health-report .cause-analysis{
+    background: #fff;
+    margin-top: .625rem;
+    border-top: 1px solid #DEDEDE;
+    border-bottom: 1px solid #DEDEDE;
+}
+.press-curve .result-title,.cause-analysis .result-title{
+    margin-top: 1.375rem;
+}
+.press-curve .curve-box .press-curve-title{
+    margin-top: 2.1875rem;
+    color: #333;
+    font-size: 1rem;
+    margin-left: 1rem;
+}
+.press-curve .curve-box #press-chart{
+    width: 100%;
+    min-height: 20rem;
+    top:-1.3rem;
+}
+.health-report .cause-analysis{
+    padding-bottom: 1.5625rem;
+    border-bottom: 0!important;
+}
+.cause-analysis .cause-box{
+    margin-top: 2.1875rem;
+}
+.cause-analysis .cause-box.cause-box-ysjl{
+    margin-top: 1.875rem;
+}
+.cause-analysis .cause-box .cause-top{
+    overflow: hidden;
+    line-height: 1.6875rem;
+}
+.cause-analysis .cause-box .cause-chose{
+    float: left;
+    margin-left: 4rem;
+    overflow: hidden;
+}
+.cause-analysis .cause-box .yes-num{
+    color: #999;
+    float: right;
+    margin-right:.9375rem;
+    font-size: .875rem;
+}
+.cause-box .yes-num i{
+    font-size: .875rem;
+    color: #999;
+    font-style: normal;
+}
+.cause-box .cause-chose span{
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #333;
+    font-size: 1rem;
+    border-radius: .3rem;
+    text-align: center;
+    float: left;
+    opacity: .5;
+    line-height: 1.25rem;
+    margin-top: .2rem;
+    vertical-align: middle;
+}
+.cause-box .cause-chose span.cur{
+    opacity: 1;
+    width: 1.6875rem;
+    height: 1.6875rem;
+    line-height: 1.6875rem;
+    margin-top: 0!important;
+}
+.cause-box .cause-chose span.a{
+    background: #D5FF81;
+}
+.cause-box .cause-chose span.b{
+    background: #ffdd81;
+}
+.cause-box .cause-chose span.c{
+    background: #81daff;
+}
+.cause-box .cause-tip{
+    /*min-height: 2.4rem;*/
+    padding: .8rem 0;
+    width: 92%;
+    margin: 0 auto;
+    box-shadow: 0 0 5px #cdcdcd;
+    -webkit-box-shadow: 0 0 5px #cdcdcd;
+    border-radius:1px;
+    -webkit-border-radius:1px;
+    vertical-align: middle;
+    overflow: hidden;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    /*position: relative;*/
+}
+.cause-box .cause-tip .tip-img{
+    display: inline-block;
+    width: 12%;
+    vertical-align: middle;
+    float: left;
+    font-size: 0;
+    /*position: absolute;*/
+    /*top:50%;*/
+    /*margin-top: -0.625rem;*/
+}
+.cause-box .cause-tip .tip-img img{
+    width: 1.25rem;
+    height: 1.25rem;
+    vertical-align:middle;
+    margin: 0 0.625rem;
+    /*margin-top: .5rem;*/
+}
+.cause-box .cause-tip span.tip-text{
+    width: 86%;
+    font-size: 1rem;
+    color: #333;
+    /*position: absolute;*/
+    /*left:2.5rem;*/
+}
+.health-report .score-Explain{
+    padding-bottom: 7.3rem;
+    background: #fff;
+}
+.health-report .score-Explain .score-inner{
+    padding-top: 1.5625rem;
+    width: 92%;
+    margin: 0 auto;
+    border-top: 1px solid #DEDEDE;
+}
+.score-Explain p{
+    font-size: .875rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.5;
+}
+/*滑块*/
+.result-box2 .slider-result .slider-box,.cause-analysis .cause-box .cause-slider{
+    width: 83%;
+    margin: 0 auto;
+}
+.slider-box .slider-fre,.cause-slider .slider-fre{
+    font-size: 1rem;
+    color: #333;
+    width: 2.8125rem;
+    height: 1.09375rem;
+    border-radius: 1rem;
+    text-align: center;
+    line-height: 1.09375rem;
+    position: absolute;
+    margin-left: -1rem;
+}
+.slider-box .slider-inner,.cause-slider .slider-inner{
+    position: relative;
+    margin-bottom: 2.5rem;
+    margin-top: 1.0625rem;
+}
+.slider-box{
+    min-height: 3rem;
+}
+.slider-box .slider-inner .slider,.cause-slider .slider-inner .slider{
+    width: 100%;
+    height: .25rem;
+    border-radius: .25rem;
+    margin-top: .2rem;
+    position: relative;
+    top: 1.4rem;
+}
+.slider-box .slider-inner .slider span.slider-val,.cause-slider .slider-inner .slider span.slider-val{
+    display: inline-block;
+    width: 1rem;
+    height:100%;
+    border-radius: .25rem;
+    position: absolute;
+    top:0;
+    left:0;
+    opacity:1;
+    z-index: 100;
+}
+.slider-inner .slider-min,.slider-inner .slider-max,.slider-inner .slider-max i{
+    font-style: normal;
+    color: #333;
+    font-size: .875rem;
+    margin-top: .625rem;
+}
+.slider-inner .slider-min{
+    position: absolute;
+    left:-.4rem;
+}
+.slider-inner .slider-max{
+    position: absolute;
+    right:-.4rem;
+}
+.slider-inner .slider-region span{
+    display: inline-block;
+    text-align: center;
+    font-size: .875rem;
+    color: #999;
+}
+.cause-slider{
+    min-height: 5rem;
+}
+.cause-slider .slider-inner{
+    margin-top: 1.5625rem;
+    margin-bottom: 1.375rem;
+}
+.cause-slider .slider-inner .slider-region{
+    margin-bottom: 1rem;
+}
+.cause-slider .slider-inner .slider .slider-b,.cause-slider .slider-inner .slider .slider-c{
+    display: inline-block;
+    height: 100%;
+    width: .125rem;
+    background: #fa8e62;
+    position: absolute;
+    top:0
+}
+.cause-analysis .cause-box-ysjl .cause-top .cause-type .line{
+    background: #FA8E60;
+}
+.cause-analysis .cause-box-smjl .cause-top .cause-type .line{
+    background: #7fc1f3;
+}
+.cause-analysis .cause-box-ydjl .cause-top .cause-type .line{
+    background: #7274be;
+}
+.cause-analysis .cause-box-qxjl .cause-top .cause-type .line{
+    background: #ff819a;
+}
+/*弹窗*/
+.alert-box{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    display: none;
+}
+.alert-box .alert-inner-box{
+    width: 85%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    padding: .625rem;
+    border-radius: .3125rem;
+    background: #FFFFFF;
+}
+.alert-box .alert-inner-box .alert-text{
+    line-height: 1.875rem;
+    font-size: .9rem;
+    margin-bottom: .625rem;
+    color: #333;
+}
+.alert-box .alert-inner-box .alert-btn{
+    border-top: solid 1px #DCDCDC;
+    line-height: 1.875rem;
+    text-align: center;
+    color: #E87039;
+    padding-top: .625rem;
+    font-size: .9rem;
+}
+.press-curve .curve-box{
+    position: relative;
+}
+.press-curve .curve-box .nodata{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    line-height: 1.875rem;
+    color: #999999;
+    text-align: center;
+    display: none;
+}
+.health-report .share-btn{
+    display: none;
+    float: right!important;
+}
+.health-report .press-level{
+    width: 12rem;
+    height: 4.47rem;
+    position: fixed;
+    right: 0;
+    bottom: 2.8125rem;
+    background: url("../img/btn-bg.png") no-repeat;
+    background-size: cover;
+    z-index: 100000;
+}
+.health-report .press-level a{
+    display: inline-block;
+    width: 100%;
+    height:100%;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 4.47rem;
+    color: #fff;
+    text-decoration: none;
+    margin-left: .8rem;
+}

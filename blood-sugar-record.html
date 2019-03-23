@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>血糖记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/layui.css">
+		<link rel="stylesheet" href="css/style1.css" />
+</head>
+<body style="background: #f1f1f1">
+<article class="blood-sugar-page">
+	<header class="zcjl-title">
+		<div class="date">
+			<span class="left-btn">
+				<img src="img/left.png" alt="">
+			</span>
+			<span class="chose-date"></span>
+			<span class="right-btn">
+				<img src="img/right.png" alt="">
+			</span>
+		</div>
+		<div class="save-btn">保存</div>
+	</header>
+	<section class="edit-blood-sugar">
+		<div class="blood-nav">
+			<ul class="blood-box">
+				<li class="blood-list cur">
+					空腹
+				</li>
+				<li class="blood-list">
+					早餐后
+				</li>
+				<li class="blood-list">
+					午餐前
+				</li>
+				<li class="blood-list">
+					午餐后
+				</li>
+				<li class="blood-list">
+					晚餐前
+				</li>
+				<li class="blood-list">
+					晚餐后
+				</li>
+				<li class="blood-list">
+					睡前
+				</li>
+			</ul>
+		</div>
+		<div class="edit-blood-detail">
+			<div class="blood-detail-inner">
+				<p class="blood-num">
+					<input type="text" placeholder="0.0" id="blood-num">
+				</p>
+				<p class="blood-dw">mmol/L</p>
+				<p class="blood-state">
+					<img src="img/blood-state.png" alt="">
+				</p>
+			</div>
+		</div>
+		<div class="blood-tip">
+			<p>注意：餐后数据是指餐后2小时数据</p>
+			<p>血糖值不到2.8或超过16都应该去医院进行检查！</p>
+		</div>
+	</section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/rem.js"></script>
+<script src="layui.js"></script>
+<script>
+	$(document).ready(function(){
+        // 获取ul的宽度
+        var len=$('.blood-box .blood-list').length;
+        var listW=5.375;
+        $('.blood-box').css('width',listW*len+'rem');
+        // 点击对应的添加cur样式
+        $('.blood-list').click(function(){
+        	$('.blood-list').removeClass('cur');
+        	$(this).addClass('cur');
+        	//血糖的记录清空
+        	$('#blood-num').val('');
+        	$('.blood-state').children('img').attr('src','img/blood-state.png')
+        })
+        // 更改血糖的背景颜色
+        $('#blood-num').change(function(){
+        	var curIndex = $('.blood-list.cur').index();
+        	var val = $(this).val();
+        	var changeImg = $('.blood-state').children('img');
+        	//餐前的数据
+        	if( curIndex == 0 || curIndex == 2 || curIndex == 4 || curIndex == 6){
+        		console.log('餐前');
+	        	if(val <= 2 || val >=17){
+	        		// 显示弹窗
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg('允许输入的血糖范围为2-17');
+					});
+	        	}else if(val>=2.8&&val<=3.8){
+	        		//低血糖
+	        		changeImg.attr('src','img/blood-state.png');
+	        	}else if(val>=3.9&&val<=6.1){
+	        		//正常
+					changeImg.attr('src','img/blood-state1.png');
+	        	}else{
+	        		changeImg.attr('src','img/blood-state2.png');
+	        	}
+	        }else{
+	        	//餐后的数据
+	        	console.log('餐后');
+	        	if(val<2.8 || val>16){
+	        		alert('允许输入的血糖范围为2.8-16')
+	        	}else if(val>=2.8&&val<=4.3){
+	        		//低血糖
+	        		changeImg.attr('src','img/blood-state.png');
+	        	}else if(val>=4.4&&val<=10){
+	        		//正常
+					changeImg.attr('src','img/blood-state1.png');
+	        	}else{
+	        		changeImg.attr('src','img/blood-state2.png');
+	        	}
+	        }
+        	
+        })
+	})
+</script>
+</body>
+</html>

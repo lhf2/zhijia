@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>日期</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/layui.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="plan-page">
+    <header class="health-top" id="headerNav">
+        日期
+        <span class="commit-btn"><a href="program-detail.html">保存</a></span>
+    </header>
+    <section class="date-box">
+        <div class="open-date">
+            <p>开始日期</p>
+            <p class="open-text"></p>
+        </div>
+        <div class="close-date">
+            <p>结束日期</p>
+            <p class="close-text"></p>
+        </div>
+    </section>
+    <section class="chose-date-outer">
+        <input type="hidden" id="datetext">
+        <div id="chose-date"></div>
+        <div class="date-tip">
+            推荐理由：1. 建议尽量选择周末时间开启定制方案</br>
+            2. 建议尽量避开出差及应酬聚会日期</br>
+            3. 请保持良好且平稳的心情</br>
+            4. 准备一台榨汁机或破壁机（品牌、价位不限）</br>
+        </div>
+    </section>
+</article>
+</body>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../layui.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //把日期格式变成yyyy-mm-dd的格式
+        Date.prototype.format = function(fmt) {
+            var o = {
+                "M+" : this.getMonth()+1,                 //月份
+                "d+" : this.getDate(),                    //日
+                "h+" : this.getHours(),                   //小时
+                "m+" : this.getMinutes(),                 //分
+                "s+" : this.getSeconds(),                 //秒
+                "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                "S"  : this.getMilliseconds()             //毫秒
+            };
+            if(/(y+)/.test(fmt)) {
+                fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+            }
+            for(var k in o) {
+                if(new RegExp("("+ k +")").test(fmt)){
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                }
+            }
+            return fmt;
+        }
+        //获取AddDayCount天后的日期
+        function GetDateStr(date,AddDayCount) {
+            var dd = new Date(date);
+            dd.setDate(dd.getDate()+AddDayCount);
+            var y = dd.getFullYear();
+            var m = dd.getMonth()+1;//获取当前月份的日期
+            var d = dd.getDate();
+            if(m<10){
+                m = '0'+m
+            }
+            if(d<10){
+                d = '0'+d
+            }
+            return y+"-"+m+"-"+d;
+        }
+        //获取当前日期的周六日
+        function Lately(){
+            var now = new Date();
+            var nowTime = now.getTime() ;
+            var day = now.getDay();
+            var oneDayLong = 24*60*60*1000 ;
+            //周六
+            var SatTime = nowTime + (6-day)*oneDayLong  ;
+            //周日
+            var SundayTime =  nowTime + (7-day)*oneDayLong ;
+            var satday = new Date(SatTime);
+            var sunday = new Date(SundayTime);
+            if(day!=0&day<6){
+                return satday.getFullYear()+'-'+(satday.getMonth()+1)+'-'+satday.getDate();
+            }else{
+                return sunday.getFullYear()+'-'+(sunday.getMonth()+1)+'-'+sunday.getDate()
+            }
+        }
+        var dateConfig = {
+            elem: '#chose-date',
+            format: 'yyyy-MM-dd',
+            show:true,
+            showBottom: false,
+            isToday:true,
+            position: 'static',
+            min:new Date().format('yyyy-MM-dd'),
+            done: function (value, date, endDate) {
+                $('#datetext').val(value);
+                //如果点击的是当前日期之前的日期
+                var date1 = GetDateStr(value,27);
+                $('td').each(function(item){
+                    //看每个td的日期在不在点击的日期跟28天后的日期范围内
+                    if(new Date($(this).attr('lay-ymd'))>=new Date(value) && new Date($(this).attr('lay-ymd'))<=new Date(date1)){
+                        $(this).addClass('laydate-selected');
+                    }
+                })
+                $('.open-text').html(value.substring(5));
+                $('.close-text').html(date1.substring(5));
+            },
+            change:function(value, date, endDate){
+                var djdate = $('#datetext').val();
+                var date2 = GetDateStr(djdate,27);
+                $('td').each(function(item){
+                    if(new Date($(this).attr('lay-ymd'))>=new Date(djdate) && new Date($(this).attr('lay-ymd'))<=new Date(date2)){
+                        $(this).addClass('laydate-selected');
+                    }
+                })
+            }
+        };
+
+
+        var markDate = Lately();
+
+        setMark(markDate);
+
+
+        // _date 需要标记的日期
+        function setMark(_date){
+            layui.use(['laydate','layer'], function() {
+                var $ = layui.$, laydate = layui.laydate, layer = layui.layer, myDate = new Date();
+
+                $("#chose-date").html("");
+
+                if(_date){
+                    dateConfig.mark = {};
+                    dateConfig.mark[_date] = '推荐'
+                }
+
+                laydate.render(dateConfig);
+
+                return laydate;
+
+            });
+        }
+
+
+
+
+
+
+    })
+</script>
+</html>

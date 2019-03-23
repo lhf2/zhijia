@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>身体指标分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <link rel="stylesheet" href="../css/rule.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="whr-chose">
+    <section class="chose-detail-box">
+        <h1>身体指标分析</h1>
+        <div class="chose-detail">
+            <p>腰臀比（WHR）是判定中心性肥胖的重要指标</p>
+        </div>
+        <section class="rule-box">
+            <span class="rule-title">腰围</span>
+            <div class="rule" id="waistRuler"></div>
+            <span class="rule-unit">厘米</span>
+        </section>
+        <section class="rule-box">
+            <span class="rule-title">臀围</span>
+            <div class="rule" id="HiplineRuler"></div>
+            <span class="rule-unit">厘米</span>
+        </section>
+        <div class="result-box">
+            <span class="result-name">WHR</span>
+            <span class="result-text">根据你的腰围臀围，自动算出WHR</span>
+        </div>
+        <p class="whr-text">您属于中心肥胖人群</p>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/wx/js/Ruler.js?version=1513336130491"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //刻度尺
+        var waistRuler = new Ruler({
+            id: "#waistRuler",
+            rate:10,
+            markColor:'#21cfc0',
+            max:250,
+            num:70,
+            onChange:function(){
+               changeVal()
+            }
+        });
+        var HiplineRuler = new Ruler({
+            id: "#HiplineRuler",
+            rate:10,
+            markColor:'#21cfc0',
+            max:250,
+            num:90,
+            onChange:function(){
+                changeVal()
+            }
+        });
+        //刚进入页面的时候
+        var waist = sessionStorage.getItem('waist');
+        var hipline = sessionStorage.getItem('hipline');
+        var sex = sessionStorage.getItem('sex');
+        if(waist&&hipline){
+            $('.whr-chose .result-box .result-text').css('margin-left','-7.5%');
+            waistRuler.val(waist);
+            HiplineRuler.val(hipline);
+            $('.result-text').html(whr(waist,hipline));
+            $('.whr-text').show().html(whrState(waist,hipline));
+            $('.next-btn').addClass('cur').children('a').attr('href','body-index.html')
+        }
+        //点击下一步的时候
+        $('.next-btn').click(function(){
+            sessionStorage.setItem('waist',waistRuler.val());
+            sessionStorage.setItem('hipline',HiplineRuler.val());
+        })
+        //计算whr指数
+        function whr(w,h){
+            return (w/h).toFixed(2);
+        }
+        function whrState(w,h){
+            var whrIndex = whr(w,h);
+            //如果是男生
+            if(sex == 1&&whrIndex>0.9){
+                return '您属于中心性肥胖人群'
+            }else if(sex == 2&&whrIndex>0.8){
+                return '您属于中心性肥胖人群'
+            }else{
+                return '您不属于中心性肥胖人群'
+            }
+        }
+        //修改刻度尺的值的时候
+        function changeVal(){
+            $('.whr-chose .result-box .result-text').css('margin-left','-7.5%');
+            waistVal = waistRuler.val();
+            hiplineVal = HiplineRuler.val();
+            if(waistVal&&hiplineVal){
+                $('.result-text').html(whr(waistVal,hiplineVal));
+                $('.whr-text').show().html(whrState(waistVal,hiplineVal));
+                $('.next-btn').addClass('cur').children('a').attr('href','body-index.html')
+            }
+        }
+    })
+</script>
+</body>
+</html>

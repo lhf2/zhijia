@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>药品选择</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style1.css" />
+</head>
+<body>
+<article class="drugs-chose-page">
+	<header>
+		<div class="mui-input-row mui-search">
+	    	<input type="search" class="mui-input-clear" placeholder="请输入药品名称">
+		</div>
+	</header>
+	<ul class="search-result">
+		<li class="result-list">
+			<span class="drug-name">达美康</span>
+			<span class="drug-dose">30mg/片</span>
+		</li>
+		<li class="result-list">
+			<span class="drug-name">美迪康</span>
+			<span class="drug-dose">30mg/片</span>
+		</li>
+	</ul>
+</article>
+<script type="text/javascript" src="js/rem.js" ></script>	
+<script src="js/mui.min.js"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.result-list').click(function(){
+			var medica_name=$(this).children('.drug-name').html();
+			location.href='medica-record1.html?medica_name='+medica_name;
+		})
+	})
+</script>
+</body>
+</html>

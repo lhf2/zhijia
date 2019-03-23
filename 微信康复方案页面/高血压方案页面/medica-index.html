@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>药物指数分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <link rel="stylesheet" href="../css/rule.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="medica-index">
+    <section class="chose-detail-box">
+        <h1>药物指数分析</h1>
+        <div class="chose-detail">
+            <p>您目前是否服用降血压药物</p>
+        </div>
+        <div class="medica-outbox">
+            <div class="medica-box">
+                <div class="form-group form-border-group" id="drugNamePop">
+                    <span class="group-name">药物名称</span>
+                    <span class="medica-name" id="medica-name">请选择药物名称</span>
+                </div>
+                <div class="form-group">
+                    <div class="chose-box" id="degree-chose">
+                        <span>一天</span>
+                        <input type="text" id="degree-text" class="degree-text" readonly>
+                        <span>次</span>
+                    </div>
+                    <div class="chose-box" id="con-chose">
+                        <span>一次</span>
+                        <input type="text" id="con-text" class="con-text" readonly>
+                        <span>片</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="remove-medica medica-btn">
+            <span>-</span>删除药物
+        </div>-->
+        <div class="add-medica medica-btn">
+            <span>+</span>添加药物
+        </div>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<div id="searchContainer" class="weui-popup__container">
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+        <div class="weui-search-bar" id="searchBar">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="text" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+        </div><!-- end searchBar-->
+        <div class="weui-cells searchbar-result" id="searchResult">
+            <div class="weui-cell weui-cell_access" medicaId="1">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>非诺贝特片 100mg/片</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access" medicaId="2">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>诺和龙 2mg/片</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access" medicaId="3">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>诺和龙 1mg/片</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access" medicaId="4">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>安立泽 5mg/片</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>安立泽 2.5mg/片</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>氯磺丙脲片 0.1g/片</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>达美康 80mg/片</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>达美康 60mg/片</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- end  weui-popup__modal -->
+</div>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js"></script>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/js/jquery-weui.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        var medicaArr = [{name:'',degree:'',con:'',medicaId:''}];
+        //输入药品名称
+        $(document).on('click','#drugNamePop',function(){
+            var clickIndex = $(this).parents('.medica-box').index();
+            sessionStorage.setItem('clickIndex',clickIndex);
+            $('#searchContainer').popup();
+        });
+        /*$('#searchResult').find('.weui-cell_access').on('click',function(){
+            var $this = $(this);
+            var name = $this.find('p').html();
+            var clickIndex = sessionStorage.getItem('clickIndex');
+            $('.medica-box').eq(clickIndex).find('#medica-name').val(name);
+            $.closePopup();
+            medicaArr[clickIndex].name = name;
+            hasVal();
+        });*/
+        $(document).on('click','.weui-cell_access', function () {
+            var $this = $(this);
+            var name = $this.find('p').html();
+            var medicaId = $(this).attr('medicaId');
+            var clickIndex = sessionStorage.getItem('clickIndex');
+            $('.medica-box').eq(clickIndex).find('#medica-name').html(name);
+            $.closePopup();
+            medicaArr[clickIndex].name = name;
+            medicaArr[clickIndex].medicaId = medicaId;
+            hasVal();
+        })
+        /*
+        $(document).on('blur','.medica-name',function(){
+            $(this).each(function(index){
+                var medicaN = $(this).val();
+                var index = $(this).parents('.medica-box').index();
+                medicaArr[index].name = medicaN;
+            })
+            hasVal();
+        })*/
+        //选择次数跟片数
+        $(document).on('click','#degree-chose',function(){
+            var degreeJson = [{"label":"1","value":"1"},{"label":"2","value":"2"},{"label":"3","value":"3"},{"label":"4","value":"4"},{"label":"5","value":"5"},{"label":"6","value":"6"},{"label":"7","value":"7"},{"label":"8","value":"8"},{"label":"9","value":"9"},{"label":"10","value":"10"}];
+            var that = this;
+            weui.picker(degreeJson, {
+                onConfirm: function (result) {
+                    $(that).children('#degree-text').val(result[0].label);
+                    var index = $(that).parents('.medica-box').index();
+                    medicaArr[index].degree = result[0].label;
+                    hasVal();
+                }
+            });
+        })
+        $(document).on('click','#con-chose',function(){
+            var conJson = [{"label":"0.5","value":"0.5"},{"label":"1","value":"1"},{"label":"2","value":"2"},{"label":"3","value":"3"},{"label":"4","value":"4"},{"label":"5","value":"5"},{"label":"6","value":"6"},{"label":"7","value":"7"},{"label":"8","value":"8"},{"label":"9","value":"9"},{"label":"10","value":"10"}];
+            var that = this;
+            weui.picker(conJson, {
+                onConfirm: function (result) {
+                    $(that).children('#con-text').val(result[0].label);
+                    var index = $(that).parents('.medica-box').index();
+                    medicaArr[index].con = result[0].label;
+                    hasVal();
+                }
+            });
+        })
+        //添加药物
+        var addhtml = '<div class="medica-box"><div class="form-group form-border-group" id="drugNamePop"><span class="group-name">药物名称</span><span class="medica-name" id="medica-name">请选择药物名称</span></div><div class="form-group"><div class="chose-box" id="degree-chose"><span>一天</span><input type="text" id="degree-text" class="degree-text" readonly><span>次</span></div><div class="chose-box" id="con-chose"><span>一次</span><input type="text" id="con-text" class="con-text" readonly><span>片</span></div></div></div>';
+        $('.add-medica').click(function(){
+            $('.remove-medica').show();
+            $('.medica-outbox').append(addhtml);
+            medicaArr.push({
+                name:'',
+                degree:'',
+                con:'',
+                medicaId:''
+            })
+        })
+        //是否可以跳转
+        function hasVal(){
+            if(medicaArr){
+                medicaArr.forEach(function(item,index){
+                    if(medicaArr[index].name!=''&&medicaArr[index].degree!=''&&medicaArr[index].con!=''){
+                        $('.next-btn').addClass('cur').children('a').attr('href','bmi-chose.html');
+                    }else{
+                        $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+                    }
+                })
+            }
+        }
+        //点击下一步
+        $('.next-btn').click(function(){
+            medicaArr = $.grep(medicaArr,function(item,index){
+                if(medicaArr[index].name =='' || medicaArr[index].degree ==''|| medicaArr[index].con ==''){
+                    return item
+                }
+            },true);
+            sessionStorage.setItem('medica', JSON.stringify(medicaArr));
+        })
+        //刚进去页面
+        var newArr = JSON.parse(sessionStorage.getItem('medica'));
+        if(newArr){
+            medicaArr = newArr.slice();
+            $('.next-btn').addClass('cur').children('a').attr('href','bmi-chose.html');
+            var len = medicaArr.length;
+            $('.medica-outbox').html('');
+            for(var i = 0;i < len;i++){
+                $('.medica-outbox').append(addhtml);
+                if(len>1){
+                    $('.remove-medica').show();
+                }
+                //赋值
+                $('.medica-name').eq(i).html(medicaArr[i].name);
+                $('.degree-text').eq(i).val(medicaArr[i].degree);
+                $('.con-text').eq(i).val(medicaArr[i].con);
+            }
+        }
+        //删除按钮
+        /*$('.remove-medica').click(function () {
+            $('.medica-box').eq(-1).remove();
+            if($('.medica-box').length == 1){
+                $(this).hide();
+            }
+            medicaArr.pop();
+        })*/
+    })
+</script>
+</body>
+</html>

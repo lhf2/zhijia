@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="css/reset.css">
+    <script src="js/rem.js"></script>
+    <style>
+        .article { padding: .3rem;margin-bottom: 10px;padding-bottom: 0;background-color: #fff;}
+        .article__title { margin-bottom: 12px;}
+        .article__title--left { width: 50%;text-align: left;}
+        .article__title--right { width: 50%;text-align: right;}
+        .article__heading { margin-bottom: 19px;color: #333;font-size: 26px;line-height: 1.5;}
+        .article__tip { margin-bottom: 15px;}
+        .article__intro p { padding-bottom: 8px;border-bottom: 1px solid #ddd;}
+        .article__container { color: #666;font-size: 15px;line-height: 24px;}
+        .article__container p { margin: 8px 0;}
+        .article__container img { width: 100%;height: auto;margin: 4px 0;}
+        ul.nav-tabs > li > a > .badge {position: absolute;top: 2px;left: 49px;}
+        .tile-header p{margin: 0 0 2px;}
+        body{
+            font-size: 16px;
+        }
+        .healthy-story .change-box .change-data,.healthy-story .change-box .change-detail{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display:-webkit-flex;
+            -webkit-justify-content: center;
+            -webkit-align-items: center;
+        }
+        .healthy-story .change-box .change-data span{
+            display: inline-block;
+            float: left;
+            margin-left: .15rem;
+            height: .15rem;
+        }
+        .healthy-story .change-box .change-data span img{
+            width: auto!important;
+            height: .15rem!important;
+            float: left;
+            font-size: 0;
+            margin: 0!important;
+        }
+        .healthy-story .change-box .change-data span i{
+            color: #333;
+            font-size: .15rem;
+            font-style: normal;
+            float: left;
+            margin-left: .09rem;
+            text-align: center;
+            line-height: .15rem;
+        }
+        .healthy-story .change-box .change-data .data-age{
+            margin-left: 0;
+        }
+        .healthy-story .change-detail span{
+            float: left;
+            font-size: .16rem;
+            margin-left: .2rem;
+        }
+        .healthy-story .change-detail span.blood-sugar{
+            margin-left: 0;
+        }
+        .healthy-story .change-detail span i{
+            margin-left: .09rem;
+        }
+        .healthy-story .change-detail span.blood-sugar,.healthy-story .change-detail span.blood-sugar i{
+            color: #ffcd44;
+        }
+        .healthy-story .change-detail span.weight-reduce,.healthy-story .change-detail span.weight-reduce i{
+            color: #f180b8;
+        }
+        .healthy-story .change-detail span.blood-press,.healthy-story .change-detail span.blood-press i{
+            color: #5DCD68;
+        }
+        .healthy-story .change-box .change-detail{
+            margin-top: .125rem;
+        }
+        .healthy-story .change-detail-box{
+            width: 94.6%;
+            margin: 0 auto;
+            margin-top: .4rem;
+            margin-bottom: .6rem;
+            border: 1px solid #A0A0A0;
+            border-radius: .04rem;
+            -webkit-border-radius: .04rem;
+        }
+        .healthy-story .change-detail-box .detail-inner{
+            width: 94%;
+            margin: 0 auto;
+        }
+        .healthy-story .change-detail-box .detail-inner .change-inner-box{
+            border-bottom: 1px solid #f7f7f7;
+            padding-bottom: .17rem;
+        }
+        .healthy-story .detail-inner .drink-time{
+            height: .39rem;
+            border-bottom: 1px solid #f7f7f7;
+            font-size: .15rem;
+            color: #000;
+            line-height: .39rem;
+            text-align: center;
+            margin: 0!important;
+        }
+        .healthy-story .detail-inner .drink-time span{
+            font-size: .15rem;
+            color: #000;
+        }
+        .healthy-story .detail-inner .change-inner-box .before-after{
+            margin-top: .175rem;
+            margin-bottom: .225rem;
+            overflow: hidden;
+        }
+        .healthy-story .before-after div{
+            float: left;
+            width: 50%;
+            text-align: center;
+        }
+        .healthy-story .before-after p{
+            font-size: .15rem;
+            margin: 0!important;
+        }
+        .healthy-story .before-after p.change-text{
+            margin-top: .14rem!important;
+        }
+        .healthy-story .before-after p.change-text1{
+            margin-top: .09rem!important;
+        }
+        .healthy-story .before-after p.change-text2{
+            margin-left: -.3rem!important;
+        }
+        .healthy-story .before-after p.change-text2 span{
+            width: auto!important;
+        }
+        .healthy-story .before-after p.change-text span,.healthy-story .before-after p.change-text1 span{
+            margin-left: .12rem;
+            display: inline-block;
+            width: .3rem;
+        }
+        .healthy-story .before-after p.change-text span:nth-last-child(1),.healthy-story .before-after p.change-text1 span:nth-last-child(1){
+            font-size: .11rem;
+            margin-left: 0;
+            width: auto;
+        }
+        .healthy-story .before-after .change-before{
+            border-right: 1px solid #f7f7f7;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+        .healthy-story .detail-inner .change-result{
+            color: #fd8a1a;
+            font-size: .17rem;
+            text-align: center;
+            margin: 0!important;
+        }
+        .healthy-story .invest-box .invest-list{
+            margin: 0 .11rem;
+            margin-bottom: .35rem;
+        }
+        .healthy-story .invest-list .invest-title{
+            color: #000;
+            font-size: .17rem;
+            font-weight: 700;
+            margin: 0!important;
+        }
+        .healthy-story .invest-list .invest-title .invest-id{
+            color: #3697b3;
+            font-size: .16rem;
+        }
+        .healthy-story .invest-list .invest-title .invest-id i{
+            display: inline-block;
+            width: .16rem;
+            height: .16rem;
+            background: #3697b3;
+            font-size: .17rem;
+            color: #fff;
+            text-align: center;
+            line-height: .16rem;
+            margin-right: .05rem;
+            font-weight: normal;
+        }
+        .healthy-story .invest-detail .invest-contrast{
+            overflow: hidden;
+            margin-top: .24rem;
+        }
+        .healthy-story .invest-detail .invest-contrast div{
+            width: 49%;
+            height: 2.5rem;
+            background: #CCCCCC;
+            float: left;
+            position: relative;
+        }
+        .healthy-story .invest-detail .invest-contrast div.invest-after{
+            float: right;
+        }
+        .healthy-story .invest-detail .invest-contrast div img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .healthy-story .invest-detail .invest-contrast div span{
+            width: .8rem;
+            height: .3rem;
+            display: inline-block;
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            font-size: .15rem;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: .11rem;
+            margin: auto;
+            text-align: center;
+            border-radius: .06rem;
+            -webkit-border-radius: .06rem;
+            line-height: .3rem;
+        }
+        .healthy-story .invest-detail .invest-imgs{
+            margin-top: .15rem;
+        }
+        .healthy-story .invest-detail .invest-imgs .invest-img-list{
+            width: 100%;
+            margin-bottom: .05rem;
+        }
+        .healthy-story .invest-detail .invest-imgs .invest-img-list img{
+            width: 100%;
+        }
+        .healthy-story .invest-list .invest-text{
+            font-size: .17rem;
+            margin-top: .15rem;
+            line-height: 1.5;
+        }
+        .healthy-story .invest-box .invest-btn{
+            margin-top: .175rem;
+            width: 94.6%;
+            height: .5rem;
+            background: #20CFC0;
+            cursor: pointer;
+        }
+        .healthy-story .invest-box .invest-btn a{
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            font-size: .18rem;
+            text-align: center;
+            line-height: .5rem;
+        }
+        .healthy-story .invest-copyright{
+            color: #999;
+            font-size: .12rem;
+            margin-top: .09rem;
+            text-align: center;
+        }
+        .healthy-story .invest-copyright p{
+            margin: 0;
+            margin-bottom: .05rem;
+        }
+    </style>
+</head>
+
+<body>
+<div class="article__container">
+    <div class="healthy-story">
+        <div class="change-box">
+            <div class="change-data">
+                    <span class="data-age">
+                        <img src="http://127.0.0.1:8887/wx/rstory/img/woman.png" alt="">
+                        <i>37岁</i>
+                    </span>
+                    <span class="data-loc">
+                        <img src="http://127.0.0.1:8887/wx/rstory/img/loc.png" alt="">
+                        <i>湖南省常德市</i>
+                    </span>
+                    <span class="data-time">
+                        <img src="http://127.0.0.1:8887/wx/rstory/img/clock.png" alt="">
+                        <i>喝汁1年前</i>
+                    </span>
+            </div>
+            <div class="change-detail">
+                <span class="blood-sugar">血糖：<i>正常</i></span>
+            </div>
+        </div>
+        <div class="change-detail-box">
+            <div class="detail-inner">
+                <p class="drink-time"><span>2015-01-01</span>开始喝汁</p>
+                <div class="change-inner-box change-sugar-box">
+                    <div class="before-after">
+                        <div class="change-before">
+                            <p>喝汁前血糖：</p>
+                            <p class="change-text">空腹<span></span><span>mmHg</span></p>
+                            <p class="change-text1">餐后<span></span><span>mmHg</span></p>
+                        </div>
+                        <div class="change-after">
+                            <p>喝汁后血糖：</p>
+                            <p class="change-text">空腹<span>100</span><span>mmHg</span></p>
+                            <p class="change-text1">餐后<span>20</span><span>mmHg</span></p>
+                        </div>
+                    </div>
+                    <p class="change-result">喝汁个月血糖正常了</p>
+                </div>
+            </div>
+        </div>
+        <div class="invest-box">
+            <div class="invest-list">
+                <p class="invest-title">
+                    <span class="invest-id"><i>1</i>.</span>
+                    我为什么要实行馨臻健康法？
+                </p>
+                <div class="invest-detail">
+                    <div class="invest-contrast">
+                        <div class="invest-before">
+                            <img src="http://127.0.0.1:8887/uploads/absolute_image/201711/3415289625d24e52bfc1621711af55b5.png" alt="">
+                            <span>喝汁前</span>
+                        </div>
+                        <div class="invest-after">
+                            <img src="http://127.0.0.1:8887/uploads/absolute_image/201711/58202b7b3bf44685a009d6d8b8fa9859.png" alt="">
+                            <span>喝汁后</span>
+                        </div>
+                    </div>
+                    <div class="invest-text">
+                        fsadfsdfasdf
+                    </div>
+                </div>
+            </div>
+            <div class="invest-list">
+                <p class="invest-title">
+                    <span class="invest-id"><i>2</i>.</span>
+                    我最想分享的健康故事是？
+                </p>
+                <div class="invest-detail">
+                    <div class="invest-contrast">
+                        <div class="invest-before">
+                            <img src="http://127.0.0.1:8887/uploads/absolute_image/201711/19bfa762f2d1419fbf46b7210d1a5c8b.png" alt="">
+                            <span>喝汁前</span>
+                        </div>
+                        <div class="invest-after">
+                            <img src="http://127.0.0.1:8887/uploads/absolute_image/201711/7036df77920f491985a19687d476afb8.png" alt="">
+                            <span>喝汁后</span>
+                        </div>
+                    </div>
+                    <div class="invest-text">
+                        sdfasdfsf
+                    </div>
+                </div>
+            </div>
+            <div class="invest-list">
+                <p class="invest-title">
+                    <span class="invest-id"><i>3</i>.</span>
+                    实践过程中遇到了什么问题？
+                </p>
+                <div class="invest-detail">
+                    <ul class="invest-imgs">
+                        <li class="invest-img-list">
+                            <img src="http://127.0.0.1:8887/uploads/absolute_image/201711/1fde4cd121884cb4ba44501d35dcd819.png" alt="">
+                        </li>
+                        <li class="invest-img-list">
+                            <img src="http://127.0.0.1:8887/uploads/absolute_image/201711/fec80bd99a0a4fa699344011f69cb86c.png" alt="">
+                        </li>
+                    </ul>
+                    <div class="invest-text">
+                        sdfsdfsdf11111
+                    </div>
+                </div>
+            </div>
+            <div class="invest-btn">
+                <a href="javascript:;">点击了解汁家高血压个性化康复服务</a>
+            </div>
+            <div class="invest-copyright">
+                <p>本文版权归爱之路（北京）科技有限公司所有</p>
+                <p>侵权必究</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

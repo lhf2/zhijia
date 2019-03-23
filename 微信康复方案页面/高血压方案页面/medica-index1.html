@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>药物指数分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <link rel="stylesheet" href="../css/rule.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="medica-index">
+    <section class="chose-detail-box">
+        <h1>药物指数分析</h1>
+        <div class="chose-detail">
+            <p>您目前是否服用降血压药物</p>
+        </div>
+        <ul class="chose-box">
+            <li class="select-list">是</li>
+            <li class="select-list">否</li>
+        </ul>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //刚进入页面的时候
+        var hasmedica = sessionStorage.getItem('hasmedica');
+        if(hasmedica){
+            $('.select-list').eq(hasmedica).addClass('cur');
+        }
+        //点击是否的时候跳转到相应的页面
+        $('.select-list').click(function(){
+            $('.select-list').removeClass('cur');
+            $(this).addClass('cur');
+            if($(this).html()=='是'){
+                location.href = 'medica-index.html'
+            }else{
+                location.href = 'bmi-chose.html'
+            }
+            sessionStorage.setItem('hasmedica',$(this).index());
+        })
+    })
+</script>
+</body>
+</html>

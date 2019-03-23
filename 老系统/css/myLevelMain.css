@@ -1,0 +1,117 @@
+
+
+body {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+
+/* module */
+
+.hidden {
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+
+/*页面样式开始*/
+
+section {
+    background: #ffffff;
+}
+
+
+/*第一部分开始*/
+
+.section1 {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    /*height: 4.2rem;*/
+    /*padding: .3rem;*/
+    /*padding-bottom: 0.4rem;*/
+}
+
+.section1>img {
+    display: block;
+    width:99.9%;
+}
+
+.loadBox {
+    position: absolute;
+    /*总长度  425px  */
+    width: 4.25rem;
+    height: 0.1rem;
+    background: #ffffff;
+    border-radius: 5px;
+    left: 2.95rem;
+    top: 1.4rem;
+}
+
+.load {
+    width: 0rem;
+    height: 100%;
+    background: #ffe501;
+    border-radius: 5px;
+    float: left;
+}
+
+.loadBall {
+    width: 0.15rem;
+    height: 0.15rem;
+    border-radius: 50%;
+    background: #ffe501;
+    /*margin-left: 1rem;*/
+    position: relative;
+    top: -0.02rem;
+    left: -0.01rem;
+}
+
+.text {
+    position: absolute;
+    color: #fff;
+    font-size: 0.28rem;
+    top: 1.57rem;
+    left: 4.5rem;
+}
+.text span{
+    color: #fff;
+}
+
+.text>span:first-of-type {
+    color: #ffe501;
+}
+
+.myLevel {
+    color: #fff;
+    font-size: 0.32rem;
+    position: absolute;
+    top: 0.6rem;
+    left: 5.16rem;
+}
+
+.minLevel {
+    color: #fff;
+    font-size: 0.24rem;
+    position: absolute;
+    top: 1.58rem;
+    left: 3.16rem;
+}
+
+.maxLevel {
+    color: #fff;
+    font-size: 0.24rem;
+    position: absolute;
+    top: 1.58rem;
+    left: 6.99rem;
+}
+
+
+/*页面样式结束*/

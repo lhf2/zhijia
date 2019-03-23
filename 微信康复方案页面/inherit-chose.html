@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>遗传因素分析</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="sugar-edit">
+    <header id="headerNav" class="test-top">
+        <a href="javascript:;" class="return-btn">
+            <img src="img/return.png" alt="">
+        </a>
+    </header>
+    <section class="chose-detail-box">
+        <h1>遗传因素分析</h1>
+        <div class="chose-detail">
+            <p>一级亲属中是否有糖尿病患者<span>（可多选）</span></p>
+        </div>
+        <ul class="chose-box">
+            <li class="select-list">无</li>
+            <li class="select-list">父亲</li>
+            <li class="select-list">母亲</li>
+            <li class="select-list">兄长</li>
+            <li class="select-list">弟弟</li>
+            <li class="select-list">姐姐</li>
+            <li class="select-list">妹妹</li>
+        </ul>
+    </section>
+    <section class="next-btn look-btn">
+        <a href="javascript:;">查看评估结果</a>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //共用的判断是否有没有数据进而显示高亮和链接
+        function load(){
+            var curArr = sessionStorage.getItem('inherit');
+            if(curArr){
+                var curArr1 = curArr.split(',');
+                $('.select-list').each(function(index){
+                    for(var i =0;i<curArr1.length;i++){
+                        if(index == curArr1[i]){
+                            $(this).addClass('cur');
+                        }
+                    }
+                })
+                $('.next-btn').addClass('cur').children('a').attr('href','look-result.html');
+            }else{
+                $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+            }
+        }
+        //点击列表的时候往存储里添加
+        var inherArr = [];
+        $('.select-list').click(function(){
+            var index = $(this).index('.select-list');
+            if($(this).hasClass('cur')){
+                $(this).removeClass('cur');
+                inherArr.remove(index);
+            }else{
+                $(this).addClass('cur');
+                inherArr.push(index);
+            }
+            sessionStorage.setItem('inherit',inherArr);
+            load();
+        })
+        //刚进入页面的时候判断
+        load();
+    })
+</script>
+</body>
+</html>

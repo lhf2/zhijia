@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>身体指标分析</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/body-test.css">
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<article class="disease-chose">
+    <header id="headerNav" class="test-top">
+        <a href="javascript:;" class="return-btn">
+            <img src="img/return.png" alt="">
+        </a>
+    </header>
+    <section class="chose-detail-box">
+        <h1>身体指标分析</h1>
+        <div class="chose-detail">
+            <p>除了Ⅱ型糖尿病，您还患有以下疾病吗？<span>（可多选）</span></p>
+        </div>
+        <ul class="disease-box">
+            <li class="select-list">高血压</li>
+            <li class="select-list">高血脂症</li>
+            <li class="select-list">无其他疾病</li>
+        </ul>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        //共用的判断是否有没有数据进而显示高亮和链接
+        function load(){
+            var curArr = sessionStorage.getItem('disease');
+            if(curArr){
+                var curArr1 = curArr.split(',');
+                $('.select-list').each(function(index){
+                    for(var i =0;i<curArr1.length;i++){
+                        if(index == curArr1[i]){
+                            $(this).addClass('cur');
+                        }
+                    }
+                })
+                $('.next-btn').addClass('cur').children('a').attr('href','smoke-chose.html');
+            }else{
+                $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+            }
+        }
+        //点击列表的时候往存储里添加
+        var disArr = [];
+        $('.select-list').click(function(){
+            var index = $(this).index('.select-list');
+            if($(this).hasClass('cur')){
+                $(this).removeClass('cur');
+                disArr.remove(index);
+            }else{
+                $(this).addClass('cur');
+                disArr.push(index);
+            }
+            sessionStorage.setItem('disease',disArr);
+            load();
+        })
+        //刚进入页面的时候判断
+        load();
+    })
+</script>
+</body>
+</html>

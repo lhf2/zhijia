@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>身体指标分析</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/body-test.css">
+    <link rel="stylesheet" href="../css/rule.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+<article class="body-index">
+    <section class="chose-detail-box">
+        <h1>身体指标分析</h1>
+        <div class="chose-detail">
+            <p>除了高血压，您还患有其他疾病吗？<span>（可多选）</span></p>
+        </div>
+        <ul class="chose-box">
+            <li class="select-list" value="1">高血脂症</li>
+            <li class="select-list" value="10">糖尿病</li>
+            <li class="select-list" value="2">左心室肥厚</li>
+            <li class="select-list" value="3">动脉壁肥厚</li>
+            <li class="select-list" value="4">血清肌酐轻度升高</li>
+            <li class="select-list" value="20">微量蛋白尿</li>
+            <li class="select-list select-list-ling" value="5">
+                <p>脑血管疾病</p>
+                <p class="dis-type">缺血性卒中、脑出血、短暂性脑缺血发作</p>
+            </li>
+            <li class="select-list select-list-ling" value="6">
+                <p>心脏疾病</p>
+                <p class="dis-type">心肌梗死史、心绞痛、冠状动脉血运重建、心力衰竭</p>
+            </li>
+            <li class="select-list select-list-ling" value="7">
+                <p>肾脏疾病</p>
+                <p class="dis-type">糖尿病肾病、肾功能受损</p>
+            </li>
+            <li class="select-list select-list-ling" value="8">
+                <p>周围血管疾病</p>
+                <p class="dis-type">足背动脉搏动减弱</p>
+            </li>
+            <li class="select-list select-list-ling" value="9">
+                <p>视网膜病变</p>
+                <p class="dis-type">视网膜出血或渗出、视乳头水肿</p>
+            </li>
+        </ul>
+    </section>
+    <section class="next-btn look-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="../js/index.js"></script>
+<script>
+    $(document).ready(function(){
+        var disArr = [];
+        //共用的判断是否有没有数据进而显示高亮和链接
+        function load(){
+            var curArr = sessionStorage.getItem('disease1');
+            if(curArr){
+                var curArr1 = curArr.split(',');
+                disArr = curArr1.slice();
+                $('.select-list').each(function(index){
+                    for(var i =0;i<curArr1.length;i++){
+                        if($(this).attr('value') == curArr1[i]){
+                            $(this).addClass('cur');
+                        }
+                    }
+                })
+                $('.next-btn').addClass('cur').children('a').attr('href','culture-chose.html');
+            }else{
+                $('.next-btn').removeClass('cur').children('a').attr('href','javascript:;');
+            }
+        }
+        //点击列表的时候往存储里添加
+        $('.select-list').click(function(){
+            var value = $(this).attr('value');
+            if($(this).hasClass('cur')){
+                $(this).removeClass('cur');
+                disArr.remove(value);
+            }else{
+                $(this).addClass('cur');
+                disArr.push(value);
+            }
+            sessionStorage.setItem('disease1',disArr);
+            load();
+        })
+        //刚进入页面的时候判断
+        load();
+    })
+</script>
+</body>
+</html>

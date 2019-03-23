@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>提问</title>
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/qa-index.css">
+    <script src="../js/rem.js"></script>
+</head>
+<body>
+    <article class="qa-edit">
+        <header class="health-top" id="headerNav">
+            <span class="close-btn">
+                <img src="../images/close.png" alt="">
+            </span>
+            提问
+        </header>
+        <section class="edit-content">
+            <form id="tempForm" style="display:none"></form>
+            <textarea name="" id="content" placeholder="关于喝汁、乐汁，您有什么不清楚的，都可以在这里提问（问题不少于5个字）"></textarea>
+            <div class="pic-chose edit-pic1">
+                <div class="edit-pic-inner">
+                    <div class="upload-list">
+                        <div class="weui-uploader__bd" id="uploader">
+                            <ul class="weui-uploader__files  weui_uploader_files-more" id="uploaderFiles"></ul>
+                            <div class="weui-uploader__input-box weui_uploader_input_wrp input_wrp">
+                                <input id="uploaderCustomInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                <div class="add-btn">
+                                    +
+                                </div>
+                                添加图片
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="commit-btn" id="saveBtn">
+            <a href="javascript:;">确认发布</a>
+        </div>
+    </article>
+</body>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js?version=1516777967184"></script>
+<script>
+
+    $(function(){
+
+        $('#saveBtn').on('click', function(){
+            var size = $('input:hidden[id^="img"]').length;
+            if (size == 0 && $('#problems').val().length==0) {
+                weui.topTips('图片和内容不能同时为空');
+                return false;
+            }
+            var loading = weui.loading('提交中...');
+            var params = [];
+            params.push($('<input>', {name:"id", value:"50"}));
+            params.push($('<input>', {name:"problems", value:$('#problems').val()}));
+            var postData = {
+                "id": '50',
+                "problems": $('#problems').val()
+            };
+            //var params = '';
+            $.each($('input:hidden[id^="img"]'), function(){
+                console.log($(this).val())
+                //params += '&imgs=' + $(this).val();
+                params.push($('<input>', {name:"imgs", value:$(this).val()}));
+            });
+            $('#tempForm').append(params);
+            $.ajax({
+                url : '/m/rstory/saveProblem?none=none'+ params,
+                data:$('#tempForm').serialize(),
+                type: "post",
+                dataType: "json",
+                success:function(res){
+                    loading.hide();
+                    if(res.meta.success){
+                        weui.toast('提交成功', {
+                            duration: 1000,
+                            callback: function(){
+                                window.location.href='/m/rstory/edit?id=50';
+                            }
+                        });
+                    }else{
+                        weui.alert(res.meta.message);
+                        return false;
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    loading.hide();
+                    weui.alert(textStatus);
+                }
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+    /* 图片自动上传 */
+    var uploadCount = Number("0");
+    var uploadCountDom = document.getElementById("uploadCount");
+    weui.uploader('#uploader', {
+        url: '/upload?kind=6&none=none',
+        auto: true,
+        type: 'file',
+        fileVal: 'file',
+        compress: {
+            width: 800,
+            height: 800,
+            quality: .6
+        },
+        onBeforeQueued: function(files) {
+            if(["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
+                weui.alert('请上传图片');
+                return false;
+            }
+
+            if(files.length > 9) { // 防止一下子选中过多文件
+                //weui.alert('最多只能上传9张图片，请重新选择');
+                //return false;
+            }
+            if(uploadCount + 1 > 9) {
+                //weui.alert('最多只能上传9张图片');
+                //return false;
+            }
+
+            ++uploadCount;
+            try{
+                window.webkit.messageHandlers.appBarVisibility.postMessage(false);
+            }catch(e){}
+        },
+        onQueued: function() {
+            console.log(this);
+        },
+        onBeforeSend: function(data, headers) {
+            console.log(this, data, headers);
+            // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
+            // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
+
+            // return false; // 阻止文件上传
+        },
+        onProgress: function(procent) {
+            console.log(this, procent);
+        },
+        onSuccess: function(ret) {
+            console.log(this, ret);
+            if (ret.meta.success) {
+                var imgUrl = ret.data[0];
+                var hiddenStr = '<input type="hidden" id="img'+uploadCount+'" imgKey="'+uploadCount+'" name="fileName" value="'+imgUrl+'">';
+                setTimeout(function(){
+                    var str = '<li class="weui-uploader__file" imgKey="'+uploadCount+'" id="img' + uploadCount + '" style="background-image: url('+imgUrl+');">  </li>';
+                    $('#uploaderFiles').find('.weui-uploader__file_status').remove();
+                    $('#uploaderFiles').append(str);
+                    $('#uploaderFiles').append(hiddenStr);
+
+                },200);
+            }
+            return true;
+        },
+        onError: function(err) {
+            //weui.alert('没有url');
+            console.log(this, err);
+        }
+    });
+
+    // 缩略图预览
+    document.querySelector('#uploaderFiles').addEventListener('click', function(e) {
+        var target = e.target;
+
+        while(!target.classList.contains('weui-uploader__file') && target) {
+            target = target.parentNode;
+        }
+        if(!target) return;
+
+        var url = target.getAttribute('style') || '';
+        if(url) {
+            url = url.match(/url\((.*?)\)/)[1];
+        }
+        var imgKey = target.getAttribute('imgKey');
+        var gallery = weui.gallery(url, {
+            className: 'custom-name',
+            onDelete: function() {
+                weui.confirm('确定删除该图片？', function() {
+                    --uploadCount;
+                    target.remove();
+                    gallery.hide();
+                    $('#img'+imgKey).remove();
+                });
+            }
+        });
+    });
+
+    $(function(){
+        var isZhijiaApp = Boolean();
+        var isWx = Boolean();
+        if (isZhijiaApp) {
+            try{
+                App.setAppBarVisibility(false);
+            }catch(e){}
+            try{
+                window.webkit.messageHandlers.appBarVisibility.postMessage(false);
+            }catch(e){}
+            var parseUA = function () {
+                var u = navigator.userAgent;
+                var u2 = navigator.userAgent.toLowerCase();
+                return { //移动终端版本信息
+                    mobile: !!u.match(/Mobile.*/), //是否为移动终端
+                    pc: !u.match(/Mobile.*/), //是否为pc终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //是否为ios终端
+                    android: u.indexOf('Android') > -1, //是否为android终端
+                    weixin: u2.match(/MicroMessenger/i) == "micromessenger" //是否为微信客户端
+                };
+            };
+            var ua = parseUA();
+            var barHeight = Number(getCookie('barHeight'));
+            if (ua.ios){
+                window.webkit.messageHandlers.appBarVisibility.postMessage(false);
+                barHeight=40;
+            }
+            var dpr = window.devicePixelRatio;
+            $('#headerNav').before('<div style="background:#FFFFFF;height:'+barHeight/dpr+'px;width:100%"></div>');
+        }
+    });
+
+</script>
+</html>

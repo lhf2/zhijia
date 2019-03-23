@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>体重记录</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="css/layui.css">
+	<link rel="stylesheet" href="css/style1.css" />
+	<link rel="stylesheet" href="css/Ruler.css">
+</head>
+<body style="background: #f1f1f1;height: 100%">
+<article class="press-page">
+	<header class="zcjl-title">
+		<div class="date mui-text-center">
+			<span class="left-btn">
+				<img src="img/left.png" alt="">
+			</span>
+			<input type="text" class="chose-date" id="chose-date" placeholder="" readonly>
+			<span class="right-btn">
+				<img src="img/right.png" alt="">
+			</span>
+		</div>
+		<div class="save-btn">保存</div>
+	</header>
+	<section class="press-curve">
+		<header class="press-curve-title">
+			体重曲线
+			<span>单位:公斤</span>
+			<span class="full-btn">全屏</span>
+		</header>
+		<div id="press-chart" class="press-chart"></div>
+		<div class="mask-box"></div>
+	</section>
+	<section class="press-record">
+		<header class="press-curve-title">
+			体重记录
+		</header>
+		<section class="rule-box">
+			<div class="rule" id="biaochi"></div>
+		</section>
+		<p>未添加身高信息无法计算您的标准体重</p>
+		<p class="have-link">请点击<a href="edit-data.html">补充基本信息</a>进行添加</p>
+	</section>
+</article>
+<!-- <div class="mask-box"></div> -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/touch.min.js"></script>
+<script type="text/javascript" src="js/rem.js" ></script>
+<script src="layui.js"></script>
+<script src="js/echarts.js"></script>
+<script src="js/Ruler.js"></script>
+<script>
+	$(document).ready(function(){
+		var pressChart=echarts.init(document.getElementById('press-chart'));
+		var arr = [];
+		var timeData = [
+			'08/05','08/06','08/07','08/08','08/09','08/10','08/11','08/24','08/25','08/26','08/27','08/28','08/29','08/30','08/31','09/01','09/02'
+		];
+		//给时间文字添加年份
+		for(var i =0;i<timeData.length;i++){
+			timeData[i]+='2017'
+		}
+		option={
+
+			textStyle:{
+				color:'#666'
+			},
+			tooltip : {
+				trigger: 'axis',
+				show:false,
+				axisPointer: {
+					type: 'cross',
+					label: {
+						backgroundColor: '#F181B8'
+					}
+				}
+			},
+			grid: {
+				left: '5%',
+				right: '12%',
+				top: '15%',
+				bottom:'10%',
+				containLabel: true
+			},
+			xAxis : [
+				{
+					type : 'category',
+					boundaryGap : false,
+					data : timeData,
+					axisLabel: {
+						textStyle: {
+							//fontSize:14,
+							color: '#333',
+						},
+						//x轴文字显示不全 换行显示
+						formatter:function(params){
+							var newParamsName = "";// 最终拼接成的字符串
+							var paramsNameNumber = params.length;// 实际标签的个数
+							var provideNumber = 5;// 每行能显示的字的个数
+							var rowNumber = 2;// 换行的话，需要显示几行，向上取整
+
+							// 条件等同于rowNumber>1
+							if (paramsNameNumber > provideNumber) {
+
+								for (var p = 0; p < rowNumber; p++) {
+									var tempStr = "";// 表示每一次截取的字符串
+									var start = p * provideNumber;// 开始截取的位置
+									var end = start + provideNumber;// 结束截取的位置
+									// 此处特殊处理最后一行的索引值
+									if (p == rowNumber - 1) {
+										// 最后一次不换行
+										tempStr = params.substring(start, paramsNameNumber);
+									} else {
+										// 每一次拼接字符串并换行
+										tempStr = params.substring(start, end) + "\n";
+									}
+									newParamsName += tempStr;// 最终拼成的字符串
+								}
+//									newParamsName = newParamsName+'2017'
+
+							} else {
+								// 将旧标签的值赋给新标签
+								newParamsName = params;
+							}
+							//将最终的字符串返回
+							return newParamsName
+						}
+					},
+				}
+			],
+			yAxis :[
+				{
+					type : 'value',
+					minInterval:1,
+					axisLabel : {
+						formatter: function(value){
+							//在坐标轴上不显示最小值
+							if(value === minval){
+								value = ''
+							}
+							return value;
+						}
+					}
+				}
+			],
+			dataZoom:[
+				{
+					show: true,
+					start: 0,
+					realtime: true,
+					type: 'inside'//移动曲线图的时候也能拖动曲线图
+				}
+			],
+			legend:{
+				selectedMode:false,
+			},
+			series : [
+				{
+					name:'收缩压',
+					type:'line',
+					smooth:0.3,
+					clickable:false,
+					itemStyle : {
+						normal : {
+							color:'#F181B8',
+							lineStyle:{
+								color:'#F181B8',
+								borderColor:'#F181B8'
+							},
+						}
+					},
+					label: {
+						normal: {
+							show: true,
+							position: 'top'
+						}
+					},
+					areaStyle: {
+						normal: {
+							color:['#F181B8'],
+							opacity:.2
+						}
+					},
+					data:[48,50,52,54,57,40,49,51,56,60,61,62,58,55,50,55,50,55,50,55,56,50,55,56,55,56,50,55,56]//24个
+//					data:[39.6,47.0,44.0,68.0,74.3,64.4,64.5,64.6,64.7,64.8,64.9,65.0,77.5],
+//					data:[61.4,60.5,59.8,60.0,60.4,60,60.2]
+				}
+			]
+		}
+		if(timeData.length<=6){
+			option.dataZoom[0].end = 100
+		}else{
+			option.dataZoom[0].end = 30
+		}
+		//动态设置y轴的最大值和最小值 可以让曲线更加明显一点
+
+		var minval = Math.floor(Math.min.apply(null, option.series[0].data));
+		var maxval = Math.ceil(Math.max.apply(null, option.series[0].data));
+		console.log(minval+'%%%'+maxval);
+
+		//处理数据
+        if(maxval - minval <=6 ){
+			maxval = maxval;
+			minval = minval
+		}else{
+			if(minval%5 == 0){
+				minval = minval
+			}else if(minval%5 < 5){
+				minval = minval- minval%5
+			}
+
+			if(maxval%5 == 0){
+				maxval = maxval
+			}else if(maxval%5 < 5){
+				maxval = maxval+(5-maxval%5);
+			}
+		}
+
+		option.yAxis[0].min = minval;
+		option.yAxis[0].max = maxval;
+
+		pressChart.setOption(option);
+		// 刻度尺
+		var ruler = new Ruler({
+			id: "#biaochi",
+			unit:'公斤',
+			rate:1,
+			min:20,
+			max:200,
+			num:50.0,
+			toFixed:1,
+			markColor:'#F181B8'
+		});
+
+		//获取屏幕宽度和高度
+		var screenW = $(window).width();
+		var screenH = $(window).height();
+		//切换全屏、取消全屏
+		var flag = true;
+		$('.press-curve').click(function(){
+			flag?enterFull():cancleFull();
+		})
+		//进入全屏之后左右滑动显示数据
+		function moveChart(){
+			pressChart.resize();
+			//刚进全屏时候多显示几条数据
+			newOption = option;
+			length = newOption.series[0].data.length;
+			newOption.dataZoom[0].start = 0;
+			newOption.dataZoom[0].end = 50;
+			pressChart.setOption(newOption);
+
+			//滑动
+			touch.on('body','swipeup swipedown', function (e){
+				var direction = e.direction;
+				var length = newOption.series[0].data.length;
+				var first = 10;
+				var last = length*first;
+				var maxStart = 50;
+				if(direction == "up"){
+					newOption.dataZoom[0].start+=first;
+					newOption.dataZoom[0].end+=first;
+				}else{
+					newOption.dataZoom[0].start-=first;
+					newOption.dataZoom[0].end-=first;
+				}
+
+				if(newOption.dataZoom[0].start < 0){
+					newOption.dataZoom[0].start = 0
+				}
+
+				if(newOption.dataZoom[0].start >= maxStart){
+					newOption.dataZoom[0].start = maxStart
+				}
+				if(newOption.dataZoom[0].end >= 100){
+					newOption.dataZoom[0].end = 100;
+				}
+				if(newOption.dataZoom[0].end <= maxStart){
+					newOption.dataZoom[0].end = maxStart;
+				}
+				pressChart.setOption(newOption);
+			});
+
+			//缩放
+			/*touch.on('body', 'touchstart', function (ev) {
+				ev.preventDefault();
+			});*/
+			//缩小
+			touch.on('body', 'pinchin', function (ev) {
+				newOption.dataZoom[0].start = 0;
+				newOption.dataZoom[0].end+=10;
+				if(newOption.dataZoom[0].end >= 100){
+					newOption.dataZoom[0].end = 100;
+				}
+				pressChart.setOption(newOption);
+			});
+			//放大
+			touch.on('body', 'pinchout', function (ev) {
+				newOption.dataZoom[0].start = 0;
+				newOption.dataZoom[0].end-=10;
+				if(newOption.dataZoom[0].end <= 50){
+					newOption.dataZoom[0].end = 50;
+				}
+				pressChart.setOption(newOption);
+			});
+		}
+		//进入全屏
+		function enterFull(){
+			flag = false;
+			$('.full-btn').html('退出');
+			var fullScreen = {
+				"width":screenH,
+				"height":screenW,
+				"margin-left":-screenH/2,
+				"margin-top":-screenW/2
+			};
+			$('.press-curve').css(fullScreen);
+			$('.press-curve').addClass('full-box');
+
+			//显示遮罩
+			$('.mask-box').show().css({
+				"width":screenW,
+				"height":screenH,
+			})
+
+			//判断是否滑动
+			var newOption = option;
+			var length = newOption.series[0].data.length;
+			if(length<=10){
+				newOption.dataZoom[0].end = 100;
+				pressChart.setOption(newOption);
+				pressChart.resize();
+				return false;
+			}else{
+				moveChart();
+			}
+		}
+		//取消全屏
+		function cancleFull(){
+			flag = true;
+			$('.full-btn').html('全屏');
+			$('.mask-box').hide();
+			$('.press-curve').attr("style","").removeClass('full-box');
+
+			if(timeData.length<=6){
+				option.dataZoom[0].end = 100
+			}else{
+				option.dataZoom[0].end = 30
+			}
+			pressChart.setOption(option);
+			pressChart.resize();
+		}
+
+
+	})
+</script>
+</body>
+</html>

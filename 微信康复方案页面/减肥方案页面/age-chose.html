@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>基本信息分析</title>
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/recure/css/reset.css?version1517467235971">
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com/weui/css/weui.min.css?version1517467235971">
+    <link rel="stylesheet" href="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/recure/css/body-test.css?version1517467235971">
+    <script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/recure/js/rem.js?version1517467235971"></script>
+</head>
+<body>
+<article class="age-chose">
+    <section class="chose-detail-box">
+        <h1>基本信息分析</h1>
+        <div class="chose-detail">
+            <p>你的实际年龄，将用于匹配更合适的计划</p>
+        </div>
+        <div class="sex-img">
+            <img src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/recure/img/2.png" alt="">
+        </div>
+        <div class="age-text" id="age-chose">
+            <input type="text" id="age-text" placeholder="请选择出生日期" readonly>
+        </div>
+    </section>
+    <section class="next-btn">
+        <a href="javascript:;">下一步</a>
+    </section>
+</article>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/js/jquery-2.1.4.min.js?version1517467235971"></script>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/weui/js/weui.min.js?version1517467235971"></script>
+<script src="http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/recure/js/index.js?version1517467235971"></script>
+<script>
+    $(document).ready(function(){
+        //刚进入页面
+        var sex = sessionStorage.getItem('sex');
+        var birthday = sessionStorage.getItem('birthday');
+        //设置头像是男的还是女的
+        if(sex){
+            $('.sex-img').children('img').attr('src','http://izhijia-test.oss-cn-beijing.aliyuncs.com/wx/recure/img/'+sex+'.png');
+        }else {
+            weui.alert('请先选择性别',function(){
+                location.href = 'index.html'});
+        }
+        //按钮是否高亮
+        if(birthday){
+            $('.next-btn').addClass('cur').children('a').attr('href','bmi-chose.html');
+        }
+        //选择日期
+        $('#age-chose').click(function(){
+            weui.datePicker({
+                start: 1917,
+                end:new Date(),
+                defaultValue:[1980,1,1],
+                onConfirm: function(result){
+                    var resultLabel = result[0].label+result[1].label+result[2].label;
+                    $('#age-text').val(resultLabel);
+                    if(resultLabel){
+                        sessionStorage.setItem('birthday',resultLabel);
+                        $('.next-btn').addClass('cur').children('a').attr('href','bmi-chose.html');
+                    }
+                },
+                id: 'age-chose'
+            });
+        })
+    })
+</script>
+</body>
+</html>
